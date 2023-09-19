@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public class EntityData
+public struct EntityData
 {
     public string Name;
     public Sprite Icon;
