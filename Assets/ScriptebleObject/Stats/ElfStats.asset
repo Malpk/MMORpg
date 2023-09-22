@@ -20,3 +20,5 @@ MonoBehaviour:
     Intelligence: 3
     Survival: 1
     Body: 3
+    Attack: 0
+    Protect: 0

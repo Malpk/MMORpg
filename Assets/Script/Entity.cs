@@ -8,6 +8,9 @@ public class Entity : MonoBehaviour
     [SerializeField] private SkillPanel _skillPanel;
     [SerializeField] private PlayerPanel _panel;
 
+
+    public event System.Action OnDead;
+
     public EntityData Data => _entityData;
     public EntityStats Stats => _entiryStats;
 
@@ -28,6 +31,7 @@ public class Entity : MonoBehaviour
         _panel.LoadPlayer(_entityData);
         _skillPanel.SetStats(stats);
     }
+
 
     private void SetStats(EntityStats stats)
     {

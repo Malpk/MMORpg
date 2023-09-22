@@ -5,6 +5,7 @@ using TMPro;
 public class SkillRow : MonoBehaviour
 {
     [SerializeField] private string _lableText;
+    [SerializeField] private bool _hideAddButon = false;
     [Header("Reference")]
     [SerializeField] private Button _buttons;
     [SerializeField] private TextMeshProUGUI _lable;
@@ -17,6 +18,7 @@ public class SkillRow : MonoBehaviour
 
     private void OnValidate()
     {
+        _buttons.gameObject.SetActive(!_hideAddButon);
         _lable?.SetText(_lableText);
     }
 

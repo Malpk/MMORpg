@@ -13,6 +13,8 @@ public class SkillPanel : MonoBehaviour
     [SerializeField] private SkillRow _intelligence;
     [SerializeField] private SkillRow _survival;
     [SerializeField] private SkillRow _body;
+    [SerializeField] private SkillRow _attack;
+    [SerializeField] private SkillRow _protect;
     [SerializeField] private TextMeshProUGUI _scoreLable;
 
     private EntityStats _stats;
@@ -27,6 +29,8 @@ public class SkillPanel : MonoBehaviour
     public void SetStats(EntityStats stats)
     {
         _stats = stats;
+        _attack.SetValue((int)(_stats.Attack * 100));
+        _protect.SetValue((int)(_stats.Protect * 100));
         _power.SetValue(_stats.Power);
         _dexterity.SetValue(_stats.Dexterity);
         _luck.SetValue(_stats.Luck);

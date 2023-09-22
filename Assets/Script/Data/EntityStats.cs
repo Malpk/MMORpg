@@ -7,4 +7,6 @@ public struct EntityStats
     public int Intelligence;
     public int Survival;
     public int Body;
+    public float Attack;
+    public float Protect;
 }
