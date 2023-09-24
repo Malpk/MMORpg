@@ -3,7 +3,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [Header("Reference")]
-    [SerializeField] private Entity _entity;
+    [SerializeField] private EntityOld _entity;
 
     private void Start()
     {

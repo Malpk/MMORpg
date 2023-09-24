@@ -4,7 +4,7 @@ using UnityEngine.Events;
 public class EntityCreater : MonoBehaviour
 {
     [SerializeField] private EntityData _entity;
-    [SerializeField] private Entity _player;
+    [SerializeField] private EntityOld _player;
     [SerializeField] private RaceStats[] _stats;
     [Header("Reference")]
     [SerializeField] private RaceChoose _raceMenu;
@@ -32,7 +32,7 @@ public class EntityCreater : MonoBehaviour
         Create(_player);
     }
 
-    public Entity Create(Entity entity)
+    public EntityOld Create(EntityOld entity)
     {
         entity.LoadEntity(_entity, GetStats(_entity.Race));
         _onCreate.Invoke(_entity);

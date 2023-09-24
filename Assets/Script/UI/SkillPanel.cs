@@ -29,9 +29,7 @@ public class SkillPanel : MonoBehaviour
     public void SetStats(EntityStats stats)
     {
         _stats = stats;
-        _attack.SetValue((int)(_stats.Attack * 100));
-        _protect.SetValue((int)(_stats.Protect * 100));
-        _power.SetValue(_stats.Power);
+        _power.SetValue(_stats.Strenght);
         _dexterity.SetValue(_stats.Dexterity);
         _luck.SetValue(_stats.Luck);
         _intelligence.SetValue(_stats.Intelligence);
@@ -42,8 +40,8 @@ public class SkillPanel : MonoBehaviour
     #region Add
     public void AddPower()
     {
-        _stats.Power++;
-        _power.SetValue(_stats.Power);
+        _stats.Strenght++;
+        _power.SetValue(_stats.Strenght);
         AddSkill();
     }
 
