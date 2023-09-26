@@ -6,6 +6,7 @@ public class BodyPartPanel : MonoBehaviour
     [SerializeField] private PartType _part;
     [Header("Reference")]
     [SerializeField] private Image _image;
+    [SerializeField] private Image _shadow;
     [SerializeField] private TextUI _armor;
     [SerializeField] private TextUI _health;
     [SerializeField] private TextUI _damage;
@@ -23,11 +24,18 @@ public class BodyPartPanel : MonoBehaviour
     {
         if (armor)
         {
-            _image.sprite = armor.Icon;
+            if (armor.Icon)
+            {
+                _image.gameObject.SetActive(true);
+                _shadow.gameObject.SetActive(false);
+                _image.sprite = armor.Icon;
+            }
             _armor.SetText(armor.Protect.ToString());
         }
         else
         {
+            _image.gameObject.SetActive(false);
+            _shadow.gameObject.SetActive(true);
             _armor.SetText("0");
         }
     }

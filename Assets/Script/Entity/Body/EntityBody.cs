@@ -25,6 +25,8 @@ public class EntityBody : MonoBehaviour
         }
     }
 
+
+
     private void Reset()
     {
         _parts = GetComponentsInChildren<PartBody>();
@@ -66,14 +68,16 @@ public class EntityBody : MonoBehaviour
 
     #region Health
 
-    public void TakeDamage(int damage)
+    public bool TakeDamage(int damage)
     {
         var parts = GetActivePart();
         if (parts.Count > 0)
         {
             parts[Random.Range(0, parts.Count)].TakeDamage(damage);
             Health = GetHealth();
+            return true;
         }
+        return false;
     }
 
     public void TekeHeal(int heal = 4)

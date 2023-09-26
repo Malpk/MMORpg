@@ -8,8 +8,8 @@ public class PartBody : MonoBehaviour
     [SerializeField] private BodyPartStateData[] _states;
     [Header("Reference")]
     [SerializeField] private Armor _armor;
-    [SerializeField] private BodyPartPanel _panel;
     [Header("Event")]
+    [SerializeField] private UnityEvent<int> _onHealthUpdate;
     [SerializeField] private UnityEvent<Armor> _onArmorUpdate;
 
     private int _curretHealth;
@@ -24,7 +24,7 @@ public class PartBody : MonoBehaviour
         private set
         {
             _curretHealth = value;
-            _panel?.SetHealth(_curretHealth);
+            _onHealthUpdate.Invoke(_curretHealth);
         }
     }
 
@@ -62,7 +62,6 @@ public class PartBody : MonoBehaviour
         {
             _curretState = stateData;
         }
-        _panel.SetState(_curretState);
         Health = Health - damage > 0 ? Health - damage : 0;
     }
 
@@ -75,7 +74,6 @@ public class PartBody : MonoBehaviour
     public void AddArmor(Armor armor)
     {
         _armor = armor;
-        _panel?.SetArmor(armor);
         _onArmorUpdate.Invoke(armor);
     }
 }

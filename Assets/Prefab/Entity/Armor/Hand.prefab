@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _protect: 5
-  _icon: {fileID: 0}
+  _icon: {fileID: 21300000, guid: 5d2a51bcf0a846e438c9dc325a7c1145, type: 3}
   _part: 3

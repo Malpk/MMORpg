@@ -436,7 +436,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4319441629977962682}
-  - component: {fileID: 6455237333475164921}
   - component: {fileID: 4319441629977962687}
   - component: {fileID: 4319441629977962684}
   - component: {fileID: 4319441629977962685}
@@ -469,23 +468,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &6455237333475164921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4319441629977962683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83952df304dc74841b8c38e2fc9885cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _prefab: {fileID: 6019465683298466303, guid: 9be4d557309c19549b63e8a268bf416f, type: 3}
-  _battels:
-  - {fileID: 11400000, guid: 9ece1fabc2f393245ba70dd95e9fd90d, type: 2}
-  - {fileID: 11400000, guid: 593dfdff9e98cc043885fc70cb9b7b1a, type: 2}
-  _panelHolder: {fileID: 4319441629289733497}
 --- !u!223 &4319441629977962687
 Canvas:
   m_ObjectHideFlags: 0
@@ -668,8 +650,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4319441629625545424}
   m_HandleRect: {fileID: 4319441629625545425}
   m_Direction: 2
-  m_Value: 0.9999995
-  m_Size: 0.8692942
+  m_Value: 1
+  m_Size: 0.8692943
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

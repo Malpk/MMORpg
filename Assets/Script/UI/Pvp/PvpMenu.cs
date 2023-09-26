@@ -2,8 +2,24 @@ using UnityEngine;
 
 public class PvpMenu : MonoBehaviour
 {
-    [SerializeField] private BattelPanel _prefab;
-    [SerializeField] private BattelData[] _battels;
-    [Header("Reference")]
-    [SerializeField] private Transform _panelHolder;
+    [SerializeField] private InterfaceSwitcher _interface;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (MenuType.Attack == _interface.OpenMenu)
+                ShowHud();
+        }
+    }
+
+    public void ShowHud()
+    {
+        _interface.SwitchMenu(MenuType.HUD);
+    }
+
+    public void ShowAttack()
+    {
+        _interface.SwitchMenu(MenuType.Attack);
+    }
 }
