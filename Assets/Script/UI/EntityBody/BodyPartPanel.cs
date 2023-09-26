@@ -4,7 +4,8 @@ using UnityEngine.UI;
 public class BodyPartPanel : MonoBehaviour
 {
     [SerializeField] private PartType _part;
-    [Header("Reference")]
+    [SerializeField] private PartBody _partBody;
+    [Header("PrefabReference")]
     [SerializeField] private Image _image;
     [SerializeField] private Image _shadow;
     [SerializeField] private TextUI _armor;
@@ -13,6 +14,14 @@ public class BodyPartPanel : MonoBehaviour
     [SerializeField] private Animator _animator;
 
     public PartType Part => _part;
+
+
+    private void OnEnable()
+    {
+        SetArmor(_partBody.Armor);
+        SetHealth(_partBody.Health, _partBody.State);
+    }
+
 
     public void Reload()
     {
@@ -40,15 +49,14 @@ public class BodyPartPanel : MonoBehaviour
         }
     }
 
-    public void SetHealth(int health)
+    public void SetHealth(int health, BodyPartStateData data = null)
     {
         _health.SetText(health.ToString());
-    }
-
-    public void SetState(BodyPartStateData data)
-    {
-        _animator.SetTrigger(GetAnimation(data.State));
-        _damage.SetText(data.StateName);
+        if (data != null)
+        {
+            _animator.SetTrigger(GetAnimation(data.State));
+            _damage.SetText(data.StateName);
+        }
     }
 
     private string GetAnimation(BodyPartState state)

@@ -68,16 +68,14 @@ public class EntityBody : MonoBehaviour
 
     #region Health
 
-    public bool TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         var parts = GetActivePart();
         if (parts.Count > 0)
         {
             parts[Random.Range(0, parts.Count)].TakeDamage(damage);
             Health = GetHealth();
-            return true;
         }
-        return false;
     }
 
     public void TekeHeal(int heal = 4)

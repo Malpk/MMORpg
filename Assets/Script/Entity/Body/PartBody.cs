@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public class PartBody : MonoBehaviour
 {
@@ -8,12 +7,13 @@ public class PartBody : MonoBehaviour
     [SerializeField] private BodyPartStateData[] _states;
     [Header("Reference")]
     [SerializeField] private Armor _armor;
-    [Header("Event")]
-    [SerializeField] private UnityEvent<int> _onHealthUpdate;
-    [SerializeField] private UnityEvent<Armor> _onArmorUpdate;
 
     private int _curretHealth;
     private BodyPartStateData _curretState;
+
+    public event System.Action<int, BodyPartStateData> OnUpdateHealth;
+    public event System.Action<Armor> OnSetArmor;
+
 
     public int Health
     {
@@ -24,7 +24,7 @@ public class PartBody : MonoBehaviour
         private set
         {
             _curretHealth = value;
-            _onHealthUpdate.Invoke(_curretHealth);
+            OnUpdateHealth?.Invoke(_curretHealth, _curretState);
         }
     }
 
@@ -32,6 +32,8 @@ public class PartBody : MonoBehaviour
     public PartType Part => _type;
 
     public Armor Armor => _armor;
+    public BodyPartStateData State => _curretState;
+
 
     private void OnValidate()
     {
@@ -40,6 +42,10 @@ public class PartBody : MonoBehaviour
             if (_armor.Part != Part)
                 _armor = null;
         }
+    }
+
+    private void Start()
+    {
         AddArmor(_armor);
     }
 
@@ -74,6 +80,6 @@ public class PartBody : MonoBehaviour
     public void AddArmor(Armor armor)
     {
         _armor = armor;
-        _onArmorUpdate.Invoke(armor);
+        OnSetArmor?.Invoke(armor);
     }
 }

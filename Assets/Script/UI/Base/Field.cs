@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class Field : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class Field : MonoBehaviour
     [SerializeField] private Color _color;
     [Header("Rereference")]
     [SerializeField] private Image _field;
+    [SerializeField] private List<Field> _child;
 
     private void Reset()
     {
@@ -22,11 +24,16 @@ public class Field : MonoBehaviour
             _field.color = _color;
             SetValue(_value);
         }
+        _child.Remove(this);
     }
 
     public void SetValue(float progress)
     {
         _value = progress;
         _field.fillAmount = _value;
+        foreach (var child in _child)
+        {
+            child.SetValue(_value);
+        }
     }
 }
