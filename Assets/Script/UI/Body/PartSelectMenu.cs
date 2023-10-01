@@ -5,6 +5,7 @@ public class PartSelectMenu : MonoBehaviour
 {
     [Min(1)]
     [SerializeField] private int _maxSelect = 1;
+    [SerializeField] private TextUI _contAction;
     [SerializeField] private PartButton[] _partButtons;
 
     private EntityBody _body;
@@ -13,6 +14,11 @@ public class PartSelectMenu : MonoBehaviour
     public event System.Action<PartButton> OnDeselect;
 
     private List<PartButton> _selects = new List<PartButton>();
+
+    private void Awake()
+    {
+        _contAction.SetText(_selects.Count.ToString());
+    }
 
     private void OnEnable()
     {
@@ -51,6 +57,8 @@ public class PartSelectMenu : MonoBehaviour
         {
             part.Reload();
         }
+        _selects.Clear();
+        _contAction.SetText(_selects.Count.ToString());
     }
 
     private void SelectPart(PartButton button)
@@ -66,5 +74,6 @@ public class PartSelectMenu : MonoBehaviour
             _selects.Add(button);
             OnSelect?.Invoke(button);
         }
+        _contAction.SetText(_selects.Count.ToString());
     }
 }

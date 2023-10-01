@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class MapHolder : MonoBehaviour
 {
-    [SerializeField] private AttackMenu _attack;
     [SerializeField] private List<MapPoint> _points = new List<MapPoint>();
 
     public event System.Action<MapPoint> OnActive;
@@ -31,6 +30,7 @@ public class MapHolder : MonoBehaviour
         foreach (var point in _points)
         {
             point.OnActive -= OnEnterPoint;
+            point.OnExit -= OnExitPoint;
         }
     }
 
@@ -112,13 +112,11 @@ public class MapHolder : MonoBehaviour
             Point.Deactivate();
         Point = point;
         OnActive?.Invoke(Point);
-        _attack.BindMenu(Point.Content.GetComponent<Enemy>());
     }
 
     private void OnExitPoint(MapPoint point)
     {
         Point = null;
-        _attack.BindMenu(null);
         OnExit?.Invoke(null);
     }
 }

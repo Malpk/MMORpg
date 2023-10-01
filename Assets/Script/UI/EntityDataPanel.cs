@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class EntityDataPanel : MonoBehaviour
@@ -7,14 +6,18 @@ public class EntityDataPanel : MonoBehaviour
     [SerializeField] private Entity _bind;
     [SerializeField] private List<EntityDataPanel> _childs;
     [Header("UI Reference")]
-    [SerializeField] private Image _icon;
-    [SerializeField] private TextUI _name;
     [SerializeField] private Field _healthField;
     [SerializeField] private Field _magicField;
+    [SerializeField] private EntityPreview _preview;
 
     private void OnValidate()
     {
         _childs.Remove(this);
+    }
+
+    private void Reset()
+    {
+        enabled = false;
     }
 
     private void OnEnable()
@@ -25,7 +28,8 @@ public class EntityDataPanel : MonoBehaviour
 
     private void OnDisable()
     {
-        _bind.Body.OnChangeHealth -= _healthField.SetValue;
+        if (_bind)
+            _bind.Body.OnChangeHealth -= _healthField.SetValue;
     }
 
     public void BindPanel(Entity entity)
@@ -40,21 +44,14 @@ public class EntityDataPanel : MonoBehaviour
 
     private void SwitchBind(Entity entity)
     {
-        if (enabled)
-        {
-            if (_bind)
-            {
-                OnDisable();
-            }
-            OnEnable();
-        }
+        enabled = false;
         _bind = entity;
+        enabled = true;
     }
 
     private void UpdateData()
     {
-        _name.SetText(_bind.Name);
-        _icon.sprite = _bind.Icon;
-        _healthField?.SetValue(_bind.Body.HealthNormalize);
+        _preview.BindEntity(_bind);
+        _healthField?.SetValue(_bind ? _bind.Body.HealthNormalize : 1);
     }
 }

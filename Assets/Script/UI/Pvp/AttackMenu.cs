@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class AttackMenu : MonoBehaviour
@@ -6,8 +7,7 @@ public class AttackMenu : MonoBehaviour
     [Min(1)]
     [SerializeField] private int _maxAction = 1;
     [Header("Reference")]
-    [SerializeField] private Enemy _enemy;
-    [SerializeField] private Player _player;
+    [SerializeField] private Button _applyButtonl;
     [SerializeField] private PartSelectMenu _protect;
     [SerializeField] private PartSelectMenu _attack;
     [SerializeField] private PvpEntityPanel _enemyPanel;
@@ -15,12 +15,19 @@ public class AttackMenu : MonoBehaviour
     private List<PartButton> _selectAttack = new List<PartButton>();
     private List<PartButton> _selectProtect = new List<PartButton>();
 
-    public event System.Action<PartBody[], PartBody[]> OnComplite;
+    public event System.Action<PartType[]> OnAttack;
+    public event System.Action<PartType[]> OnProtect;
 
     private int CountAction => _selectAttack.Count + _selectProtect.Count;
 
+    private void Awake()
+    {
+        _applyButtonl.onClick.AddListener(Close);
+    }
+
     private void OnEnable()
     {
+        _applyButtonl.interactable = CountAction == _maxAction;
         _attack.OnSelect += SelectAttack;
         _protect.OnSelect += SelectProtect;
         _attack.OnDeselect += DelesectAttack;
@@ -37,42 +44,39 @@ public class AttackMenu : MonoBehaviour
 
     public void BindMenu(Enemy target)
     {
-        _enemy = target;
         _enemyPanel.BindPanel(target);
     }
 
     public void Close()
     {
-        Attack();
-        Protect(_selectProtect);
-        _attack.Reload();
-        _protect.Reload();
+        if(_selectAttack.Count > 0)
+            OnAttack?.Invoke(GetParts(_selectAttack));
+        OnProtect?.Invoke(GetParts(_selectProtect));
+        Reload();
     }
 
     public void Skip()
     {
+        OnProtect?.Invoke(GetParts(_protect.GetPats()));
+        Reload();
+    }
+
+    public void Reload()
+    {
+        BindMenu(null);
         _attack.Reload();
         _protect.Reload();
-        _player.Skip();
-        Protect(_protect.GetPats());
     }
 
-    private void Attack()
+    private PartType[] GetParts(List<PartButton> select)
     {
-        foreach (var attack in _selectAttack)
+        var list = new List<PartType>();
+        foreach (var attack in select)
         {
-            _enemy.Body.TakeDamage(_player.Attack, attack.Part);
+            list.Add(attack.Part);
         }
-        _selectAttack.Clear();
-    }
-
-    private void Protect(List<PartButton> selects)
-    {
-        foreach (var protect in selects)
-        {
-            _enemy.Body.SetProtect(protect.Part, false);
-        }
-        selects.Clear();
+        select.Clear();
+        return list.ToArray();
     }
 
     #region Select
@@ -95,6 +99,7 @@ public class AttackMenu : MonoBehaviour
                 }
             }
         }
+        _applyButtonl.interactable = CountAction == _maxAction;
     }
 
     private void SelectProtect(PartButton part)
@@ -116,16 +121,19 @@ public class AttackMenu : MonoBehaviour
                 }
             }
         }
+        _applyButtonl.interactable = CountAction == _maxAction;
     }
 
     private void DelesectAttack(PartButton part)
     {
         _selectAttack.Remove(part);
+        _applyButtonl.interactable = CountAction == _maxAction;
     }
 
     private void DeselectProtect(PartButton part)
     {
         _selectProtect.Remove(part);
+        _applyButtonl.interactable = CountAction == _maxAction;
     }
     #endregion
 
