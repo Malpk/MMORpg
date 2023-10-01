@@ -3,9 +3,13 @@ using UnityEngine;
 
 public class MapHolder : MonoBehaviour
 {
+    [SerializeField] private AttackMenu _attack;
     [SerializeField] private List<MapPoint> _points = new List<MapPoint>();
 
-    public MapPoint Point { get; private set; }
+    public event System.Action<MapPoint> OnActive;
+    public event System.Action<MapPoint> OnExit;
+
+    private MapPoint Point { get;  set; }
 
     private void Reset()
     {
@@ -17,7 +21,8 @@ public class MapHolder : MonoBehaviour
     {
         foreach (var point in _points)
         {
-            point.OnActive += SetActive;
+            point.OnActive += OnEnterPoint;
+            point.OnExit += OnExitPoint;
         }
     }
 
@@ -25,7 +30,15 @@ public class MapHolder : MonoBehaviour
     {
         foreach (var point in _points)
         {
-            point.OnActive -= SetActive;
+            point.OnActive -= OnEnterPoint;
+        }
+    }
+
+    public void SetBlock(bool block)
+    {
+        foreach (var point in _points)
+        {
+            point.SetBlock(block);
         }
     }
 
@@ -49,7 +62,11 @@ public class MapHolder : MonoBehaviour
             if (!point.Content)
             {
                 var distance = Vector2.Distance(point.transform.position, position);
-                point.SetMode(distance > moveRadius);
+                point.SetBlock(distance > moveRadius);
+            }
+            else
+            {
+                point.SetBlock(false);
             }
         }
     }
@@ -89,12 +106,19 @@ public class MapHolder : MonoBehaviour
 
     #endregion
 
-    private void SetActive(MapPoint point)
+    private void OnEnterPoint(MapPoint point)
     {
         if (Point != null)
-        {
             Point.Deactivate();
-        }
         Point = point;
+        OnActive?.Invoke(Point);
+        _attack.BindMenu(Point.Content.GetComponent<Enemy>());
+    }
+
+    private void OnExitPoint(MapPoint point)
+    {
+        Point = null;
+        _attack.BindMenu(null);
+        OnExit?.Invoke(null);
     }
 }

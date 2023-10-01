@@ -7,9 +7,7 @@ public class ArmorPanel : MonoBehaviour
     [SerializeField] private Armor _armor;
     [SerializeField] private Image _icon;
     [SerializeField] private Image _empty;
-    [SerializeField] private PartBody _part;
-    [SerializeField] private TextMeshProUGUI _protect;
-
+    [SerializeField] private TextUI _protect;
 
     private void OnValidate()
     {
@@ -22,21 +20,6 @@ public class ArmorPanel : MonoBehaviour
                 _icon.sprite = _armor.Icon;
         }
         _protect?.SetText(_armor ? _armor.Protect.ToString() : "0");
-    }
-
-    private void OnEnable()
-    {
-        _part.OnSetArmor += SetArmor;
-    }
-
-    private void OnDisable()
-    {
-        _part.OnSetArmor -= SetArmor;
-    }
-
-    private void Start()
-    {
-        SetArmor(_part.Armor);
     }
 
     public void SetArmor(Armor armor)

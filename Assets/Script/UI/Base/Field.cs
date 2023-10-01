@@ -15,6 +15,7 @@ public class Field : MonoBehaviour
     {
         _color = Color.red;
         _value = 1f;
+        _child.Remove(this);
     }
 
     private void OnValidate()
@@ -33,7 +34,7 @@ public class Field : MonoBehaviour
         _field.fillAmount = _value;
         foreach (var child in _child)
         {
-            child.SetValue(_value);
+            child?.SetValue(_value);
         }
     }
 }

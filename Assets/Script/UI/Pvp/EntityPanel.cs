@@ -14,7 +14,7 @@ public class EntityPanel : MonoBehaviour
     {
         if (_entity)
         {
-            _health?.SetText(_entity.Health.ToString());
+            _health?.SetText(_entity.Body.Health.ToString());
             _damage?.SetText(_entity.Attack.ToString());
             _level?.SetText(_entity.Level.ToString());
         }
@@ -22,7 +22,7 @@ public class EntityPanel : MonoBehaviour
 
     public void SetEntity(Entity entity)
     {
-        _health.SetText(entity.Health.ToString());
+        _health.SetText(_entity.Body.Health.ToString());
         _damage.SetText(entity.Attack.ToString());
         _level.SetText(entity.Level.ToString());
     }

@@ -5,11 +5,11 @@ public class EntityBody : MonoBehaviour
 {
     [SerializeField] private int _health;
     [Header("Reference")]
-    [SerializeField] private Field _field;
-    [SerializeField] private BodyPanel _panel;
     [SerializeField] private PartBody[] _parts;
 
     private int _curretHealth;
+
+    public event System.Action<float> OnChangeHealth;
 
     public int Health 
     {
@@ -21,11 +21,13 @@ public class EntityBody : MonoBehaviour
         private set
         {
             _curretHealth =  value;
-            _field?.SetValue((float)_curretHealth / _health);
+            OnChangeHealth?.Invoke(HealthNormalize);
         }
     }
 
+    public float HealthNormalize => Health / (float)_health;
 
+    public PartBody[] Parts => _parts;
 
     private void Reset()
     {
@@ -39,7 +41,6 @@ public class EntityBody : MonoBehaviour
             part?.SetHealth(_health / _parts.Length);
         }
         Health = GetHealth();
-        _panel?.SetArmor(GetAmountArmor());
     }
 
     public void AddArmor(Armor armor)
@@ -49,8 +50,6 @@ public class EntityBody : MonoBehaviour
             if (part.Part == armor.Part)
             {
                 part.AddArmor(armor);
-                _panel.SetArmor(
-                    GetAmountArmor());
                 return;
             }
         }
@@ -66,8 +65,63 @@ public class EntityBody : MonoBehaviour
         return amount;
     }
 
-    #region Health
+    #region PartBody
 
+    public void ReloadPart()
+    {
+        foreach (var part in _parts)
+        {
+            part.SetProtect(false);
+        }
+    }
+
+    public void SetProtect(PartType target, bool protect)
+    {
+        var part = GetPart(target);
+        if (part)
+            part.SetProtect(protect);
+
+    }
+    public bool TakeDamage(int damage, PartType target)
+    {
+        var part = GetPart(target);
+        if (part)
+        {
+            part.TakeDamage(damage);
+            Health = GetHealth();
+            return true;
+        }
+        return false;
+    }
+    public bool TekeHeal(int heal, PartType target)
+    {
+        var part = GetPart(target);
+        if (part)
+        {
+            part.TakeHeal(heal);
+            Health = GetHealth();
+            return true;
+        }
+        return false;
+    }
+
+    private PartBody GetPart(PartType target, bool isActive = false)
+    {
+        foreach (var part in _parts)
+        {
+            if (part.Health > 0 || !isActive)
+            {
+                if (part.Part == target)
+                {
+                    return part;
+                }
+            }
+        }
+        return null;
+    }
+    #endregion
+
+    #region Body
     public void TakeDamage(int damage)
     {
         var parts = GetActivePart();
@@ -77,7 +131,6 @@ public class EntityBody : MonoBehaviour
             Health = GetHealth();
         }
     }
-
     public void TekeHeal(int heal = 4)
     {
         if (heal < _parts.Length)
@@ -87,21 +140,6 @@ public class EntityBody : MonoBehaviour
             part.TakeHeal(heal / _parts.Length);
         }
         Health = GetHealth();
-    }
-
-
-    public bool TekeHeal(int heal, PartType type)
-    {
-        foreach (var part in _parts)
-        {
-            if (part.Part == type)
-            {
-                part.TakeHeal(heal);
-                Health = GetHealth();
-                return true;
-            }
-        }
-        return false;
     }
 
     private List<PartBody> GetActivePart()
@@ -115,6 +153,9 @@ public class EntityBody : MonoBehaviour
         return list;
     }
 
+    #endregion
+
+
     private int GetHealth()
     {
         var health = 0;
@@ -124,5 +165,5 @@ public class EntityBody : MonoBehaviour
         }
         return health;
     }
-    #endregion
+
 }

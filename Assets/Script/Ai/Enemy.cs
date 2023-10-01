@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IPvp
+public class Enemy : Entity, IPvp
 {
     [SerializeField] private int _damage;
     [SerializeField] private float _attackDistance;

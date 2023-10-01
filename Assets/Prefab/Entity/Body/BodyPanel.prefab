@@ -799,7 +799,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc6da40c991679440ab12f2622ab42c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _armorProtect: {fileID: 1344044130842340692}
+  _head: {fileID: 0}
+  _body: {fileID: 0}
+  _hands: {fileID: 0}
+  _leg: {fileID: 0}
+  _entity: {fileID: 0}
 --- !u!1001 &459184011574220093
 PrefabInstance:
   m_ObjectHideFlags: 0

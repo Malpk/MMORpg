@@ -268,8 +268,7 @@ MonoBehaviour:
   _armor: {fileID: 0}
   _icon: {fileID: 7004505931539573927}
   _empty: {fileID: 7618055567145643301}
-  _part: {fileID: 0}
-  _protect: {fileID: 1865065180972098824}
+  _protect: {fileID: 0}
 --- !u!222 &6388224297821244252
 CanvasRenderer:
   m_ObjectHideFlags: 0

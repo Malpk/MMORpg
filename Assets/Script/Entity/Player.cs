@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Player : Entity, IPvp
 {
-
     [Header("Reference")]
     [SerializeField] private MapPoint _point;
     [SerializeField] private MapHolder _map;
@@ -19,25 +18,13 @@ public class Player : Entity, IPvp
     private void OnEnable()
     {
         _movement.OnCompliteMove += Complite;
+        _map.OnActive += EnterPoint;
     }
 
     private void OnDisable()
     {
         _movement.OnCompliteMove -= Complite;
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && _map.Point)
-        {
-            if (!_movement.IsMove)
-            {
-                _movement.SetTarget(_map.Point.transform.position);
-                _point.SetContent(null);
-                _point = _map.Point;
-                _point.SetContent(gameObject);
-            }
-        }
+        _map.OnActive -= EnterPoint;
     }
 
     public void Play()
@@ -52,9 +39,24 @@ public class Player : Entity, IPvp
         Complite();
     }
 
-    public void Complite()
+    private void Complite()
     {
         _map.Reload();
         OnComplite?.Invoke();
     }
+
+    private void EnterPoint(MapPoint point)
+    {
+        if (!point.Content)
+        {
+            if (!_movement.IsMove)
+            {
+                _movement.SetTarget(point.transform.position);
+                _point = point;
+                _point.SetContent(null);
+                _point.SetContent(gameObject);
+            }
+        }
+    }
+
 }

@@ -3,17 +3,18 @@ using UnityEngine;
 public class PartBody : MonoBehaviour
 {
     [SerializeField] private int _health;
+    [SerializeField] private bool _isProtect;
     [SerializeField] private PartType _type;
-    [SerializeField] private BodyPartStateData[] _states;
+    [SerializeField] private BodyPartState _idleState;
+    [SerializeField] private BodyPartState[] _states;
     [Header("Reference")]
     [SerializeField] private Armor _armor;
 
     private int _curretHealth;
-    private BodyPartStateData _curretState;
+    private BodyPartState _curretState;
 
-    public event System.Action<int, BodyPartStateData> OnUpdateHealth;
+    public event System.Action<int, BodyPartState> OnUpdateHealth;
     public event System.Action<Armor> OnSetArmor;
-
 
     public int Health
     {
@@ -32,7 +33,7 @@ public class PartBody : MonoBehaviour
     public PartType Part => _type;
 
     public Armor Armor => _armor;
-    public BodyPartStateData State => _curretState;
+    public BodyPartState State => _curretState;
 
 
     private void OnValidate()
@@ -42,11 +43,17 @@ public class PartBody : MonoBehaviour
             if (_armor.Part != Part)
                 _armor = null;
         }
+        _curretState = _idleState;
     }
 
     private void Start()
     {
         AddArmor(_armor);
+    }
+
+    public void SetProtect(bool protect)
+    {
+        _isProtect = protect;
     }
 
     public void SetHealth(int health)
@@ -57,18 +64,21 @@ public class PartBody : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (_armor)
-            damage = Mathf.Clamp(damage - _armor.Protect, 0, damage);
-        var stateData = _states[Random.Range(0, _states.Length)];
-        if (_curretState == null)
+        if (!_isProtect)
         {
-            _curretState = stateData;
+            if (_armor)
+                damage = Mathf.Clamp(damage - _armor.Protect, 0, damage);
+            var stateData = _states[Random.Range(0, _states.Length)];
+            if (_curretState == null)
+            {
+                _curretState = stateData;
+            }
+            else if (stateData.Seriousness > _curretState.Seriousness)
+            {
+                _curretState = stateData;
+            }
+            Health = Health - damage > 0 ? Health - damage : 0;
         }
-        else if (stateData.Seriousness > _curretState.Seriousness)
-        {
-            _curretState = stateData;
-        }
-        Health = Health - damage > 0 ? Health - damage : 0;
     }
 
     public void TakeHeal(int heal)

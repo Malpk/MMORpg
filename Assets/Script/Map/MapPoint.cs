@@ -9,8 +9,7 @@ public class MapPoint : MonoBehaviour
     private bool _block;
 
     public event System.Action<MapPoint> OnActive;
-
-    public bool IsBlcok => _content || _block;
+    public event System.Action<MapPoint> OnExit;
 
     public GameObject Content => _content;
 
@@ -23,18 +22,27 @@ public class MapPoint : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (!IsBlcok)
+        if (!_block)
         {
-            _activate = true;
-            OnActive?.Invoke(this);
-            _animator.SetBool("active", _activate);
-            _animator.SetBool("select", false);
+            if (!_activate)
+            {
+                _activate = true;
+                OnActive?.Invoke(this);
+                _animator.SetBool("active", _activate);
+                _animator.SetBool("select", false);
+            }
+            else
+            {
+                _activate = false;
+                OnExit?.Invoke(this);
+                _animator.SetBool("active", false);
+            }
         }
     }
 
     private void OnMouseEnter()
     {
-        if (!IsBlcok)
+        if (!_block)
         {
             if (!_activate)
             {
@@ -56,13 +64,22 @@ public class MapPoint : MonoBehaviour
         _animator.SetBool("none", false);
     }
 
-    public void SetMode(bool mode)
+    public bool SetBlock(bool mode)
     {
-        _block = mode;
+        if (!_content)
+        {
+            _block = mode;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void SetContent(GameObject content)
     {
+        SetBlock(false);
         _content = content;
     }
 

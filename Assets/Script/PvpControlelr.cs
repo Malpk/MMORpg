@@ -54,6 +54,7 @@ public class PvpControlelr : MonoBehaviour
     private void SetEnemy()
     {
         _pvp = _enemy;
+        _enemy.Body.ReloadPart();
         _pvp.Play();
         _progress = 0;
     }
@@ -61,6 +62,7 @@ public class PvpControlelr : MonoBehaviour
     private void SetPlayer()
     {
         _pvp = _player;
+        _player.Body.ReloadPart();
         _steapCount++;
         _steapText.SetText(_steapCount.ToString());
         _pvp.Play();

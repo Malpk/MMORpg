@@ -49,6 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f872122727656be4681091d3ae74ed5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveDistance: 0
+  attackDistance: 0
   _level: 1
   _stats:
     Strenght: 10
@@ -72,7 +74,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 100
   _field: {fileID: 0}
-  _panel: {fileID: 0}
   _parts:
   - {fileID: 2130463523560198211}
   - {fileID: 5811257666782508104}
@@ -93,6 +94,30 @@ PrefabInstance:
       propertyPath: _health
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 1237161238190833547, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
+      propertyPath: _idleState
+      value: 
+      objectReference: {fileID: 11400000, guid: 38f0efff7fff98a43a351daca3ffcc91, type: 2}
+    - target: {fileID: 1237161238190833547, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
+      propertyPath: _states.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1237161238190833547, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
+      propertyPath: _states.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 76a4a4dce5cb715449541465b216aaa5, type: 2}
+    - target: {fileID: 1237161238190833547, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
+      propertyPath: _states.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0bdd067a0ca034d469db178bd7cc51f1, type: 2}
+    - target: {fileID: 1237161238190833547, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
+      propertyPath: _states.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 30dcd2c02f3068c428fa2f61dae32bf5, type: 2}
+    - target: {fileID: 1237161238190833547, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
+      propertyPath: _states.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 531589ea830fa694c80e3b5780bae1aa, type: 2}
     - target: {fileID: 3054161728557030322, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
       propertyPath: m_Name
       value: Head
@@ -182,6 +207,26 @@ PrefabInstance:
       propertyPath: _health
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 1237161238190833547, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
+      propertyPath: _idleState
+      value: 
+      objectReference: {fileID: 11400000, guid: 38f0efff7fff98a43a351daca3ffcc91, type: 2}
+    - target: {fileID: 1237161238190833547, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
+      propertyPath: _states.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1237161238190833547, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
+      propertyPath: _states.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 76a4a4dce5cb715449541465b216aaa5, type: 2}
+    - target: {fileID: 1237161238190833547, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
+      propertyPath: _states.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0bdd067a0ca034d469db178bd7cc51f1, type: 2}
+    - target: {fileID: 1237161238190833547, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
+      propertyPath: _states.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 30dcd2c02f3068c428fa2f61dae32bf5, type: 2}
     - target: {fileID: 3054161728557030322, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
       propertyPath: m_Name
       value: Body
@@ -271,6 +316,26 @@ PrefabInstance:
       propertyPath: _health
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 1237161238190833547, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
+      propertyPath: _idleState
+      value: 
+      objectReference: {fileID: 11400000, guid: 38f0efff7fff98a43a351daca3ffcc91, type: 2}
+    - target: {fileID: 1237161238190833547, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
+      propertyPath: _states.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1237161238190833547, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
+      propertyPath: _states.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 76a4a4dce5cb715449541465b216aaa5, type: 2}
+    - target: {fileID: 1237161238190833547, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
+      propertyPath: _states.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0bdd067a0ca034d469db178bd7cc51f1, type: 2}
+    - target: {fileID: 1237161238190833547, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
+      propertyPath: _states.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 30dcd2c02f3068c428fa2f61dae32bf5, type: 2}
     - target: {fileID: 3054161728557030322, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
       propertyPath: m_Name
       value: Leg
@@ -360,6 +425,26 @@ PrefabInstance:
       propertyPath: _health
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 1237161238190833547, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
+      propertyPath: _idleState
+      value: 
+      objectReference: {fileID: 11400000, guid: 38f0efff7fff98a43a351daca3ffcc91, type: 2}
+    - target: {fileID: 1237161238190833547, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
+      propertyPath: _states.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1237161238190833547, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
+      propertyPath: _states.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 76a4a4dce5cb715449541465b216aaa5, type: 2}
+    - target: {fileID: 1237161238190833547, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
+      propertyPath: _states.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 0bdd067a0ca034d469db178bd7cc51f1, type: 2}
+    - target: {fileID: 1237161238190833547, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
+      propertyPath: _states.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 30dcd2c02f3068c428fa2f61dae32bf5, type: 2}
     - target: {fileID: 3054161728557030322, guid: cdd21520d9378514bb4936fa485444e7, type: 3}
       propertyPath: m_Name
       value: Hadns

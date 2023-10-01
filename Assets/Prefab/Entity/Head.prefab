@@ -45,16 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 0
+  _isProtect: 0
   _type: 0
+  _state: 0
   _states:
-  - _seriousness: 0
-    _name: "\u0423\u0448\u0438\u0431"
-    _state: 1
-  - _seriousness: 1
-    _name: "\u041F\u0435\u0440\u0435\u043B\u043E\u043C"
-    _state: 2
+  - {fileID: 11400000, guid: 76a4a4dce5cb715449541465b216aaa5, type: 2}
+  - {fileID: 11400000, guid: 0bdd067a0ca034d469db178bd7cc51f1, type: 2}
   _armor: {fileID: 0}
-  _panel: {fileID: 0}
-  _onArmorUpdate:
-    m_PersistentCalls:
-      m_Calls: []
