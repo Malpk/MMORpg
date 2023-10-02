@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EntityPreview : MonoBehaviour
+public class ItemPreview : MonoBehaviour
 {
     [SerializeField] private string _defoutText;
     [Header("Reference")]
@@ -9,21 +9,23 @@ public class EntityPreview : MonoBehaviour
     [SerializeField] private Image _preview;
     [SerializeField] private TextUI _name;
 
-    private Entity _bind;
+    public void Reload()
+    {
+        SetData(_defoutText, null);
+    }
+
+    public void SetData(string name, Sprite icon)
+    {
+        _name.SetText(name);
+        ShowIcon(icon);
+    }
 
     public void BindEntity(Entity entity)
     {
-        _bind = entity;
         if (entity)
-        {
-            _name.SetText(entity.Name);
-            ShowIcon(entity.Icon);
-        }
+            SetData(entity.Name, entity.Icon);
         else
-        {
-            ShowIcon(null);
-            _name.SetText(_defoutText);
-        }
+            Reload();
     }
 
     private void ShowIcon(Sprite icon)

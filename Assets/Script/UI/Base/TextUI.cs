@@ -9,6 +9,8 @@ public class TextUI : MonoBehaviour
     [Header("Reference")]
     [SerializeField] private TextMeshProUGUI _textMesh;
 
+    public string Content => _content;
+
     private void OnValidate()
     {
         _textMesh?.SetText(_prefix + _content + _postfix);

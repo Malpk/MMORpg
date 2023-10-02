@@ -496,10 +496,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7575500010688391365}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f039a3652fc285540adcb9b8de194b96, type: 3}
+  m_Script: {fileID: 11500000, guid: 964daf07af0226840838a0fba5b06b55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defoutText: "\u043D\u0435\u0438\u0437\u0432\u0435\u0441\u0442\u043D\u044B\u0439"
+  _defoutText: "\u0413\u0435\u0440\u043E\u0439"
   _icon: {fileID: 9121105702300584667}
   _preview: {fileID: 6056446312050988732}
   _name: {fileID: 951541951098673883}

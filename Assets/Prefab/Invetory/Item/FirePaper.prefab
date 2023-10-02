@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9149310250359012407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9149310250359012401}
+  - component: {fileID: 9149310250359012406}
+  m_Layer: 0
+  m_Name: FirePaper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9149310250359012401
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9149310250359012407}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.603421, y: 0.8128761, z: -9.891512}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9149310250359012406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9149310250359012407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9c0392dd944120458da036fb951800c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 0
+  _name: "\u041E\u0433\u043D\u0435\u043D\u044B\u0439 \u0441\u0432\u0438\u0442\u043E\u043A"
+  _icon: {fileID: 21300000, guid: 73ebef95938a6cf42925d0c5bac4cb5d, type: 3}
+  _type: 1
+  _description: "\u0421\u0432\u0438\u0442\u043E\u043A \u043F\u0440\u0438\u0437\u044B\u0432\u0430\u0435\u0442
+    \u043E\u0433\u043D\u0435\u043D\u044B\u0439 \u0448\u0430\u0440, \u0447\u0442\u043E
+    \u0443\u043D\u0438\u0447\u0442\u043E\u0436\u0430\u0435\u0442\u0441\u044F \u0432\u0441\u0435
+    \u043D\u0430 \u0441\u0432\u043E\u0435\u043C \u043F\u0443\u0442\u0438."
+  _probility: 80
+  _mana: 20
+  _useDescription: "\u041C\u0433\u043D\u043E\u0432\u0435\u043D\u043E"

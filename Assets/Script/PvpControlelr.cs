@@ -7,8 +7,7 @@ public class PvpControlelr : MonoBehaviour
     [Header("Reference")]
     [SerializeField] private Enemy _enemy;
     [SerializeField] private Player _player;
-    [SerializeField] private Field _steapProgressField;
-    [SerializeField] private TextUI _steapText;
+    [SerializeField] private GameStateLog _game;
     [SerializeField] private PvpMenu _inteface;
     [SerializeField] private AttackMenu _attack;
 
@@ -21,7 +20,6 @@ public class PvpControlelr : MonoBehaviour
     {
         _steapTime = 1f;
     }
-
 
     private void OnEnable()
     {
@@ -43,7 +41,7 @@ public class PvpControlelr : MonoBehaviour
     private void Update()
     {
         _progress = Mathf.Clamp01(_progress + Time.deltaTime / _steapTime);
-        _steapProgressField.SetValue(1 -_progress);
+        _game.SetProgress(1 -_progress);
         if (_progress == 1)
         {
             _progress = 0;
@@ -66,7 +64,7 @@ public class PvpControlelr : MonoBehaviour
         _pvp = _player;
         _player.Body.ReloadPart();
         _steapCount++;
-        _steapText.SetText(_steapCount.ToString());
+        _game.SetSteap(_steapCount);
         _pvp.Play();
         _progress = 0;
     }

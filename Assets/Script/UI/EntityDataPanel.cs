@@ -8,7 +8,7 @@ public class EntityDataPanel : MonoBehaviour
     [Header("UI Reference")]
     [SerializeField] private Field _healthField;
     [SerializeField] private Field _magicField;
-    [SerializeField] private EntityPreview _preview;
+    [SerializeField] private ItemPreview _preview;
 
     private void OnValidate()
     {
