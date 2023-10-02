@@ -5,15 +5,17 @@ public class PartSelectMenu : MonoBehaviour
 {
     [Min(1)]
     [SerializeField] private int _maxSelect = 1;
+    [Header("Reference")]
     [SerializeField] private TextUI _contAction;
     [SerializeField] private PartButton[] _partButtons;
-
-    private EntityBody _body;
 
     public event System.Action<PartButton> OnSelect;
     public event System.Action<PartButton> OnDeselect;
 
     private List<PartButton> _selects = new List<PartButton>();
+
+    public int SelectCount => _selects.Count;
+    public List<PartButton> Selects => _selects;
 
     private void Awake()
     {
@@ -36,11 +38,6 @@ public class PartSelectMenu : MonoBehaviour
         }
     }
 
-    public void SetEntity(EntityBody body)
-    {
-        _body = body;
-    }
-
     public List<PartButton> GetPats()
     {
         var list = new List<PartButton>();
@@ -49,6 +46,16 @@ public class PartSelectMenu : MonoBehaviour
             list.Remove(list[Random.Range(0, list.Count)]);
         }
         return list;
+    }
+
+    public bool RemoveSelect()
+    {
+        if (_selects.Count > 0)
+        {
+            Remove(_selects[_selects.Count - 1]);
+            return true;
+        }
+        return false;
     }
 
     public void Reload()
@@ -67,13 +74,19 @@ public class PartSelectMenu : MonoBehaviour
         {
             if (_selects.Count >= _maxSelect)
             {
-                OnDeselect?.Invoke(_selects[0]);
-                _selects[0].Reload();
-                _selects.Remove(_selects[0]);
+                Remove(_selects[0]);
             }
             _selects.Add(button);
             OnSelect?.Invoke(button);
         }
+        _contAction.SetText(_selects.Count.ToString());
+    }
+
+    private void Remove(PartButton part)
+    {
+        part.Reload();
+        _selects.Remove(part);
+        OnDeselect?.Invoke(part);
         _contAction.SetText(_selects.Count.ToString());
     }
 }

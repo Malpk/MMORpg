@@ -10,6 +10,7 @@ public class PvpControlelr : MonoBehaviour
     [SerializeField] private Field _steapProgressField;
     [SerializeField] private TextUI _steapText;
     [SerializeField] private PvpMenu _inteface;
+    [SerializeField] private AttackMenu _attack;
 
     private int _steapCount;
     private float _progress = 0f;
@@ -47,6 +48,7 @@ public class PvpControlelr : MonoBehaviour
         {
             _progress = 0;
             _pvp.Skip();
+            _attack.Skip();
             _inteface.ShowHud();
         }
     }
