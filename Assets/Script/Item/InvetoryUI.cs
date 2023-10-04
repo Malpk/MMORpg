@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InvetoryMenu : MonoBehaviour
+public class InvetoryUI : MonoBehaviour
 {
     [SerializeField] private Transform _contentHolder;
     [SerializeField] private ItemPanel _itemPanel;
     [SerializeField] private ItemDescriptionPanel _decription;
+
+    private ItemType _curretItem;
 
     private ItemPanel _select;
 
@@ -20,6 +22,18 @@ public class InvetoryMenu : MonoBehaviour
         _items.Add(panel);
     }
 
+    public void ShowItem(ItemType type)
+    {
+        if (_curretItem != type)
+        {
+            _curretItem = type;
+            foreach (var item in _items)
+            {
+                item.gameObject.SetActive(item.Content.Type == type);
+            }
+            _decription.SetMode(false);
+        }
+    }
 
     private ItemPanel GetPanel()
     {

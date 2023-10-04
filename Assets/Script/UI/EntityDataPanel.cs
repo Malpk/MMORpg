@@ -23,7 +23,10 @@ public class EntityDataPanel : MonoBehaviour
     private void OnEnable()
     {
         if (_bind)
+        {
             _bind.Body.OnChangeHealth += _healthField.SetValue;
+            _healthField.SetValue(_bind.Body.HealthNormalize);
+        }
     }
 
     private void OnDisable()

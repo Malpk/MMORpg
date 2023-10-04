@@ -12,7 +12,7 @@ public abstract class Item : MonoBehaviour
     public int ID => _id;
     public ItemType Type => _type;
 
-    public abstract void Pick(InvetorySet set);
+    public abstract void Pick();
 
     public abstract void Use(Player player);
 

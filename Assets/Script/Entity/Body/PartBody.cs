@@ -62,7 +62,7 @@ public class PartBody : MonoBehaviour
         Health = health;
     }
 
-    public void TakeDamage(int damage)
+    public bool TakeDamage(int damage)
     {
         if (!_isProtect)
         {
@@ -78,7 +78,9 @@ public class PartBody : MonoBehaviour
                 _curretState = stateData;
             }
             Health = Health - damage > 0 ? Health - damage : 0;
+            return true;
         }
+        return false;
     }
 
     public void TakeHeal(int heal)

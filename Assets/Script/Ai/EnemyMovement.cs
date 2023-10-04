@@ -1,7 +1,7 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
-public class EntityMovement : MonoBehaviour
+public class EnemyMovement : MonoBehaviour
 {
     [Min(1)]
     [SerializeField] private float _moveDistance;
@@ -22,19 +22,6 @@ public class EntityMovement : MonoBehaviour
         _point.SetContent(gameObject);
     }
 
-    private void OnEnable()
-    {
-        _map.SetMap(transform.position, _moveDistance);
-        _map.OnActive += EnterPoint;
-    }
-
-    private void OnDisable()
-    {
-        _map.Reload();
-        _map.OnActive -= EnterPoint;
-    }
-
-
     private IEnumerator Move(Vector2 target)
     {
         while ((Vector2)transform.position != target)
@@ -44,28 +31,17 @@ public class EntityMovement : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         OnCompliteMove?.Invoke();
+        _point.SetContent(gameObject);
         _corotine = null;
     }
 
-    public void SetTarget(Vector2 target)
+    public void MoveToTarget(Transform target)
     {
         if (!IsMove)
         {
-            _corotine = StartCoroutine(Move(target));
-        }
-    }
-
-    private void EnterPoint(MapPoint point)
-    {
-        if (!point.Content)
-        {
-            if (!IsMove)
-            {
-                SetTarget(point.transform.position);
-                _point = point;
-                _point.SetContent(null);
-                _point.SetContent(gameObject);
-            }
+            _point.SetContent(null);
+            _point = _map.GetPoint(transform.position, target.position, _moveDistance);
+            _corotine = StartCoroutine(Move(_point.transform.position));
         }
     }
 }

@@ -8,10 +8,9 @@ public class Paper : Item
     [SerializeField] private int _mana; 
     [SerializeField] private string _useDescription;
 
-    public override void Pick(InvetorySet set)
+    public override void Pick()
     {
         gameObject.SetActive(false);
-        set.AddItem(this);
     }
 
     public override void Use(Player player)

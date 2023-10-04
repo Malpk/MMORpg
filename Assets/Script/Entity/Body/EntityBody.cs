@@ -4,6 +4,8 @@ using System.Collections.Generic;
 public class EntityBody : MonoBehaviour
 {
     [SerializeField] private int _health;
+    [Range(0,1f)]
+    [SerializeField] private float _evasionProbility;
     [Header("Reference")]
     [SerializeField] private PartBody[] _parts;
 
@@ -82,16 +84,14 @@ public class EntityBody : MonoBehaviour
             part.SetProtect(protect);
 
     }
-    public bool TakeDamage(int damage, PartType target)
+    public AttackType TakeDamage(int damage, PartType target)
     {
         var part = GetPart(target);
         if (part)
         {
-            part.TakeDamage(damage);
-            Health = GetHealth();
-            return true;
+            return SetDamage(part, damage);
         }
-        return false;
+        return AttackType.None;
     }
     public bool TekeHeal(int heal, PartType target)
     {
@@ -122,14 +122,16 @@ public class EntityBody : MonoBehaviour
     #endregion
 
     #region Body
-    public void TakeDamage(int damage)
+    public AttackType TakeDamage(int damage)
     {
         var parts = GetActivePart();
         if (parts.Count > 0)
         {
-            parts[Random.Range(0, parts.Count)].TakeDamage(damage);
-            Health = GetHealth();
+            var part = parts[Random.Range(0, parts.Count)];
+            var result = SetDamage(part, damage);
+            return result;
         }
+        return AttackType.None;
     }
     public void TekeHeal(int heal = 4)
     {
@@ -166,4 +168,21 @@ public class EntityBody : MonoBehaviour
         return health;
     }
 
+    private AttackType SetDamage(PartBody part, int damage)
+    {
+        var evasion = Random.Range(0, 1f);
+        if (evasion > _evasionProbility)
+        {
+            if (part.TakeDamage(damage))
+            {
+                Health = GetHealth();
+                return AttackType.Full;
+            }
+            else
+            {
+                return AttackType.Protect;
+            }
+        }
+        return AttackType.Evasul;
+    }
 }

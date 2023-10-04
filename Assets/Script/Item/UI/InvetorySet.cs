@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class InvetorySet : MonoBehaviour
 {
-    [SerializeField] private InvetoryMenu _menu;
+    [SerializeField] private InvetoryUI _menu;
     [SerializeField] private List<Item> _contents;
 
     private void Awake()

@@ -2,61 +2,54 @@ using UnityEngine;
 
 public class Player : Entity, IPvp
 {
-    [Header("Reference")]
-    [SerializeField] private MapPoint _point;
-    [SerializeField] private MapHolder _map;
+    [SerializeField] private PvpSkills _skills;
     [SerializeField] private EntityMovement _movement;
 
     public event System.Action OnComplite;
-
-    private void Awake()
-    {
-        transform.position = _point.transform.position;
-        _point.SetContent(gameObject);
-    }
+    public event System.Action<AttackType> OnDamage;
 
     private void OnEnable()
     {
         _movement.OnCompliteMove += Complite;
-        _map.OnActive += EnterPoint;
     }
 
     private void OnDisable()
     {
         _movement.OnCompliteMove -= Complite;
-        _map.OnActive -= EnterPoint;
     }
 
     public void Play()
     {
-        enabled = true;
-        _map.SetMap(transform.position, moveDistance);
+        foreach (var part in body.Parts)
+        {
+            part.SetProtect(false);
+        }
+        _movement.enabled = true;
     }
 
     public void Skip()
     {
-        enabled = false;
+        _movement.enabled = false;
         Complite();
+    }
+
+    public void TakeDamage(int damage)
+    {
+        var attack = body.TakeDamage(damage);
+        switch (attack)
+        {
+            case AttackType.Evasul:
+                _skills.AddScore(PvpScoreType.Evasion);
+                break;
+            case AttackType.Protect:
+                _skills.AddScore(PvpScoreType.Protect);
+                break;
+        }
     }
 
     private void Complite()
     {
-        _map.Reload();
         OnComplite?.Invoke();
-    }
-
-    private void EnterPoint(MapPoint point)
-    {
-        if (!point.Content)
-        {
-            if (!_movement.IsMove)
-            {
-                _movement.SetTarget(point.transform.position);
-                _point = point;
-                _point.SetContent(null);
-                _point.SetContent(gameObject);
-            }
-        }
     }
 
 }

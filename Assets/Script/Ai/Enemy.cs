@@ -6,21 +6,13 @@ public class Enemy : Entity, IPvp
     [SerializeField] private int _damage;
     [SerializeField] private float _attackDistance;
     [SerializeField] private float _delay;
-    [SerializeField] private float _radiusMove;
     [Header("Reference")]
     [SerializeField] private Player _player;
-    [SerializeField] private MapPoint _point;
-    [SerializeField] private MapHolder _map;
-    [SerializeField] private EntityMovement _movement;
+    [SerializeField] private EnemyMovement _movement;
 
     private Coroutine _steap;
 
     public event System.Action OnComplite;
-
-    private void Awake()
-    {
-        _point.SetContent(gameObject);
-    }
 
     private void OnEnable()
     {
@@ -52,14 +44,11 @@ public class Enemy : Entity, IPvp
         var distance = Vector2.Distance(transform.position, _player.transform.position);
         if (distance > _attackDistance)
         {
-            var target = _map.GetPoint(transform.position, _player.transform.position, _radiusMove);
-            _movement.SetTarget(target.transform.position);
-            _point.SetContent(null);
-            _point = target;
+            _movement.MoveToTarget(_player.transform);
         }
         else
         {
-            _player.Body.TakeDamage(_damage);
+            _player.TakeDamage(_damage);
             OnComplite?.Invoke();
             _steap = null;
         }
@@ -71,7 +60,6 @@ public class Enemy : Entity, IPvp
         if (_steap != null)
             StopCoroutine(_steap);
         _steap = null;
-        _point.SetContent(gameObject);
         enabled = false;
     }
 }

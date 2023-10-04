@@ -41,6 +41,7 @@ public class PartSelectMenu : MonoBehaviour
     public List<PartButton> GetPats()
     {
         var list = new List<PartButton>();
+        list.AddRange(_partButtons);
         while (list.Count > _maxSelect && list.Count > 0)
         {
             list.Remove(list[Random.Range(0, list.Count)]);
