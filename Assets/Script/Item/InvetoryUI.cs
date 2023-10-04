@@ -35,6 +35,22 @@ public class InvetoryUI : MonoBehaviour
         }
     }
 
+    public void SetSkillScore(PvpSkillScore skill)
+    {
+        foreach (var item in _items)
+        {
+            item.SetSkillSkore(skill.Score);
+            if (item.Content.SkillScore <= skill.Score)
+            {
+                item.transform.SetAsFirstSibling();
+            }
+            else
+            {
+                item.transform.SetAsLastSibling();
+            }
+        }
+    }
+
     private ItemPanel GetPanel()
     {
         return Instantiate(_itemPanel.gameObject, _contentHolder).

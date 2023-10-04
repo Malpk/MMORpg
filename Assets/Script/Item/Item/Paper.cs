@@ -18,6 +18,12 @@ public class Paper : Item
         Debug.Log("use");
     }
 
+    public override void BindPanel(ItemPanel panel)
+    {
+        base.BindPanel(panel);
+        panel.SetMana(_mana);
+    }
+
     public override void BindDescription(ItemDescriptionPanel panel)
     {
         base.BindDescription(panel);

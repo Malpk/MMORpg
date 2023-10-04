@@ -8,8 +8,11 @@ public abstract class Item : MonoBehaviour
     [SerializeField] private ItemType _type;
     [TextArea(3,6)]
     [SerializeField] private string _description;
+    [Min(1)]
+    [SerializeField] private int _skillScore;
 
     public int ID => _id;
+    public int SkillScore => _skillScore;
     public ItemType Type => _type;
 
     public abstract void Pick();

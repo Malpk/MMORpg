@@ -7,7 +7,9 @@ public class ItemPanel : MonoBehaviour,IPointerEnterHandler, IPointerExitHandler
     [SerializeField] private Item _content;
     [Header("UI Reference")]
     [SerializeField] private Image _selectBackGround;
+    [SerializeField] private TextUI _mana;
     [SerializeField] private TextUI _description;
+    [SerializeField] private TextUI _setSkillScore;
     [SerializeField] private ItemPreview _preview;
 
     private bool _isSelect;
@@ -23,6 +25,11 @@ public class ItemPanel : MonoBehaviour,IPointerEnterHandler, IPointerExitHandler
         _selectBackGround.enabled = false;
     }
 
+    public void SetSkillSkore(int score)
+    {
+        _setSkillScore.SetText($"{score}/{_content.SkillScore}");
+    }
+
     public void SetContent(Item item)
     {
         _content = item;
@@ -36,6 +43,12 @@ public class ItemPanel : MonoBehaviour,IPointerEnterHandler, IPointerExitHandler
     public void SetDescription(string description)
     {
         _description.SetText(description);
+    }
+
+    public void SetMana(int mana)
+    {
+        _mana.gameObject.SetActive(mana > 0);
+        _mana.SetText(mana.ToString());
     }
 
     #region Action
