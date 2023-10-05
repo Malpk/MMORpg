@@ -10,12 +10,14 @@ public class Player : Entity, IPvp
 
     private void OnEnable()
     {
-        _movement.OnCompliteMove += Complite;
+        if(_movement)
+            _movement.OnCompliteMove += Complite;
     }
 
     private void OnDisable()
     {
-        _movement.OnCompliteMove -= Complite;
+        if(_movement)
+            _movement.OnCompliteMove -= Complite;
     }
 
     public void Play()

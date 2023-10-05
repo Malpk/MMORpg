@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2187221415616780082}
-  - component: {fileID: 8529515435847361696}
+  - component: {fileID: 6665277435895285629}
   - component: {fileID: 2187221415616780083}
+  - component: {fileID: 82975062}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -37,7 +38,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8529515435847361696
+--- !u!114 &6665277435895285629
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,18 +47,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 2187221415616780080}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f872122727656be4681091d3ae74ed5d, type: 3}
+  m_Script: {fileID: 11500000, guid: 302ad70951c21624eb35c4026aa6b7c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _level: 1
+  _name: 
+  _level: 0
+  _icon: {fileID: 0}
   _stats:
-    Strenght: 10
+    Strenght: 0
     Dexterity: 0
     Luck: 0
     Intelligence: 0
     Survival: 0
     Body: 0
-  _body: {fileID: 2187221415616780083}
+  body: {fileID: 0}
+  _skills: {fileID: 0}
+  _movement: {fileID: 0}
 --- !u!114 &2187221415616780083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,14 +75,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88f3ff9ad2cbd9c458a8ce97b6690033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mana: 0
   _health: 100
-  _field: {fileID: 0}
-  _panel: {fileID: 0}
+  _evasionProbility: 0
   _parts:
   - {fileID: 4775087305592806524}
   - {fileID: 1112905729632352375}
   - {fileID: 1112905728487181193}
   - {fileID: 1112905728884422737}
+--- !u!114 &82975062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2187221415616780080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ee46493d51997c46a2110912877cc6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 0}
+  _menu: {fileID: 0}
+  _contents: []
 --- !u!1001 &2187221416624293884
 PrefabInstance:
   m_ObjectHideFlags: 0

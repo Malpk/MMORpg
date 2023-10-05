@@ -11,15 +11,6 @@ public class BodyPartPanel : MonoBehaviour
 
     public PartBody Bind => _bind;
 
-    private void OnValidate()
-    {
-        if (_armor && _bind)
-        {
-            SetArmor(_bind.Armor);
-            SetHealth(_bind.Health, _bind.State);
-        }
-    }
-
     private void OnEnable()
     {
         if (_bind)

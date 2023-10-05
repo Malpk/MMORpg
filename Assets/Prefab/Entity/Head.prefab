@@ -47,7 +47,7 @@ MonoBehaviour:
   _health: 0
   _isProtect: 0
   _type: 0
-  _state: 0
+  _idleState: {fileID: 11400000, guid: 38f0efff7fff98a43a351daca3ffcc91, type: 2}
   _states:
   - {fileID: 11400000, guid: 76a4a4dce5cb715449541465b216aaa5, type: 2}
   - {fileID: 11400000, guid: 0bdd067a0ca034d469db178bd7cc51f1, type: 2}
