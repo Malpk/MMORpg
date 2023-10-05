@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PvpInvetoryMenu : UIMenu
 {
-    [SerializeField] private InvetoryUI _invetory;
+    [SerializeField] private PvpInvetoryUI _invetory;
 
     public void ShowPaper()
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 public class InvetorySet : MonoBehaviour
 {
     [SerializeField] private Player _player;
-    [SerializeField] private InvetoryUI _menu;
+    [SerializeField] private PvpInvetoryUI _menu;
     [SerializeField] private List<Item> _contents;
 
     private void Awake()

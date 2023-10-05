@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class InvetoryUI : MonoBehaviour
+public class PvpInvetoryUI : MonoBehaviour
 {
     [SerializeField] private Transform _contentHolder;
     [SerializeField] private Button _useButton;
