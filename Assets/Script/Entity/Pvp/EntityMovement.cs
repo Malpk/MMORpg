@@ -24,7 +24,7 @@ public class EntityMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        _map.SetMap(transform.position, _moveDistance);
+        _map.SetMap(_point.transform.position, _moveDistance);
         _map.OnActive += EnterPoint;
     }
 

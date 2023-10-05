@@ -29,7 +29,6 @@ public class Player : Entity, IPvp
 
     public void Skip()
     {
-        _movement.enabled = false;
         Complite();
     }
 
@@ -50,6 +49,7 @@ public class Player : Entity, IPvp
     private void Complite()
     {
         OnComplite?.Invoke();
+        _movement.enabled = false;
     }
 
 }

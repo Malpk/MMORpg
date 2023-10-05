@@ -4862,7 +4862,7 @@ MonoBehaviour:
     Body: 0
   body: {fileID: 737755010}
   _damage: 10
-  _attackDistance: 7
+  _attackDistance: 1
   _delay: 1
   _player: {fileID: 1235513939}
   _movement: {fileID: 1292766703}
@@ -5280,7 +5280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc03cd6f2e41f034da98193b5f2240e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _steapTime: 200
+  _steapTime: 20
   _enemy: {fileID: 1292766702}
   _player: {fileID: 1235513939}
   _game: {fileID: 1047508334}
@@ -8235,7 +8235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c03e83eef17462e48b06dbb7b323fac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _score: 10
+  _score: 0
   _type: 3
 --- !u!1 &2033417667
 GameObject:
