@@ -9,6 +9,6 @@ public class Polution : Item
 
     public override void Use(Player player)
     {
-        
+        Debug.Log("Use");
     }
 }

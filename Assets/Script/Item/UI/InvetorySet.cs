@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class InvetorySet : MonoBehaviour
 {
+    [SerializeField] private Player _player;
     [SerializeField] private InvetoryUI _menu;
     [SerializeField] private List<Item> _contents;
 
@@ -14,8 +15,25 @@ public class InvetorySet : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        _menu.OnUse += UseItem;
+    }
+
+
+
+    private void OnDisable()
+    {
+        
+    }
+
     public void AddItem(Item item)
     {
         _menu.AddItem(item);
+    }
+
+    private void UseItem(Item item)
+    {
+        item.Use(_player);
     }
 }

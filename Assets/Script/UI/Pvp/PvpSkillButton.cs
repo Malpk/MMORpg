@@ -31,6 +31,7 @@ public class PvpSkillButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         if (!_isSelect)
         {
             _isSelect = true;
+            _select.enabled = true;
             OnSelect?.Invoke(this);
             _onChoose.Invoke(_content);
         }

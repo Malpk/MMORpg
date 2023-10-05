@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 public class EntityBody : MonoBehaviour
 {
+    [Min(0)]
+    [SerializeField] private int _mana;
+    [Min(0)]
     [SerializeField] private int _health;
     [Range(0,1f)]
     [SerializeField] private float _evasionProbility;
