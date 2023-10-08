@@ -1,12 +1,17 @@
 using UnityEngine;
 
-public class PvpInvetoryMenu : UIMenu
+public class InvetoryMenu : UIMenu
 {
-    [SerializeField] private PvpInvetoryUI _invetory;
+    [SerializeField] private Inventory _invetory;
 
     public void ShowPaper()
     {
         _invetory.ShowItem(ItemType.Paper);
+    }
+
+    public void ShowArmor()
+    {
+        _invetory.ShowItem(ItemType.Armor);
     }
 
     public void ShowPolution()

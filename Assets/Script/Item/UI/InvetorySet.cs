@@ -4,7 +4,7 @@ using UnityEngine;
 public class InvetorySet : MonoBehaviour
 {
     [SerializeField] private Player _player;
-    [SerializeField] private PvpInvetoryUI _menu;
+    [SerializeField] private Inventory _menu;
     [SerializeField] private List<Item> _contents;
 
     private void Awake()
@@ -20,11 +20,9 @@ public class InvetorySet : MonoBehaviour
         _menu.OnUse += UseItem;
     }
 
-
-
     private void OnDisable()
     {
-        
+        _menu.OnUse -= UseItem;
     }
 
     public void AddItem(Item item)

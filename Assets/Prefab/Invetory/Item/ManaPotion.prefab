@@ -44,10 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab6ba76e55e178a43b380e34ec2b7cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 4
-  _name: "\u0417\u0435\u043B\u044C\u0435 \u043C\u0430\u043D\u044B"
-  _icon: {fileID: 21300000, guid: f1ebd52da39f0164ca4a01986c389025, type: 3}
-  _type: 0
-  _description: "\u0417\u0435\u043B\u044C\u0435 \u0432\u043E\u0441\u0442\u0430\u043D\u0430\u0432\u043B\u0438\u0432\u0430\u0435\u0442
-    10 \u043C\u0430\u043D\u044B"
+  _id: 2
+  data:
+    Name: "\u0417\u0435\u043B\u044C\u0435 \u043C\u0430\u043D\u044B"
+    Cost: 50
+    Icon: {fileID: 21300000, guid: f1ebd52da39f0164ca4a01986c389025, type: 3}
+    Type: 0
+    Description: "\u0417\u0435\u043B\u044C\u0435 \u0432\u043E\u0441\u0442\u043E\u043D\u0430\u0432\u043B\u0438\u0432\u0430\u0435\u0442
+      \u043C\u0430\u043D\u044B"
   _skillScore: 2

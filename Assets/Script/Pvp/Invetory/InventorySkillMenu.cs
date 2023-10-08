@@ -2,11 +2,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class PvpInvetoryUI : MonoBehaviour
+public class InventorySkillMenu : Inventory
 {
-    [SerializeField] private Transform _contentHolder;
     [SerializeField] private Button _useButton;
     [SerializeField] private ItemPanel _itemPanel;
+    [SerializeField] private Transform _contentHolder;
     [SerializeField] private ItemDescriptionPanel _decription;
 
     private ItemType _curretItem;
@@ -16,28 +16,29 @@ public class PvpInvetoryUI : MonoBehaviour
 
     private List<ItemPanel> _items = new List<ItemPanel>();
 
-    public event System.Action<Item> OnUse;
-
     public void Use()
     {
         if (_skillScore.GiveSkore(_select.Content.SkillScore))
         {
-            OnUse?.Invoke(_select.Content);
+            UseItemEvent(_select.Content);
             SetSkillScore(_skillScore);
             _useButton.interactable = _select.Content.SkillScore <= _skillScore.Score;
         }
     }
 
-    public void AddItem(Item item)
+    public override void AddItem(Item content)
     {
-        var panel = GetPanel();
-        item.BindPanel(panel);
-        panel.OnSelect += Select;
-        panel.OnDeselect += Deselect;
-        _items.Add(panel);
+        if (content is SkillItem item)
+        {
+            var panel = GetPanel();
+            item.BindPanel(panel);
+            panel.OnSelect += Select;
+            panel.OnDeselect += Deselect;
+            _items.Add(panel);
+        }
     }
 
-    public void ShowItem(ItemType type)
+    public override void ShowItem(ItemType type)
     {
         if (_curretItem != type)
         {
@@ -75,8 +76,9 @@ public class PvpInvetoryUI : MonoBehaviour
             GetComponent<ItemPanel>();
     }
 
-    public void Select(ItemPanel item)
+    public void Select(InvetoryPanel panel)
     {
+        var item = panel as ItemPanel;
         if (_select)
             _select.Deselect();
         _select = item;
@@ -85,7 +87,7 @@ public class PvpInvetoryUI : MonoBehaviour
         _useButton.interactable = _select.Content.SkillScore <= _skillScore.Score;
     }
 
-    private void Deselect(ItemPanel item)
+    private void Deselect(InvetoryPanel item)
     {
         _select = null;
         _decription.SetMode(false);

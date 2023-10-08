@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Polution : Item
+public class Polution : SkillItem
 {
     public override void Pick()
     {

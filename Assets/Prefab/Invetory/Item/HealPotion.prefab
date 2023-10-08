@@ -44,10 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab6ba76e55e178a43b380e34ec2b7cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 3
-  _name: "\u0417\u0435\u043B\u044C\u0435 \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u044F"
-  _icon: {fileID: 21300000, guid: ff4627f82e3db2b40976a18716c55bfa, type: 3}
-  _type: 0
-  _description: "\u0417\u0435\u043B\u044C\u0435 \u0432\u043E\u0441\u0442\u0430\u043D\u0430\u0432\u043B\u0438\u0432\u0430\u0435\u0442
-    10 \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u044F"
+  _id: 1
+  data:
+    Name: "\u0417\u0435\u043B\u044C\u0435 \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u044F"
+    Cost: 50
+    Icon: {fileID: 21300000, guid: ff4627f82e3db2b40976a18716c55bfa, type: 3}
+    Type: 0
+    Description: "\u0417\u0435\u043B\u044C\u0435 \u0432\u043E\u0441\u0442\u043E\u043D\u0430\u0432\u043B\u0438\u0432\u0430\u0435\u0442
+      \u0437\u0434\u043E\u0440\u043E\u0432\u044C\u0435"
   _skillScore: 4

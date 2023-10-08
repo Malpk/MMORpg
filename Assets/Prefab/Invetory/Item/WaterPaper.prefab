@@ -44,13 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9c0392dd944120458da036fb951800c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 1
-  _name: "\u0412\u043E\u0434\u043D\u044B\u0439 \u0441\u0432\u0438\u0442\u043E\u043A"
-  _icon: {fileID: 21300000, guid: 6663d967e36c7104bbff3ef100459cd5, type: 3}
-  _type: 1
-  _description: "\u0421\u0432\u0438\u0442\u043E\u043A \u043F\u0440\u0438\u0437\u044B\u0432\u0430\u0435\u0442
-    \u0441\u0442\u0435\u043D\u0443 \u0432\u043E\u0434\u044B, \u0447\u0442\u043E \u0443\u043D\u0438\u0447\u0442\u043E\u0436\u0430\u0435\u0442\u0441\u044F
-    \u0432\u0441\u0435 \u043D\u0430 \u0441\u0432\u043E\u0435\u043C \u043F\u0443\u0442\u0438."
+  _id: 3
+  data:
+    Name: "\u0412\u043E\u0434\u043D\u0430\u044F \u0441\u0442\u0435\u043D\u0430"
+    Cost: 25
+    Icon: {fileID: 21300000, guid: 6663d967e36c7104bbff3ef100459cd5, type: 3}
+    Type: 1
+    Description: "\u0412\u043E\u0434\u043D\u0430\u044F \u0441\u0442\u0435\u043D\u0430,
+      \u043A\u043E\u0442\u043E\u0440\u0430\u044F \u0443\u043D\u0438\u0447\u0442\u043E\u0436\u0430\u0435\u0442
+      \u0432\u0441\u0435 \u043D\u0430 \u0441\u0432\u043E\u0435\u043C \u043F\u0443\u0442\u0438"
   _skillScore: 1
   _probility: 80
   _mana: 20

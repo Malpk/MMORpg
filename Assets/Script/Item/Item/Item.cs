@@ -3,34 +3,32 @@ using UnityEngine;
 public abstract class Item : MonoBehaviour
 {
     [SerializeField] private int _id;
-    [SerializeField] private string _name;
-    [SerializeField] private Sprite _icon;
-    [SerializeField] private ItemType _type;
-    [TextArea(3,6)]
-    [SerializeField] private string _description;
-    [Min(1)]
-    [SerializeField] private int _skillScore;
+    [SerializeField] private int _level;
+    [SerializeField] protected ItemData data;
 
     public int ID => _id;
-    public int SkillScore => _skillScore;
-    public ItemType Type => _type;
+    public int Level => _level;
+    public Sprite Icon => data.Icon;
+    public ItemType Type => data.Type;
 
     public abstract void Pick();
 
     public abstract void Use(Player player);
 
     #region Bind
-    public virtual void BindPanel(ItemPanel panel)
+
+    public virtual void BindPanel(ContentPanel panel)
     {
         panel.SetContent(this);
-        panel.Preview(_name, _icon);
-        panel.SetDescription(_description);
+        panel.Preview(data.Name, data.Icon);
+        panel.SetData(data.Cost, 0);
     }
 
     public virtual void BindDescription(ItemDescriptionPanel panel)
     {
-        panel.Preview(_name, _icon);
-        panel.SetDescription(_description);
+        panel.Preview(data.Name, data.Icon);
+        panel.SetDescription(data.Description);
     }
+
     #endregion
 }

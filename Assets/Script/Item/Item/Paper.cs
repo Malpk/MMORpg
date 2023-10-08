@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Paper : Item
+public class Paper : SkillItem
 {
     [Header("ItemSetting")]
     [Range(0, 100)]
@@ -28,5 +28,10 @@ public class Paper : Item
     {
         base.BindDescription(panel);
         panel.SetUseData(_probility, _useDescription, _mana);
+    }
+    public void BindDescription(PaperDescription panel)
+    {
+        panel.SetData(data.Name, data.Icon, data.Cost);
+        panel.SetAddition(_mana);
     }
 }
