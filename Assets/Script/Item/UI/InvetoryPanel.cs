@@ -32,6 +32,7 @@ public abstract class InvetoryPanel : MonoBehaviour, IPointerEnterHandler, IPoin
         if (_isSelect)
         {
             OnSelect?.Invoke(this);
+            _selectBackGround.enabled = true;
         }
         else
         {

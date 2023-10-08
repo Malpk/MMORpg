@@ -10,6 +10,7 @@ public abstract class Item : MonoBehaviour
     public int Level => _level;
     public Sprite Icon => data.Icon;
     public ItemType Type => data.Type;
+    public ItemData Data => data;
 
     public abstract void Pick();
 

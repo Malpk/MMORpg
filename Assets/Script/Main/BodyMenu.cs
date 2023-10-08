@@ -26,6 +26,14 @@ public class BodyMenu : MonoBehaviour
         }
     }
 
+    public void RemoveArmor(Item item)
+    {
+        if (item is Armor armor)
+        {
+            _palyer.Body.RemoveArmor(armor);
+        }
+    }
+
     public void AddArmor()
     {
         _useArmor.gameObject.SetActive(false);

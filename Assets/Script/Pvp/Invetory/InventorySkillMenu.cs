@@ -14,7 +14,10 @@ public class InventorySkillMenu : Inventory
     private ItemPanel _select;
     private PvpSkillScore _skillScore;
 
-    private List<ItemPanel> _items = new List<ItemPanel>();
+    private List<ItemPanel> _panels = new List<ItemPanel>();
+    private List<ItemPanel> _pool = new List<ItemPanel>();
+
+    public override Item SelectItem => _select.Content;
 
     public void Use()
     {
@@ -30,11 +33,24 @@ public class InventorySkillMenu : Inventory
     {
         if (content is SkillItem item)
         {
-            var panel = GetPanel();
+            var panel = CreatePanel();
             item.BindPanel(panel);
             panel.OnSelect += Select;
             panel.OnDeselect += Deselect;
-            _items.Add(panel);
+            _panels.Add(panel);
+        }
+    }
+
+    public override void RemoveItem(Item item)
+    {
+        var panel = GetPanel(item);
+        if (panel)
+        {
+            _pool.Add(panel);
+            _panels.Remove(panel);
+            panel.OnSelect -= Select;
+            panel.OnDeselect -= Deselect;
+            panel.gameObject.SetActive(false);
         }
     }
 
@@ -43,7 +59,7 @@ public class InventorySkillMenu : Inventory
         if (_curretItem != type)
         {
             _curretItem = type;
-            foreach (var item in _items)
+            foreach (var item in _panels)
             {
                 item.gameObject.SetActive(item.Content.Type == type);
             }
@@ -53,7 +69,7 @@ public class InventorySkillMenu : Inventory
 
     public void SetSkillScore(PvpSkillScore skill)
     {
-        foreach (var item in _items)
+        foreach (var item in _panels)
         {
             item.SetSkillSkore(skill.Score);
             if (item.Content.SkillScore <= skill.Score)
@@ -68,12 +84,6 @@ public class InventorySkillMenu : Inventory
         _skillScore = skill;
         if(_select)
             _useButton.interactable = _select.Content.SkillScore <= _skillScore.Score;
-    }
-
-    private ItemPanel GetPanel()
-    {
-        return Instantiate(_itemPanel.gameObject, _contentHolder).
-            GetComponent<ItemPanel>();
     }
 
     public void Select(InvetoryPanel panel)
@@ -94,4 +104,28 @@ public class InventorySkillMenu : Inventory
         _decription.Reload();
     }
 
+
+    private ItemPanel GetPanel(Item target)
+    {
+        foreach (var panel in _panels)
+        {
+            if (panel.Content.ID == target.ID)
+            {
+                return panel;
+            }
+        }
+        return null;
+    }
+
+    private ItemPanel CreatePanel()
+    {
+        if (_pool.Count > 0)
+        {
+            var panel = _pool[0];
+            _pool.Remove(panel);
+            panel.gameObject.SetActive(true);
+        }
+        return Instantiate(_itemPanel.gameObject, _contentHolder).
+             GetComponent<ItemPanel>();
+    }
 }

@@ -66,6 +66,13 @@ public class EntityBody : MonoBehaviour
         part.SetArmor(null);
     }
 
+    public void RemoveArmor(Armor armor)
+    {
+        var part = GetPart(armor.Part);
+        if (part.Armor == armor)
+            part.SetArmor(null);
+    }
+
     public bool CheakContaintArmor(PartType type)
     {
         var part = GetPart(type);
