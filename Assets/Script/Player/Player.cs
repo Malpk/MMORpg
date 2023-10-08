@@ -2,14 +2,12 @@ using UnityEngine;
 
 public class Player : Entity, IPvp
 {
-    [SerializeField] private EntityRang _rang;
     [SerializeField] private PvpSkills _skills;
     [SerializeField] private EntityMovement _movement;
 
     public event System.Action OnComplite;
     public event System.Action<AttackType> OnDamage;
 
-    public EntityRang Rang => _rang;
 
     private void OnEnable()
     {

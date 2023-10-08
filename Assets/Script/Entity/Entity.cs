@@ -4,6 +4,7 @@ public class Entity : MonoBehaviour
 {
     [SerializeField] private int _level;
     [SerializeField] private int _attack;
+    [SerializeField] private EntityRang _rang;
     [SerializeField] private EntityData _data;
     [Header("Reference")]
     [SerializeField] protected EntityBody body;
@@ -12,6 +13,7 @@ public class Entity : MonoBehaviour
 
     public int Level => _level;
     public int Attack => _attack;
+    public EntityRang Rang => _rang;
     public EntityData Data => _data;
     public EntityBody Body => body;
 
