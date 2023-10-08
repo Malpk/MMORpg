@@ -7,7 +7,7 @@ public class EntityBody : MonoBehaviour
     [SerializeField] private int _mana;
     [Min(0)]
     [SerializeField] private int _health;
-    [Range(0,1f)]
+    [Range(0, 1f)]
     [SerializeField] private float _evasionProbility;
     [Header("Reference")]
     [SerializeField] private PartBody[] _parts;
@@ -16,7 +16,7 @@ public class EntityBody : MonoBehaviour
 
     public event System.Action<float> OnChangeHealth;
 
-    public int Health 
+    public int Health
     {
         get
         {
@@ -25,7 +25,7 @@ public class EntityBody : MonoBehaviour
 
         private set
         {
-            _curretHealth =  value;
+            _curretHealth = value;
             OnChangeHealth?.Invoke(HealthNormalize);
         }
     }
@@ -54,10 +54,22 @@ public class EntityBody : MonoBehaviour
         {
             if (part.Part == armor.Part)
             {
-                part.AddArmor(armor);
+                part.SetArmor(armor);
                 return;
             }
         }
+    }
+
+    public void RemoveArmor(PartType type)
+    {
+        var part = GetPart(type);
+        part.SetArmor(null);
+    }
+
+    public bool CheakContaintArmor(PartType type)
+    {
+        var part = GetPart(type);
+        return part.Armor;
     }
 
     private int GetAmountArmor()

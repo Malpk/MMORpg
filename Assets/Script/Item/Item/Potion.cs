@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Polution : SkillItem
+public class Potion : SkillItem
 {
     public override void Pick()
     {
@@ -10,5 +10,10 @@ public class Polution : SkillItem
     public override void Use(Player player)
     {
         Debug.Log("Use");
+    }
+
+    public void BindDescription(PotionDescription panel)
+    {
+        panel.SetData(data.Name, data.Icon, data.Cost);
     }
 }

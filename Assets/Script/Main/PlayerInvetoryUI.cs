@@ -3,14 +3,13 @@ using UnityEngine;
 
 public class PlayerInvetoryUI : Inventory
 {
+    [SerializeField] private BodyMenu _body;
     [SerializeField] private Transform _contentHolder;
     [SerializeField] private ContentPanel _prefabPanel;
-    [SerializeField] private ArmorDescription _armorDescription;
-    [SerializeField] private PaperDescription _papaerDescription;
+    [SerializeField] private DescriptionHolder _description;
 
     private ItemType _curretItem;
     private ContentPanel _select;
-    private GameObject _description;
     private List<ContentPanel> _items = new List<ContentPanel>();
 
     private void Start()
@@ -39,34 +38,25 @@ public class PlayerInvetoryUI : Inventory
         panel.OnDeselect += Deselect;
         _items.Add(panel);
     }
+
+
+
     private void Select(InvetoryPanel panel)
     {
         if (_select)
             _select.Deselect();
         _select = panel as ContentPanel;
-        if (_select.Content is Armor armor)
-        {
-            ShowDescription(_armorDescription.gameObject);
-            armor.BindDescription(_armorDescription);
-        }
-        else if (_select.Content is Paper paper)
-        {
-            ShowDescription(_papaerDescription.gameObject);
-            paper.BindDescription(_papaerDescription);
-        }
+        _body.SetArmor(_select.Content);
+        _description.Show(_select.Content);
     }
 
-    public void ShowDescription(GameObject description)
-    {
-        _description?.SetActive(false);
-        _description = description;
-        _description.SetActive(true);
-    }
 
     private void Deselect(InvetoryPanel panel)
     {
         _select.Deselect();
+        _description.Hide();
         _select = null;
+        _body.SetArmor(null);
     }
 
 

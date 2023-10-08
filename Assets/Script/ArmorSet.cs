@@ -1,10 +1,14 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ArmorSet : MonoBehaviour
 {
-    public int Head;
-    public int Body;
-    public int Leg;
-    public int Boods;
+    [SerializeField] private EntityBody _body;
 
+    private List<Armor> _list = new List<Armor>();
+
+    public void AddArmor(Armor armor)
+    {
+        _body.AddArmor(armor);
+    }
 }
