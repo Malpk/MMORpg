@@ -1,17 +1,17 @@
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class EntityCreater : MonoBehaviour
 {
-    [SerializeField] private EntityData _entity;
-    [SerializeField] private EntityOld _player;
+    [SerializeField] private EntityData _data;
+    [SerializeField] private Entity _entity;
     [SerializeField] private RaceStats[] _stats;
     [Header("Reference")]
+    [SerializeField] private DataSaver _save;
     [SerializeField] private RaceChoose _raceMenu;
     [SerializeField] private ClassChoose _classMenu;
     [SerializeField] private GenderChoose _genderMenu;
-    [Header("Event")]
-    [SerializeField] private UnityEvent<EntityData> _onCreate;
+
 
     private void OnEnable()
     {
@@ -29,14 +29,9 @@ public class EntityCreater : MonoBehaviour
 
     public void CreateButton()
     {
-        Create(_player);
-    }
-
-    public EntityOld Create(EntityOld entity)
-    {
-        entity.LoadEntity(_entity, GetStats(_entity.Race));
-        _onCreate.Invoke(_entity);
-        return entity;
+        _entity.SetData(_data);
+        _save.Save();
+        SceneManager.LoadScene(1);
     }
 
     public EntityStats GetStats(EntityRace race)
@@ -53,27 +48,27 @@ public class EntityCreater : MonoBehaviour
 
     public void SetName(string name)
     {
-        _entity.Name = name;
+        _data.Name = name;
     }
 
     public void SetIcon(Sprite sprite)
     {
-        _entity.Icon = sprite;
+        _data.Icon = sprite;
     }
 
     private void SetRace(RaceData data)
     {
-        _entity.Race = data.Race;
+        _data.Race = data.Race;
     }
 
     private void SetGender(EntityGender gender)
     {
-        _entity.Gender = gender;
+        _data.Gender = gender;
     }
 
     private void SetClass(ClassData data)
     {
-        _entity.Class = data.Class;
+        _data.Class = data.Class;
     }
     #endregion
 }

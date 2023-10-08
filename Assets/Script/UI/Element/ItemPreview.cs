@@ -23,7 +23,7 @@ public class ItemPreview : MonoBehaviour
     public void BindEntity(Entity entity)
     {
         if (entity)
-            SetData(entity.Name, entity.Icon);
+            SetData(entity.Data.Name, entity.Data.Icon);
         else
             Reload();
     }
