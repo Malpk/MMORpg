@@ -6,7 +6,7 @@ public class DataSaver : MonoBehaviour
     [Header("Reference")]
     [SerializeField] private Player _player;
 
-    private void Awake()
+    private void Start()
     {
         Load();
     }

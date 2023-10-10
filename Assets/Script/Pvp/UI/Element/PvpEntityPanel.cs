@@ -7,9 +7,21 @@ public class PvpEntityPanel : MonoBehaviour
     [SerializeField] private BodyPanel _bodyPanel;
     [SerializeField] private EntityDataPanel _entityPanel;
 
-    private void Awake()
+    private void OnEnable()
     {
-        BindPanel(_bindTarget);
+        if (_bindTarget)
+        {
+            BindPanel(_bindTarget);
+            _bindTarget.OnLoad += () => BindPanel(_bindTarget);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (_bindTarget)
+        {
+            _bindTarget.OnLoad -= () => BindPanel(_bindTarget);
+        }
     }
 
     public void BindPanel(Entity entity)

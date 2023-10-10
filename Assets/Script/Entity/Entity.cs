@@ -9,6 +9,7 @@ public class Entity : MonoBehaviour
     [SerializeField] protected EntityBody body;
     [SerializeField] protected EntityStats entityStats;
 
+    public event System.Action OnLoad;
     public event System.Action<EntityData> OnSetData;
 
     public int Level => _level;
@@ -32,7 +33,7 @@ public class Entity : MonoBehaviour
     {
         var save = new PlayerSave();
         save.Data = Data;
-        save.Body = body.Save();
+        save.Body = body?.Save();
         save.Stats = entityStats.Save();
         save.Level = Level;
         return JsonUtility.ToJson(save);
@@ -40,15 +41,15 @@ public class Entity : MonoBehaviour
 
     public void Load(string json)
     {
-        if (json != null)
+        if (json != "")
         {
             var save = JsonUtility.FromJson<PlayerSave>(json);
             SetData(save.Data);
             _level = save.Level;
-            body.Load(save.Body);
+            body?.Load(save.Body);
             entityStats.Load(save.Stats);
+            OnLoad?.Invoke();
         }
     }
-
 
 }

@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class InterfaceSwitcher : MonoBehaviour
 {
+    [SerializeField] private UIMenu _openMenu;
     [SerializeField] private UIMenu[] _menu;
 
-    private UIMenu _openMenu;
 
     public MenuType OpenMenu { get; private set; }
 

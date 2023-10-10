@@ -15,6 +15,7 @@ public class PartBody : MonoBehaviour
     private int _curretHealth;
     private BodyPartState _curretState;
 
+    public event System.Action OnLoad;
     public event System.Action<int, BodyPartState> OnUpdateHealth;
     public event System.Action<Armor> OnSetArmor;
 
@@ -115,6 +116,7 @@ public class PartBody : MonoBehaviour
             SetArmor(armor);
         if (state)
             _curretState = state;
+        OnLoad.Invoke();
     }
 
     private BodyPartState GetState(PartState target)
