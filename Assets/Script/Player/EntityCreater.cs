@@ -10,7 +10,9 @@ public class EntityCreater : MonoBehaviour
     [SerializeField] private DataSaver _save;
     [SerializeField] private RaceChoose _raceMenu;
     [SerializeField] private ClassChoose _classMenu;
+    [SerializeField] private EntityHolder _holder;
     [SerializeField] private GenderChoose _genderMenu;
+
 
 
     private void OnEnable()
@@ -30,16 +32,17 @@ public class EntityCreater : MonoBehaviour
     public void CreateButton()
     {
         _entity.SetData(_data);
+        _entity.SetStats(_holder.GetStats(_data.Race));
         _save.Save();
         SceneManager.LoadScene(1);
     }
 
-    public EntityStats GetStats(EntityRace race)
+    public Stats GetStats(EntityRace race)
     {
         foreach (var item in _stats)
         {
             if (item.Race == race)
-                return item.Stat;
+                return item.Stats;
         }
         return default;
     }

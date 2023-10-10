@@ -1,5 +1,5 @@
 [System.Serializable]
-public struct EntityStats
+public struct Stats
 {
     public int Strenght;
     public int Dexterity;

@@ -4,9 +4,9 @@ using UnityEngine;
 public class RaceStats : ScriptableObject
 {
     [SerializeField] private EntityRace _race;
-    [SerializeField] private EntityStats _stats;
+    [SerializeField] private Stats _stats;
 
 
     public EntityRace Race => _race;
-    public EntityStats Stat => _stats;
+    public Stats Stats => _stats;
 }

@@ -3,10 +3,10 @@ using TMPro;
 
 public class SkillPanel : MonoBehaviour
 {
-    [Min(0)]
-    [SerializeField] private int _scoreSkill = 1;
     [SerializeField] private string _lablePrefix;
     [Header("Reference")]
+    [SerializeField] private EntityStats _entityStats;
+    [Header("UIReference")]
     [SerializeField] private SkillRow _power;
     [SerializeField] private SkillRow _dexterity;
     [SerializeField] private SkillRow _luck;
@@ -17,24 +17,27 @@ public class SkillPanel : MonoBehaviour
     [SerializeField] private SkillRow _protect;
     [SerializeField] private TextMeshProUGUI _scoreLable;
 
-    private EntityStats _stats;
+    private Stats _stats;
 
-    public event System.Action<EntityStats> OnSkillUpdate;
+    public event System.Action<Stats> OnSkillUpdate;
 
     private void OnValidate()
     {
-        _scoreLable?.SetText(_lablePrefix + _scoreSkill.ToString());
+        if(_entityStats)
+            _entityStats.OnScoreUpdate += UpdateScore;
     }
 
-    public void SetStats(EntityStats stats)
+    private void OnEnable()
     {
-        _stats = stats;
-        _power.SetValue(_stats.Strenght);
-        _dexterity.SetValue(_stats.Dexterity);
-        _luck.SetValue(_stats.Luck);
-        _intelligence.SetValue(_stats.Intelligence);
-        _survival.SetValue(_stats.Survival);
-        _body.SetValue(_stats.Body);
+        LoadStats();
+        _entityStats.OnLoad += LoadStats;
+        _entityStats.OnScoreUpdate += UpdateScore;
+    }
+
+    private void OnDisable()
+    {
+        _entityStats.OnLoad -= LoadStats;
+        _entityStats.OnScoreUpdate -= UpdateScore;
     }
 
     #region Add
@@ -83,13 +86,11 @@ public class SkillPanel : MonoBehaviour
 
     private void AddSkill()
     {
-        _scoreSkill--;
-        _scoreLable.SetText(_lablePrefix + _scoreSkill.ToString());
-        if (_scoreSkill == 0)
+        if (_entityStats.Score > 0)
         {
-            SetMode(false);
+            _entityStats.UpdateStats(_stats);
+            UpdateScore();
         }
-        OnSkillUpdate?.Invoke(_stats);
     }
 
     private void SetMode(bool mode)
@@ -100,5 +101,30 @@ public class SkillPanel : MonoBehaviour
         _intelligence.SetMode(mode);
         _survival.SetMode(mode);
         _body.SetMode(mode);
+    }
+
+    private void UpdateScore()
+    {
+        SetMode(_entityStats.Score != 0);
+        _scoreLable?.SetText(_lablePrefix + _entityStats.Score);
+    }
+
+    private void LoadStats()
+    {
+        SetMode(_entityStats.Score != 0);
+        SetStats(_entityStats.Stats);
+        UpdateScore();
+    }
+
+    private void SetStats(Stats stats)
+    {
+
+        _stats = stats;
+        _power.SetValue(_stats.Strenght);
+        _dexterity.SetValue(_stats.Dexterity);
+        _luck.SetValue(_stats.Luck);
+        _intelligence.SetValue(_stats.Intelligence);
+        _survival.SetValue(_stats.Survival);
+        _body.SetValue(_stats.Body);
     }
 }

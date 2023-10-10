@@ -14,11 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _race: 1
   _stats:
-    Power: 1
+    Strenght: 1
     Dexterity: 3
     Luck: 3
     Intelligence: 3
     Survival: 1
     Body: 3
-    Attack: 0
-    Protect: 0
