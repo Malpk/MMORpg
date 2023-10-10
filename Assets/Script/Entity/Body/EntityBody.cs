@@ -48,6 +48,35 @@ public class EntityBody : MonoBehaviour
         Health = GetHealth();
     }
 
+    #region Save
+    public string Save()
+    {
+        var save = new SaveEntityBody();
+        save.Mana = _mana;
+        save.Evasion = _evasionProbility;
+        save.Parts = new SavePartBody[_parts.Length];
+        for (int i = 0; i < _parts.Length; i++)
+        {
+            save.Parts[i] = _parts[i].Save();
+        }
+        return JsonUtility.ToJson(save);
+    }
+
+    public void Load(string json)
+    {
+        if (json != "")
+        {
+            var save = JsonUtility.FromJson<SaveEntityBody>(json);
+            _mana = save.Mana;
+            _evasionProbility = save.Evasion;
+            for (int i = 0; i < save.Parts.Length; i++)
+            {
+                _parts[i].Load(save.Parts[i]);
+            }
+        }
+    }
+    #endregion
+    #region Armor
     public void AddArmor(Armor armor)
     {
         foreach (var part in _parts)
@@ -88,7 +117,7 @@ public class EntityBody : MonoBehaviour
         }
         return amount;
     }
-
+    #endregion
     #region PartBody
 
     public void ReloadPart()
@@ -142,7 +171,6 @@ public class EntityBody : MonoBehaviour
         return null;
     }
     #endregion
-
     #region Body
     public AttackType TakeDamage(int damage)
     {
@@ -178,7 +206,6 @@ public class EntityBody : MonoBehaviour
     }
 
     #endregion
-
 
     private int GetHealth()
     {

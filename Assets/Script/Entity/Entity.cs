@@ -7,12 +7,12 @@ public class Entity : MonoBehaviour
     [SerializeField] private EntityData _data;
     [Header("Reference")]
     [SerializeField] protected EntityBody body;
-    [SerializeField] protected EntityStats _entityStats;
+    [SerializeField] protected EntityStats entityStats;
 
     public event System.Action<EntityData> OnSetData;
 
     public int Level => _level;
-    public int Attack => _entityStats.Stats.Strenght;
+    public int Attack => entityStats.Stats.Strenght;
     public EntityRang Rang => _rang;
     public EntityData Data => _data;
     public EntityBody Body => body;
@@ -25,14 +25,15 @@ public class Entity : MonoBehaviour
 
     public void SetStats(Stats stats)
     {
-        _entityStats.SetStats(stats);
+        entityStats.SetStats(stats);
     }
 
     public string Save()
     {
         var save = new PlayerSave();
         save.Data = Data;
-        save.Stats = _entityStats.Save();
+        save.Body = body.Save();
+        save.Stats = entityStats.Save();
         save.Level = Level;
         return JsonUtility.ToJson(save);
     }
@@ -44,7 +45,8 @@ public class Entity : MonoBehaviour
             var save = JsonUtility.FromJson<PlayerSave>(json);
             SetData(save.Data);
             _level = save.Level;
-            _entityStats.Load(save.Stats);
+            body.Load(save.Body);
+            entityStats.Load(save.Stats);
         }
     }
 

@@ -3750,6 +3750,59 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 10.46}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!1 &1067986677
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1067986679}
+  - component: {fileID: 1067986678}
+  m_Layer: 0
+  m_Name: ItemHub
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1067986678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067986677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 691a6482d6ae78742b105d1be2140bd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _items:
+  - {fileID: 9149310250359012406, guid: 639cc2fcb1ff8394ca5fccfa583e5941, type: 3}
+  - {fileID: 8558397049815668971, guid: caec51d9a3b47b2458e48a90cca5b42c, type: 3}
+  - {fileID: 9020524289899669373, guid: 36a1ac6732b8b904ea74fb173f4e3087, type: 3}
+  - {fileID: 6557031246817909295, guid: ea4747e004828c845a620ee59de18f69, type: 3}
+  - {fileID: 613185175141136335, guid: 89521cd2745e8fa4bac88668b708b77b, type: 3}
+  - {fileID: 3049830227132241821, guid: cd93ffff915e38842a09ad0d0a79e9bf, type: 3}
+  - {fileID: 7742280525022290017, guid: d9b120e32b966b94688be63c9e0eb0b7, type: 3}
+  - {fileID: 1507097568945470345, guid: 9a33bc76c56a4854089d2d7c4b00a71a, type: 3}
+--- !u!4 &1067986679
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1067986677}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.16692904, y: 2.9535356, z: 259.36978}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1145817333
 GameObject:
   m_ObjectHideFlags: 0
@@ -7547,6 +7600,10 @@ PrefabInstance:
       value: "\u0411\u043B\u0430\u0433\u043E\u0440\u043E\u0434\u043D\u044B\u0439
         \u0433\u0435\u0440\u043E\u0439"
       objectReference: {fileID: 0}
+    - target: {fileID: 6665277435895285629, guid: f37b52213a8e84545a14b409e9c8b080, type: 3}
+      propertyPath: entityStats
+      value: 
+      objectReference: {fileID: 1656527472}
     - target: {fileID: 6665277435895285629, guid: f37b52213a8e84545a14b409e9c8b080, type: 3}
       propertyPath: _entityStats
       value: 

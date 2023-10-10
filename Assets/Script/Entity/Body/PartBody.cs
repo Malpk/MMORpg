@@ -58,11 +58,13 @@ public class PartBody : MonoBehaviour
         _isProtect = protect;
     }
 
+    #region Health
     public void SetHealth(int health)
     {
         _health = health;
         Health = health;
     }
+
 
     public bool TakeDamage(int damage)
     {
@@ -90,6 +92,43 @@ public class PartBody : MonoBehaviour
         var health = Health + heal;
         Health = health > _health ? _health :health;
     }
+    #endregion
+
+    #region Save
+    public SavePartBody Save()
+    {
+        var save = new SavePartBody();
+        save.Health = Health;
+        save.Part = _type;
+        save.State = _curretState.State;
+        save.ArmorId = _armor ? _armor.ID : -1;
+        return save;
+    }
+
+    public void Load(SavePartBody save)
+    {
+        Health = save.Health;
+        _type = save.Part;
+        var state = GetState(save.State);
+        var armor = ItemHub.GetItem<Armor>(save.ArmorId);
+        if (armor)
+            SetArmor(armor);
+        if (state)
+            _curretState = state;
+    }
+
+    private BodyPartState GetState(PartState target)
+    {
+        foreach (var state in _states)
+        {
+            if (state.State == target)
+            {
+                return state;
+            }
+        }
+        return null;
+    }
+    #endregion
 
     public void SetArmor(Armor armor)
     {
