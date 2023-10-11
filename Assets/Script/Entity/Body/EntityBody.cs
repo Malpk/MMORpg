@@ -14,6 +14,7 @@ public class EntityBody : MonoBehaviour
 
     private int _curretHealth;
 
+    public event System.Action OnDead;
     public event System.Action<float> OnChangeHealth;
 
     public int Health
@@ -140,7 +141,10 @@ public class EntityBody : MonoBehaviour
         var part = GetPart(target);
         if (part)
         {
-            return SetDamage(part, damage);
+            var result = SetDamage(part, damage);
+            if (GetActivePart().Count == 0)
+                Dead();
+            return result;
         }
         return AttackType.None;
     }
@@ -179,10 +183,18 @@ public class EntityBody : MonoBehaviour
         {
             var part = parts[Random.Range(0, parts.Count)];
             var result = SetDamage(part, damage);
+            if (GetActivePart().Count == 0)
+                Dead();
             return result;
         }
         return AttackType.None;
     }
+
+    public void Dead()
+    {
+        OnDead?.Invoke();
+    }
+
     public void TekeHeal(int heal = 4)
     {
         if (heal < _parts.Length)

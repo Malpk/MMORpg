@@ -5094,6 +5094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90260d62518b96c448a3deee0ef8f263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _openMenu: {fileID: 0}
   _menu: []
 --- !u!114 &1699778689
 MonoBehaviour:
@@ -7004,7 +7005,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4319441629625545425, guid: e118fc220d2d3054d992be078083ba3e, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.99999994
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4319441629625545425, guid: e118fc220d2d3054d992be078083ba3e, type: 3}
       propertyPath: m_AnchorMin.y
@@ -7120,6 +7121,14 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 82975063}
+    - target: {fileID: 4469744288792078656, guid: 1d64596162e93ed4792ac362a316541d, type: 3}
+      propertyPath: _wallet
+      value: 
+      objectReference: {fileID: 1261028380}
+    - target: {fileID: 4469744288792078656, guid: 1d64596162e93ed4792ac362a316541d, type: 3}
+      propertyPath: _invetory
+      value: 
+      objectReference: {fileID: 1261028377}
     - target: {fileID: 4469744288792078657, guid: 1d64596162e93ed4792ac362a316541d, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -7612,6 +7621,10 @@ PrefabInstance:
       propertyPath: _entityStats
       value: 
       objectReference: {fileID: 1656527472}
+    - target: {fileID: 6665277435895285629, guid: f37b52213a8e84545a14b409e9c8b080, type: 3}
+      propertyPath: _playerWallet
+      value: 
+      objectReference: {fileID: 1261028380}
     m_RemovedComponents:
     - {fileID: 8590415407697633497, guid: f37b52213a8e84545a14b409e9c8b080, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f37b52213a8e84545a14b409e9c8b080, type: 3}

@@ -30,7 +30,7 @@ public class BattelPanel : MonoBehaviour
         _lable?.SetText(_locationName);
     }
 
-    private void Awake()
+    private void Start()
     {
         if (_battel)
             SetBattel(_battel);

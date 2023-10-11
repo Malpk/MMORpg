@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PvpMenu : MonoBehaviour
+public class PvpMenuHolder : MonoBehaviour
 {
     [SerializeField] private InterfaceSwitcher _interface;
 
@@ -21,5 +21,10 @@ public class PvpMenu : MonoBehaviour
     public void ShowAttack()
     {
         _interface.SwitchMenu(MenuType.Attack);
+    }
+
+    public void ShowEndMenu()
+    {
+        _interface.SwitchMenu(MenuType.EndMenu);
     }
 }

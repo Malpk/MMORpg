@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Enemy : Entity, IPvp
 {
-    [SerializeField] private int _damage;
     [SerializeField] private float _attackDistance;
     [SerializeField] private float _delay;
     [Header("Reference")]
@@ -48,7 +47,7 @@ public class Enemy : Entity, IPvp
         }
         else
         {
-            _player.TakeDamage(_damage);
+            _player.TakeDamage(Attack);
             OnComplite?.Invoke();
             _steap = null;
         }

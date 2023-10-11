@@ -116,7 +116,7 @@ public class PartBody : MonoBehaviour
             SetArmor(armor);
         if (state)
             _curretState = state;
-        OnLoad.Invoke();
+        OnLoad?.Invoke();
     }
 
     private BodyPartState GetState(PartState target)

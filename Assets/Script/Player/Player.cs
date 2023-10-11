@@ -3,11 +3,13 @@ using UnityEngine;
 public class Player : Entity, IPvp
 {
     [SerializeField] private PvpSkills _skills;
+    [SerializeField] private WalletSet _playerWallet;
     [SerializeField] private EntityMovement _movement;
 
     public event System.Action OnComplite;
     public event System.Action<AttackType> OnDamage;
 
+    public WalletSet Wallet => _playerWallet;
 
     private void OnEnable()
     {

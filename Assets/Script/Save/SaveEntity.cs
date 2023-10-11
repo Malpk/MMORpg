@@ -1,4 +1,5 @@
-public class PlayerSave
+[System.Serializable]
+public class SaveEntity
 {
     public int Level = -1;
     public string Body = "";

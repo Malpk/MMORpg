@@ -4,7 +4,9 @@ public class DataSaver : MonoBehaviour
 {
     [SerializeField] private string _key = "key";
     [Header("Reference")]
-    [SerializeField] private Player _player;
+    [SerializeField] private Entity _player;
+    [SerializeField] private WalletSet _wallet;
+    [SerializeField] private InvetorySet _invetory;
 
     private void Start()
     {
@@ -18,15 +20,23 @@ public class DataSaver : MonoBehaviour
 
     public void Save()
     {
-        PlayerPrefs.SetString(_key, _player.Save());
+        var save = new SavePlayer();
+        save.Money = _wallet.Money;
+        save.Entity = _player.Save();
+        save.Invetory = _invetory.Save();
+        PlayerPrefs.SetString(_key, JsonUtility.ToJson(save));
     }
 
     public void Load()
     {
         if (PlayerPrefs.HasKey(_key))
         {
-            var json = PlayerPrefs.GetString(_key);
-            _player.Load(json);
+            var save = JsonUtility.FromJson<SavePlayer>(
+                PlayerPrefs.GetString(_key));
+            _player.Load(save.Entity);
+            _wallet.SetMoney(save.Money);
+            if(save.Invetory != null)
+                _invetory.Load(save.Invetory);
         }
     }
 }

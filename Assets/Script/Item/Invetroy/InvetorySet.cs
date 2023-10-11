@@ -4,7 +4,6 @@ using UnityEngine;
 public class InvetorySet : MonoBehaviour
 {
     [SerializeField] private Player _player;
-    [SerializeField] private WalletSet _playerWallet;
     [SerializeField] private Inventory _menu;
     [SerializeField] private List<Item> _contents;
 
@@ -26,6 +25,32 @@ public class InvetorySet : MonoBehaviour
         _menu.OnUse -= UseItem;
     }
 
+    #region Save
+    public SaveInvetory Save()
+    {
+        var save = new SaveInvetory();
+        save.Items = new int[_contents.Count];
+        for (int i = 0; i < save.Items.Length; i++)
+        {
+            save.Items[i] = _contents[i].ID;
+        }
+        return save;
+    }
+
+    public void Load(SaveInvetory save)
+    {
+        for (int i = 0; i < save.Items.Length; i++)
+        {
+            var item = ItemHub.GetItem(save.Items[i]);
+            if (!_contents.Contains(item))
+            {
+                _contents.Add(item);
+            }
+        }
+    }
+    #endregion
+
+    #region Item
     public void Sell()
     {
         if (_menu.SelectItem)
@@ -33,7 +58,7 @@ public class InvetorySet : MonoBehaviour
             var item = _menu.SelectItem;
             _menu.RemoveItem(item);
             _contents.Remove(item);
-            _playerWallet.TakeMoney(item.Data.Cost);
+            _player.Wallet.TakeMoney(item.Data.Cost);
         }
     }
 
@@ -51,4 +76,5 @@ public class InvetorySet : MonoBehaviour
     {
         item.Use(_player);
     }
+    #endregion
 }

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _locationName: "\u0421\u0442\u0440\u0430\u0440\u044B\u0439 \u043B\u0435\u0441"
   _entity:
-  - {fileID: 3005802683583926093, guid: 52bb827d9642e634cb3c25267e16c8ba, type: 3}
-  - {fileID: 3005802683583926093, guid: 52bb827d9642e634cb3c25267e16c8ba, type: 3}
+  - {fileID: 3676944431507444634, guid: e7aba3d761e8d644b8fbfe3fa670f344, type: 3}
+  - {fileID: 3676944431507444634, guid: e7aba3d761e8d644b8fbfe3fa670f344, type: 3}

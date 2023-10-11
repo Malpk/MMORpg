@@ -8,7 +8,7 @@ public class PvpControlelr : MonoBehaviour
     [SerializeField] private Enemy _enemy;
     [SerializeField] private Player _player;
     [SerializeField] private GameStateLog _game;
-    [SerializeField] private PvpMenu _inteface;
+    [SerializeField] private PvpMenuHolder _inteface;
     [SerializeField] private AttackMenu _attack;
 
     private int _steapCount;

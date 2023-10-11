@@ -29,27 +29,23 @@ public class Entity : MonoBehaviour
         entityStats.SetStats(stats);
     }
 
-    public string Save()
+    public SaveEntity Save()
     {
-        var save = new PlayerSave();
+        var save = new SaveEntity();
         save.Data = Data;
         save.Body = body?.Save();
         save.Stats = entityStats.Save();
         save.Level = Level;
-        return JsonUtility.ToJson(save);
+        return save;
     }
 
-    public void Load(string json)
+    public void Load(SaveEntity save)
     {
-        if (json != "")
-        {
-            var save = JsonUtility.FromJson<PlayerSave>(json);
-            SetData(save.Data);
-            _level = save.Level;
-            body?.Load(save.Body);
-            entityStats.Load(save.Stats);
-            OnLoad?.Invoke();
-        }
+        SetData(save.Data);
+        _level = save.Level;
+        body?.Load(save.Body);
+        entityStats.Load(save.Stats);
+        OnLoad?.Invoke();
     }
 
 }

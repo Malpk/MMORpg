@@ -6,5 +6,5 @@ public enum MenuType
     Attack,
     Invetory,
     MagicBook,
-    DeadMenu
+    EndMenu
 }
