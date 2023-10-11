@@ -580,6 +580,8 @@ MonoBehaviour:
     Enems: 0000000000000000
   _enemyHub: {fileID: 123848138}
   _map: {fileID: 187867046}
+  _game: {fileID: 1413622301}
+  _pvp: {fileID: 1413622299}
 --- !u!4 &123848137
 Transform:
   m_ObjectHideFlags: 0
@@ -4257,7 +4259,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1235513937}
-  - component: {fileID: 1235513943}
   - component: {fileID: 1235513939}
   - component: {fileID: 1235513938}
   - component: {fileID: 1235513940}
@@ -4303,7 +4304,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveDistance: 1
   _speedMovement: 2
-  _pvpSet: {fileID: 0}
   _point: {fileID: 368966328}
   _map: {fileID: 187867046}
 --- !u!114 &1235513939
@@ -4377,48 +4377,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _money: 0
   _moneyUI: []
---- !u!114 &1235513943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1235513936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2696a4c3d58754849871981d8a0c6dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _onPlay:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1235513939}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _onStop:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1235513939}
-        m_TargetAssemblyTypeName: Player, Assembly-CSharp
-        m_MethodName: Stop
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1256683345
 GameObject:
   m_ObjectHideFlags: 0
@@ -5280,7 +5238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _reward: {x: 1, y: 4}
-  _enemy: {fileID: 0}
+  _enemys: []
   _player: {fileID: 1235513939}
   _endMenu: {fileID: 511921136}
   _saver: {fileID: 1221615539}
@@ -5643,7 +5601,7 @@ PrefabInstance:
     - target: {fileID: 5811257665511507894, guid: bb67ec3348551544abc067aa4965505c, type: 3}
       propertyPath: _armor
       value: 
-      objectReference: {fileID: 1507097568945470345, guid: 9a33bc76c56a4854089d2d7c4b00a71a, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 5811257665511507894, guid: bb67ec3348551544abc067aa4965505c, type: 3}
       propertyPath: _onArmorUpdate.m_PersistentCalls.m_Calls.Array.size
       value: 3
@@ -5751,7 +5709,7 @@ PrefabInstance:
     - target: {fileID: 5811257666782508104, guid: bb67ec3348551544abc067aa4965505c, type: 3}
       propertyPath: _armor
       value: 
-      objectReference: {fileID: 613185175141136335, guid: 89521cd2745e8fa4bac88668b708b77b, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 5811257666782508104, guid: bb67ec3348551544abc067aa4965505c, type: 3}
       propertyPath: _onArmorUpdate.m_PersistentCalls.m_Calls.Array.size
       value: 3
@@ -9622,6 +9580,10 @@ PrefabInstance:
       propertyPath: _bind
       value: 
       objectReference: {fileID: 1357432689}
+    - target: {fileID: 3297911342685959270, guid: 9aac009762dff8f44ae3a86d83905c0f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3355290741811419702, guid: 9aac009762dff8f44ae3a86d83905c0f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -9657,6 +9619,10 @@ PrefabInstance:
     - target: {fileID: 3730278399735219263, guid: 9aac009762dff8f44ae3a86d83905c0f, type: 3}
       propertyPath: _content
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3790349883150814295, guid: 9aac009762dff8f44ae3a86d83905c0f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4302922091839455813, guid: 9aac009762dff8f44ae3a86d83905c0f, type: 3}
       propertyPath: m_Color.b

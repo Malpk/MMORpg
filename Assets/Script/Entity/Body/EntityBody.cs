@@ -40,6 +40,15 @@ public class EntityBody : MonoBehaviour
         _parts = GetComponentsInChildren<PartBody>();
     }
 
+    private void Awake()
+    {
+        foreach (var part in _parts)
+        {
+            part?.SetHealth(_health / _parts.Length);
+        }
+        Health = GetHealth();
+    }
+
     private void OnValidate()
     {
         foreach (var part in _parts)
@@ -74,6 +83,7 @@ public class EntityBody : MonoBehaviour
             {
                 _parts[i].Load(save.Parts[i]);
             }
+            Health = GetHealth();
         }
     }
     #endregion
@@ -232,6 +242,7 @@ public class EntityBody : MonoBehaviour
     private AttackType SetDamage(PartBody part, int damage)
     {
         var evasion = Random.Range(0, 1f);
+
         if (evasion > _evasionProbility)
         {
             if (part.TakeDamage(damage))

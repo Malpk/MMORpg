@@ -44,6 +44,7 @@ public class EntityMovement : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         OnCompliteMove?.Invoke();
+        _point.SetContent(gameObject);
         _corotine = null;
     }
 
@@ -62,9 +63,8 @@ public class EntityMovement : MonoBehaviour
             if (!IsMove)
             {
                 SetTarget(point.transform.position);
-                _point = point;
                 _point.SetContent(null);
-                _point.SetContent(gameObject);
+                _point = point;
             }
         }
     }

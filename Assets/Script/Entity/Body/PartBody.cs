@@ -49,6 +49,16 @@ public class PartBody : MonoBehaviour
         _curretState = _idleState;
     }
 
+    private void Awake()
+    {
+        if (_armor)
+        {
+            if (_armor.Part != Part)
+                _armor = null;
+        }
+        _curretState = _idleState;
+    }
+
     private void Start()
     {
         SetArmor(_armor);
@@ -82,6 +92,7 @@ public class PartBody : MonoBehaviour
             {
                 _curretState = stateData;
             }
+            Debug.Log(damage);
             Health = Health - damage > 0 ? Health - damage : 0;
             return true;
         }
@@ -99,6 +110,7 @@ public class PartBody : MonoBehaviour
     public SavePartBody Save()
     {
         var save = new SavePartBody();
+        save.FullHealth = _health;
         save.Health = Health;
         save.Part = _type;
         save.State = _curretState.State;
@@ -109,6 +121,7 @@ public class PartBody : MonoBehaviour
     public void Load(SavePartBody save)
     {
         Health = save.Health;
+        _health = save.FullHealth;
         _type = save.Part;
         var state = GetState(save.State);
         var armor = ItemHub.GetItem<Armor>(save.ArmorId);

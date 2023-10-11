@@ -41,6 +41,8 @@ public class BodyPartPanel : MonoBehaviour
     public void BindPanel(PartBody part)
     {
         SwitchPart(part);
+        enabled = false;
+        _bind = part;
         if (_bind)
         {
             SetArmor(_bind.Armor);
@@ -51,6 +53,7 @@ public class BodyPartPanel : MonoBehaviour
             SetArmor(null);
             SetHealth(0);
         }
+        enabled = true;
     }
 
     public void Reload()
