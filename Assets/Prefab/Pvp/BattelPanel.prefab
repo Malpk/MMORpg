@@ -511,7 +511,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6019465683028330552}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6019465683298466303}
+        m_TargetAssemblyTypeName: BattelPanel, Assembly-CSharp
+        m_MethodName: StartBattel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6019465683298466297
 GameObject:
   m_ObjectHideFlags: 0

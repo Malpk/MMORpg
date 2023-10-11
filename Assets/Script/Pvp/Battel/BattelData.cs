@@ -4,8 +4,8 @@ using UnityEngine;
 public class BattelData : ScriptableObject
 {
     [SerializeField] private string _locationName;
-    [SerializeField] private Entity[] _entity;
+    [SerializeField] private Enemy[] _entity;
 
     public string Location => _locationName;
-    public Entity[] Entities => _entity;
+    public Enemy[] Entities => _entity;
 }

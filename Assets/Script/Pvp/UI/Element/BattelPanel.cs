@@ -14,6 +14,8 @@ public class BattelPanel : MonoBehaviour
     private List<EntityPanel> _entites = new List<EntityPanel>();
     private List<EntityPanel> _pool = new List<EntityPanel>();
 
+    public event System.Action<Battel> OnStart;
+
     private void Reset()
     {
         _locationName = "Название локации";
@@ -34,6 +36,17 @@ public class BattelPanel : MonoBehaviour
     {
         if (_battel)
             SetBattel(_battel);
+    }
+
+    public void StartBattel()
+    {
+        var battel = new Battel();
+        battel.Enems = new int[_entites.Count];
+        for (int i = 0; i < _entites.Count; i++)
+        {
+            battel.Enems[i] = _entites[i].Enemy.Id;
+        }
+        OnStart?.Invoke(battel);
     }
 
     public void SetBattel(BattelData data)

@@ -4176,6 +4176,10 @@ PrefabInstance:
       propertyPath: _invetory
       value: 
       objectReference: {fileID: 1235513941}
+    - target: {fileID: 4469744288792078656, guid: 1d64596162e93ed4792ac362a316541d, type: 3}
+      propertyPath: _battelLoder
+      value: 
+      objectReference: {fileID: 123848136}
     - target: {fileID: 4469744288792078657, guid: 1d64596162e93ed4792ac362a316541d, type: 3}
       propertyPath: m_RootOrder
       value: 6
