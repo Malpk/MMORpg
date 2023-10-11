@@ -17,7 +17,7 @@ public class GameSwitcher : MonoBehaviour
         {
             enemy.Body.OnDead += DeadEnemy;
         }
-        _player.Body.OnDead += CompliteGame;
+        _player.Body.OnDead += () => CompliteGame();
     }
 
     private void OnDisable()
@@ -26,20 +26,23 @@ public class GameSwitcher : MonoBehaviour
         {
             enemy.Body.OnDead -= DeadEnemy;
         }
-        _player.Body.OnDead -= CompliteGame;
+        _player.Body.OnDead -= () => CompliteGame();
     }
 
     public void AddEnemy(Enemy enemy)
     {
-        if(enabled)
-            enemy.Body.OnDead += CompliteGame;
-        _enemys.Add(enemy);
+        if (!_enemys.Contains(enemy))
+        {
+            if (enabled)
+                enemy.Body.OnDead += DeadEnemy;
+            _enemys.Add(enemy);
+        }
     }
 
-    private void CompliteGame()
+    private void CompliteGame(int reward = 0)
     {
         _controller.enabled = false;
-        _endMenu.ShowMenu();
+        _endMenu.ShowMenu(reward);
         _saver.Save();
     }
 
@@ -53,7 +56,7 @@ public class GameSwitcher : MonoBehaviour
                 reward += enemy.Level * Random.Range(_reward.x, _reward.y);
             }
             _player.Wallet.TakeMoney(reward);
-            CompliteGame();
+            CompliteGame(reward);
         }
     }
 
@@ -61,7 +64,7 @@ public class GameSwitcher : MonoBehaviour
     {
         foreach (var enemy in _enemys)
         {
-            if (enemy.Body.Health > 0)
+            if (!enemy.Body.IsDead)
                 return enemy;
         }
         return null;

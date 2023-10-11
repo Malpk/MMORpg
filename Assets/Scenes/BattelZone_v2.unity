@@ -576,8 +576,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spawnDistance: 2
   _player: {fileID: 1235513939}
-  _battel:
-    Enems: 0000000000000000
   _enemyHub: {fileID: 123848138}
   _map: {fileID: 187867046}
   _game: {fileID: 1413622301}

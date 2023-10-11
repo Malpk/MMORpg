@@ -92,8 +92,8 @@ public class PartBody : MonoBehaviour
             {
                 _curretState = stateData;
             }
-            Debug.Log(damage);
             Health = Health - damage > 0 ? Health - damage : 0;
+
             return true;
         }
         return false;

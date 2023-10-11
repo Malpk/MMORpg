@@ -224,7 +224,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2130463523560198211, guid: bb67ec3348551544abc067aa4965505c, type: 3}
       propertyPath: _health
-      value: 25
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2130463523560198211, guid: bb67ec3348551544abc067aa4965505c, type: 3}
       propertyPath: _onArmorUpdate.m_PersistentCalls.m_Calls.Array.size
@@ -336,7 +336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4723989696510335756, guid: bb67ec3348551544abc067aa4965505c, type: 3}
       propertyPath: _health
-      value: 100
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4723989696510335757, guid: bb67ec3348551544abc067aa4965505c, type: 3}
       propertyPath: m_RootOrder
@@ -388,7 +388,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5811257664843986030, guid: bb67ec3348551544abc067aa4965505c, type: 3}
       propertyPath: _health
-      value: 25
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5811257664843986030, guid: bb67ec3348551544abc067aa4965505c, type: 3}
       propertyPath: _onArmorUpdate.m_PersistentCalls.m_Calls.Array.size
@@ -500,7 +500,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5811257665511507894, guid: bb67ec3348551544abc067aa4965505c, type: 3}
       propertyPath: _health
-      value: 25
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5811257665511507894, guid: bb67ec3348551544abc067aa4965505c, type: 3}
       propertyPath: _onArmorUpdate.m_PersistentCalls.m_Calls.Array.size
@@ -612,7 +612,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5811257666782508104, guid: bb67ec3348551544abc067aa4965505c, type: 3}
       propertyPath: _health
-      value: 25
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5811257666782508104, guid: bb67ec3348551544abc067aa4965505c, type: 3}
       propertyPath: _onArmorUpdate.m_PersistentCalls.m_Calls.Array.size

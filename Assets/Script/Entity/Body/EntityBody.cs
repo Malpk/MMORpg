@@ -30,6 +30,7 @@ public class EntityBody : MonoBehaviour
             OnChangeHealth?.Invoke(HealthNormalize);
         }
     }
+    public bool IsDead { get; private set; }
 
     public float HealthNormalize => Health / (float)_health;
 
@@ -202,6 +203,7 @@ public class EntityBody : MonoBehaviour
 
     public void Dead()
     {
+        IsDead = true;
         OnDead?.Invoke();
     }
 

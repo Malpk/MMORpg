@@ -28,6 +28,11 @@ public class Enemy : Entity, IPvp
         _movement.OnCompliteMove -= Complite;
     }
 
+    private void Start()
+    {
+        body.Dead();
+    }
+
     public override void Play()
     {
         if (_steap == null)

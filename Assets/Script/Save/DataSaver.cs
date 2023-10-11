@@ -7,6 +7,7 @@ public class DataSaver : MonoBehaviour
     [SerializeField] private Entity _player;
     [SerializeField] private WalletSet _wallet;
     [SerializeField] private InvetorySet _invetory;
+    [SerializeField] private BattelLoder _loder;
 
     private void Start()
     {
@@ -37,6 +38,7 @@ public class DataSaver : MonoBehaviour
             _wallet.SetMoney(save.Money);
             if(save.Invetory != null)
                 _invetory.Load(save.Invetory);
+            _loder?.Load(save.Battel);
         }
     }
 }

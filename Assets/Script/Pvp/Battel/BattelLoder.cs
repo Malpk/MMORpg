@@ -6,7 +6,6 @@ public class BattelLoder : MonoBehaviour
     [SerializeField] private float _spawnDistance;
     [Header("Reference")]
     [SerializeField] private Player _player;
-    [SerializeField] private Battel _battel;
     [SerializeField] private EnemyHub _enemyHub;
     [SerializeField] private MapHolder _map;
     [SerializeField] private GameSwitcher _game;
@@ -14,10 +13,6 @@ public class BattelLoder : MonoBehaviour
 
     private List<Enemy> _prefabs = new List<Enemy>();
 
-    private void Awake()
-    {
-        Load(_battel);
-    }
 
     public void Load(Battel battel)
     {
@@ -35,6 +30,7 @@ public class BattelLoder : MonoBehaviour
             enemy.Movement.SetMap(_map);
             enemy.Movement.SetPoint(point);
             list.Add(enemy);
+            _game.AddEnemy(enemy);
         }
         _pvp.SetParts(list);
     }
