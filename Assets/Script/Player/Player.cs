@@ -6,8 +6,8 @@ public class Player : Entity, IPvp
     [SerializeField] private WalletSet _playerWallet;
     [SerializeField] private EntityMovement _movement;
 
-    public event System.Action OnComplite;
     public event System.Action<AttackType> OnDamage;
+    public override event System.Action OnComplite;
 
     public WalletSet Wallet => _playerWallet;
 
@@ -23,7 +23,7 @@ public class Player : Entity, IPvp
             _movement.OnCompliteMove -= Complite;
     }
 
-    public void Play()
+    public override void Play()
     {
         foreach (var part in body.Parts)
         {
@@ -32,8 +32,9 @@ public class Player : Entity, IPvp
         _movement.enabled = true;
     }
 
-    public void Skip()
+    public override void Stop()
     {
+        _movement.enabled = false;
         Complite();
     }
 

@@ -81,6 +81,8 @@ public class MapPoint : MonoBehaviour
     {
         SetBlock(false);
         _content = content;
+        if(_content)
+            _content.transform.position = transform.position;
     }
 
     public void Deactivate()

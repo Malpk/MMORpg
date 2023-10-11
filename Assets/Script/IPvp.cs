@@ -1,6 +1,9 @@
 public interface IPvp
 {
+    public event System.Action OnComplite;
+
+
     public void Play();
 
-    public void Skip();
+    public void Stop();
 }

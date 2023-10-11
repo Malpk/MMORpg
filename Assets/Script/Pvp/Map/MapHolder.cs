@@ -88,6 +88,23 @@ public class MapHolder : MonoBehaviour
         return closePoint;
     }
 
+    public List<MapPoint> GetSpawnPoint(Vector2 postion, float radius)
+    {
+        var list = new List<MapPoint>();
+        foreach (var point in _points)
+        {
+            if (!point.Content)
+            {
+                var distance = Vector2.Distance(point.transform.position, postion);
+                if (distance > radius)
+                {
+                    list.Add(point);
+                }
+            }
+        }
+        return list;
+    }
+
     private List<MapPoint> GetPoints(Vector2 position,float radius)
     {
         var list = new List<MapPoint>();

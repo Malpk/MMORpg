@@ -16,9 +16,20 @@ public class EnemyMovement : MonoBehaviour
 
     public bool IsMove => _corotine != null;
 
+
     private void Awake()
     {
-        transform.position = _point.transform.position;
+        _point?.SetContent(gameObject);
+    }
+
+    public void SetMap(MapHolder map)
+    {
+        _map = map;
+    }
+
+    public void SetPoint(MapPoint point)
+    {
+        _point = point;
         _point.SetContent(gameObject);
     }
 

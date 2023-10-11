@@ -34,7 +34,7 @@ public class AttackSet : MonoBehaviour
         {
             _player.Body.SetProtect(part, true);
         }
-        _player.Skip();
+        _player.Stop();
     }
 
     public void Attack(PartType[] parts)
@@ -49,7 +49,7 @@ public class AttackSet : MonoBehaviour
                     break;
             }
         }
-        _player.Skip();
+        _player.Stop();
     }
 
     #region Point

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Entity : MonoBehaviour
+public abstract class Entity : MonoBehaviour, IPvp
 {
     [SerializeField] private int _level;
     [SerializeField] private EntityRang _rang;
@@ -11,12 +11,18 @@ public class Entity : MonoBehaviour
 
     public event System.Action OnLoad;
     public event System.Action<EntityData> OnSetData;
+    
+    public abstract event System.Action OnComplite;
 
     public int Level => _level;
     public int Attack => entityStats.Stats.Strenght;
     public EntityRang Rang => _rang;
     public EntityData Data => _data;
     public EntityBody Body => body;
+
+    public abstract void Play();
+
+    public abstract void Stop();
 
     public void SetData(EntityData data)
     {
@@ -47,5 +53,6 @@ public class Entity : MonoBehaviour
         entityStats.Load(save.Stats);
         OnLoad?.Invoke();
     }
+
 
 }

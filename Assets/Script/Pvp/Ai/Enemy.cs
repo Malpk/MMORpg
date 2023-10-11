@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Enemy : Entity, IPvp
 {
+    [SerializeField] private int _id;
     [SerializeField] private float _attackDistance;
     [SerializeField] private float _delay;
     [Header("Reference")]
@@ -11,7 +12,11 @@ public class Enemy : Entity, IPvp
 
     private Coroutine _steap;
 
-    public event System.Action OnComplite;
+    public override event System.Action OnComplite;
+
+    public int Id => _id;
+
+    public EnemyMovement Movement => _movement;
 
     private void OnEnable()
     {
@@ -23,7 +28,7 @@ public class Enemy : Entity, IPvp
         _movement.OnCompliteMove -= Complite;
     }
 
-    public void Play()
+    public override void Play()
     {
         if (_steap == null)
         {
@@ -32,9 +37,14 @@ public class Enemy : Entity, IPvp
         }
     }
 
-    public void Skip()
+    public override void Stop()
     {
         Complite();
+    }
+
+    public void SetTarget(Player target)
+    {
+        _player = target;
     }
 
     private IEnumerator MakeSteap()
