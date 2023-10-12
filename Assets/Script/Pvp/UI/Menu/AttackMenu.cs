@@ -12,15 +12,13 @@ public class AttackMenu : MonoBehaviour
     [SerializeField] private PartSelectMenu _attack;
     [SerializeField] private PvpEntityPanel _enemyPanel;
 
+    private Enemy _target;
+
     public event System.Action<PartType[]> OnAttack;
     public event System.Action<PartType[]> OnProtect;
 
     private int CountAction => _attack.SelectCount + _protect.SelectCount;
 
-    private void Awake()
-    {
-        _applyButtonl.onClick.AddListener(Close);
-    }
 
     private void OnEnable()
     {
@@ -41,12 +39,17 @@ public class AttackMenu : MonoBehaviour
 
     public void BindMenu(Enemy target)
     {
-        _enemyPanel.BindPanel(target);
-        _attack.Reload();
+        if (target != _target)
+        {
+            _target = target;
+            _enemyPanel.BindPanel(target);
+            _attack.Reload();
+        }
     }
 
     public void Close()
     {
+        _target = null;
         if(_attack.SelectCount > 0)
             OnAttack?.Invoke(GetParts(_attack.Selects));
         OnProtect?.Invoke(GetParts(_protect.Selects));

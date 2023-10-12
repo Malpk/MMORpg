@@ -12,18 +12,27 @@ public class AttackSet : MonoBehaviour
 
     private Enemy _enemy;
 
+    private void Awake()
+    {
+        _attackMenu.OnAttack += Attack;
+        _attackMenu.OnProtect += Protect;
+    }
+
     private void OnEnable()
     {
         _map.OnActive += OnPointEnter;
         _map.OnExit += OnPointExit;
-        _attackMenu.OnAttack += Attack;
-        _attackMenu.OnProtect += Protect;
+
     }
 
     private void OnDisable()
     {
         _map.OnActive -= OnPointEnter;
         _map.OnExit -= OnPointExit;
+    }
+
+    private void OnDestroy()
+    {
         _attackMenu.OnAttack -= Attack;
         _attackMenu.OnProtect -= Protect;
     }
