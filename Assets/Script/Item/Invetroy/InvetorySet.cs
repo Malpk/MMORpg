@@ -39,13 +39,11 @@ public class InvetorySet : MonoBehaviour
 
     public void Load(SaveInvetory save)
     {
+        _contents.Clear();
         for (int i = 0; i < save.Items.Length; i++)
         {
             var item = ItemHub.GetItem(save.Items[i]);
-            if (!_contents.Contains(item))
-            {
-                _contents.Add(item);
-            }
+            AddItem(item);
         }
     }
     #endregion
@@ -65,11 +63,13 @@ public class InvetorySet : MonoBehaviour
     public void AddItem(Item item)
     {
         _menu.AddItem(item);
+        _contents.Add(item);
     }
 
     public void RemoveItem(Item item)
     {
         _menu.RemoveItem(item);
+        _contents.Remove(item);
     }
 
     private void UseItem(Item item)

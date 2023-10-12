@@ -609,6 +609,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefabs:
   - {fileID: 3676944431507444634, guid: e7aba3d761e8d644b8fbfe3fa670f344, type: 3}
+  - {fileID: 3676944431507444634, guid: 0ef0ed5ecc41bd84cb4752b24ecd46cc, type: 3}
+  - {fileID: 3676944431507444634, guid: 1e1cb972656b5424aa912913815de458, type: 3}
 --- !u!1 &151600405
 GameObject:
   m_ObjectHideFlags: 0
@@ -5259,6 +5261,7 @@ GameObject:
   - component: {fileID: 1413622300}
   - component: {fileID: 1413622301}
   - component: {fileID: 1413622299}
+  - component: {fileID: 1413622302}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -5315,8 +5318,23 @@ MonoBehaviour:
   _enemys: []
   _player: {fileID: 1235513939}
   _endMenu: {fileID: 511921136}
+  _lootSpawner: {fileID: 1413622302}
   _saver: {fileID: 1221615540}
   _controller: {fileID: 1413622299}
+--- !u!114 &1413622302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413622298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a68d8e230cb9b3a4883e1d3b90042495, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _probilityRange: {x: 0.2, y: 0.5}
+  _set: {fileID: 1235513941}
 --- !u!1 &1414915888
 GameObject:
   m_ObjectHideFlags: 0

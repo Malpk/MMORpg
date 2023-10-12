@@ -8,6 +8,7 @@ public class Enemy : Entity, IPvp
     [SerializeField] private float _delay;
     [Header("Reference")]
     [SerializeField] private Player _player;
+    [SerializeField] private LootSet _loot;
     [SerializeField] private EnemyMovement _movement;
 
     private Coroutine _steap;
@@ -15,7 +16,7 @@ public class Enemy : Entity, IPvp
     public override event System.Action OnComplite;
 
     public int Id => _id;
-
+    public LootSet Loot => _loot;
     public EnemyMovement Movement => _movement;
 
     private void OnEnable()
@@ -27,6 +28,11 @@ public class Enemy : Entity, IPvp
     {
         _movement.OnCompliteMove -= Complite;
     }
+
+    //private void Start()
+    //{
+    //    Body.Dead();
+    //}
 
     public override void Play()
     {

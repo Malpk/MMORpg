@@ -8,6 +8,7 @@ public class GameSwitcher : MonoBehaviour
     [SerializeField] private List<Enemy> _enemys;
     [SerializeField] private Player _player;
     [SerializeField] private EndMenu _endMenu;
+    [SerializeField] private LootHolder _lootSpawner;
     [SerializeField] private BaseDataSaver _saver;
     [SerializeField] private PvpControlelr _controller;
 
@@ -53,6 +54,7 @@ public class GameSwitcher : MonoBehaviour
             var reward = 0;
             foreach (var enemy in _enemys)
             {
+                _lootSpawner.AddLoot(enemy.Loot);
                 reward += enemy.Level * Random.Range(_reward.x, _reward.y);
             }
             _player.Wallet.TakeMoney(reward);

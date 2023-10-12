@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5769530822529160698}
   - component: {fileID: 519520933712824719}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Enemy_v2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +60,7 @@ MonoBehaviour:
   body: {fileID: 8253368461901001514}
   entityStats: {fileID: 4391776297331508444}
   level: {fileID: 5769530822529160698}
-  _id: 0
+  _id: 2
   _attackDistance: 1
   _delay: 1
   _player: {fileID: 0}
@@ -155,8 +155,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _body: {fileID: 8253368461901001514}
   _loot:
-  - {fileID: 8558397049815668971, guid: caec51d9a3b47b2458e48a90cca5b42c, type: 3}
+  - {fileID: 9149310250359012406, guid: 639cc2fcb1ff8394ca5fccfa583e5941, type: 3}
   - {fileID: 6557031246817909295, guid: ea4747e004828c845a620ee59de18f69, type: 3}
+  - {fileID: 9020524289899669373, guid: 36a1ac6732b8b904ea74fb173f4e3087, type: 3}
+  - {fileID: 8558397049815668971, guid: caec51d9a3b47b2458e48a90cca5b42c, type: 3}
 --- !u!1 &3676944432341687698
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,7 +474,7 @@ PrefabInstance:
     - target: {fileID: 5811257664843986030, guid: bb67ec3348551544abc067aa4965505c, type: 3}
       propertyPath: _armor
       value: 
-      objectReference: {fileID: 3049830227132241821, guid: cd93ffff915e38842a09ad0d0a79e9bf, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 5811257664843986030, guid: bb67ec3348551544abc067aa4965505c, type: 3}
       propertyPath: _health
       value: 3
