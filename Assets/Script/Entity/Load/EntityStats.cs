@@ -6,6 +6,8 @@ public class EntityStats : MonoBehaviour
     [Min(0)]
     [SerializeField] private int _skillScore = 3;
     [SerializeField] private Stats _stats;
+    [Header("Reference")]
+    [SerializeField] private EntityLevelSet _level;
 
     public event System.Action OnLoad;
     public event System.Action OnScoreUpdate;
@@ -16,6 +18,16 @@ public class EntityStats : MonoBehaviour
     private void OnValidate()
     {
         Score = _skillScore;
+    }
+
+    private void OnEnable()
+    {
+        _level.OnUpLevel += UpLevel;
+    }
+
+    private void OnDisable()
+    {
+        _level.OnUpLevel -= UpLevel;
     }
 
     public string Save()
@@ -58,5 +70,10 @@ public class EntityStats : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    private void UpLevel()
+    {
+        AddSkillScore(_skillScore);
     }
 }

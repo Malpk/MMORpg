@@ -2040,7 +2040,7 @@ MonoBehaviour:
       m_Calls: []
   _mainMenuId: 1
   _reward: {fileID: 709862367}
-  _saver: {fileID: 1221615539}
+  _saver: {fileID: 0}
 --- !u!1 &513670574
 GameObject:
   m_ObjectHideFlags: 0
@@ -4208,6 +4208,7 @@ GameObject:
   - component: {fileID: 1235513940}
   - component: {fileID: 1235513941}
   - component: {fileID: 1235513942}
+  - component: {fileID: 1235513943}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -4262,7 +4263,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 302ad70951c21624eb35c4026aa6b7c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _level: 1
   _rang: 0
   _data:
     Name: 
@@ -4272,8 +4272,9 @@ MonoBehaviour:
     Gender: 0
   body: {fileID: 1728356459}
   entityStats: {fileID: 1909397418}
-  _skills: {fileID: 513670575}
+  level: {fileID: 1235513943}
   _playerWallet: {fileID: 1235513942}
+  _skills: {fileID: 513670575}
   _movement: {fileID: 1235513938}
 --- !u!114 &1235513940
 MonoBehaviour:
@@ -4321,6 +4322,65 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _money: 0
   _moneyUI: []
+--- !u!114 &1235513943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235513936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 165a5a2946d1f8c42b27db9205b6642d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _level: 1
+  _levelMax: 100
+  _score: 0
+  _targetScore: 20
+  _scoreCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -11.705523
+      outSlope: -11.705523
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.21008097
+    - serializedVersion: 3
+      time: 0.053604387
+      value: 0.44636258
+      inSlope: -3.575705
+      outSlope: -3.575705
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.18521662
+    - serializedVersion: 3
+      time: 0.16967532
+      value: 0.1188875
+      inSlope: -0.30550542
+      outSlope: -0.30550542
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.6134634
+      outWeight: 0.13314812
+    - serializedVersion: 3
+      time: 1
+      value: 0.001
+      inSlope: -0.04987289
+      outSlope: -0.04987289
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.09878795
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _scoreText: {fileID: 0}
 --- !u!1 &1256683345
 GameObject:
   m_ObjectHideFlags: 0
@@ -5165,7 +5225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _steapTime: 20
-  _enemy: {fileID: 1292766702}
+  _partsPvp: []
   _player: {fileID: 1235513939}
   _game: {fileID: 1047508334}
   _inteface: {fileID: 299944097}
@@ -5198,7 +5258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _reward: {x: 1, y: 4}
-  _enemy: {fileID: 1292766702}
+  _enemys: []
   _player: {fileID: 1235513939}
   _endMenu: {fileID: 511921136}
   _saver: {fileID: 1221615539}
@@ -8159,6 +8219,7 @@ MonoBehaviour:
     Intelligence: 0
     Survival: 0
     Body: 0
+  _level: {fileID: 1235513943}
 --- !u!224 &1910588010 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9121105702903501285, guid: 5f1399d8f690c384c8ba41cd543a63d8, type: 3}

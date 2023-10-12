@@ -8,7 +8,7 @@ public class GameSwitcher : MonoBehaviour
     [SerializeField] private List<Enemy> _enemys;
     [SerializeField] private Player _player;
     [SerializeField] private EndMenu _endMenu;
-    [SerializeField] private DataSaver _saver;
+    [SerializeField] private BaseDataSaver _saver;
     [SerializeField] private PvpControlelr _controller;
 
     private void OnEnable()

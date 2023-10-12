@@ -5,6 +5,7 @@ public class BattelMenu : MonoBehaviour
 {
     [SerializeField] private int _pvpSceneId = 2;
     [Header("Reference")]
+    [SerializeField] private MainDataSaver _saver;
     [SerializeField] private BattelPanel[] _panels;
 
     public event System.Action<Battel> OnStart;
@@ -27,7 +28,8 @@ public class BattelMenu : MonoBehaviour
 
     private void StartBattel(Battel battel)
     {
-        OnStart?.Invoke(battel);
+        _saver.SetBattel(battel);
+        _saver.Save();
         SceneManager.LoadScene(_pvpSceneId);
     }
 }

@@ -483,6 +483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pvpSceneId: 2
+  _saver: {fileID: 0}
   _panels:
   - {fileID: 4319441628613180412}
   - {fileID: 7527992605454147354}

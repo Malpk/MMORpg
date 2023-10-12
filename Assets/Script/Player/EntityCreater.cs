@@ -7,13 +7,11 @@ public class EntityCreater : MonoBehaviour
     [SerializeField] private Entity _entity;
     [SerializeField] private RaceStats[] _stats;
     [Header("Reference")]
-    [SerializeField] private DataSaver _save;
+    [SerializeField] private BaseDataSaver _save;
     [SerializeField] private RaceChoose _raceMenu;
     [SerializeField] private ClassChoose _classMenu;
     [SerializeField] private EntityHolder _holder;
     [SerializeField] private GenderChoose _genderMenu;
-
-
 
     private void OnEnable()
     {

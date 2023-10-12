@@ -46,6 +46,7 @@ public class AttackSet : MonoBehaviour
             {
                 case AttackType.Full:
                     _skills.AddScore(PvpScoreType.Attack);
+                    _player.EntityLevel.AddScore(_player.Attack);
                     break;
             }
         }

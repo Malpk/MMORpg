@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3676944431507444633}
   - component: {fileID: 3676944431507444634}
   - component: {fileID: 3676944431507444635}
+  - component: {fileID: 5769530822529160698}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -48,7 +49,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa1090c6dbada3428e08eed9d82ff3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _level: 3
   _rang: 0
   _data:
     Name: "\u042F\u0449\u0435\u0440"
@@ -58,6 +58,7 @@ MonoBehaviour:
     Gender: 1
   body: {fileID: 8253368461901001514}
   entityStats: {fileID: 4391776297331508444}
+  level: {fileID: 5769530822529160698}
   _id: 0
   _attackDistance: 1
   _delay: 1
@@ -79,6 +80,65 @@ MonoBehaviour:
   _speedMovement: 2
   _point: {fileID: 0}
   _map: {fileID: 0}
+--- !u!114 &5769530822529160698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3676944431507444639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 165a5a2946d1f8c42b27db9205b6642d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _level: 3
+  _levelMax: 100
+  _score: 0
+  _targetScore: 20
+  _scoreCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -11.705523
+      outSlope: -11.705523
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.21008097
+    - serializedVersion: 3
+      time: 0.053604387
+      value: 0.44636258
+      inSlope: -3.575705
+      outSlope: -3.575705
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.18521662
+    - serializedVersion: 3
+      time: 0.16967532
+      value: 0.1188875
+      inSlope: -0.30550542
+      outSlope: -0.30550542
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.6134634
+      outWeight: 0.13314812
+    - serializedVersion: 3
+      time: 1
+      value: 0.001
+      inSlope: -0.04987289
+      outSlope: -0.04987289
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.09878795
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _scoreText: {fileID: 0}
 --- !u!1 &3676944432341687698
 GameObject:
   m_ObjectHideFlags: 0

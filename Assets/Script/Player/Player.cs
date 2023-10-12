@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class Player : Entity, IPvp
+public class Player : Entity
 {
-    [SerializeField] private PvpSkills _skills;
     [SerializeField] private WalletSet _playerWallet;
+    [SerializeField] private PvpSkills _skills;
     [SerializeField] private EntityMovement _movement;
 
     public event System.Action<AttackType> OnDamage;

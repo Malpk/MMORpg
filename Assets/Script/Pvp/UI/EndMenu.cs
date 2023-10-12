@@ -6,7 +6,7 @@ public class EndMenu : UIMenu
     [SerializeField] private int _mainMenuId = 1;
     [Header("Reference")]
     [SerializeField] private TextUI _reward;
-    [SerializeField] private DataSaver _saver;
+    [SerializeField] private BaseDataSaver _saver;
 
     public void ShowMenu(int reward = 0)
     {
