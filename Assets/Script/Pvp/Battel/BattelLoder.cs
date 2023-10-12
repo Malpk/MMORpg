@@ -8,6 +8,7 @@ public class BattelLoder : MonoBehaviour
     [SerializeField] private Player _player;
     [SerializeField] private EnemyHub _enemyHub;
     [SerializeField] private MapHolder _map;
+    [SerializeField] private EntityPanelsHolder _enemyPanel;
     [SerializeField] private GameSwitcher _game;
     [SerializeField] private PvpControlelr _pvp;
 
@@ -31,6 +32,7 @@ public class BattelLoder : MonoBehaviour
             enemy.Movement.SetPoint(point);
             list.Add(enemy);
             _game.AddEnemy(enemy);
+            _enemyPanel.AddEmtity(enemy);
         }
         _pvp.SetParts(list);
     }

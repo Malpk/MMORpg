@@ -664,7 +664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57bfc032bc3105246818f7648cc0921f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entity: {fileID: 3676944431507444634, guid: e7aba3d761e8d644b8fbfe3fa670f344, type: 3}
+  _entity: {fileID: 0}
   _hard: {fileID: 2724696084846545259}
   _health: {fileID: 1411671581868766864}
   _damage: {fileID: 6356721908075535662}

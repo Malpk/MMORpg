@@ -52,8 +52,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rang: 0
   _data:
-    Name: "\u042F\u0449\u0435\u0440"
-    Icon: {fileID: 21300000, guid: ffd10401c40143847a4ada4f3a163d88, type: 3}
+    Name: "\u0412\u043E\u0440\u043E\u043D"
+    Icon: {fileID: 21300000, guid: 296fb922ee2538e4c81173d2b6a07cd5, type: 3}
     Race: 0
     Class: 0
     Gender: 1

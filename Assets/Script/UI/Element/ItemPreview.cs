@@ -16,7 +16,7 @@ public class ItemPreview : MonoBehaviour
 
     public void SetData(string name, Sprite icon)
     {
-        _name.SetText(name);
+        _name?.SetText(name);
         ShowIcon(icon);
     }
 

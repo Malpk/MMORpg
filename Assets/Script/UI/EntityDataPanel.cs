@@ -10,6 +10,8 @@ public class EntityDataPanel : MonoBehaviour
     [SerializeField] private Field _magicField;
     [SerializeField] private ItemPreview _preview;
 
+    public bool IsBusy => _bind;
+
     private void OnValidate()
     {
         _childs.Remove(this);
