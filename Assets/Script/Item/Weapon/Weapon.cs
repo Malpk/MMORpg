@@ -72,6 +72,7 @@ public class Weapon : Item
     public override void Drop()
     {
         _user.Hands.TakeWeapon(null);
+        _user = null;
     }
 
 }

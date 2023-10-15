@@ -18,6 +18,7 @@ public class EntityBody : MonoBehaviour
     private int _curretHealth;
 
     public event System.Action OnDead;
+    public event System.Action OnArmorUpdate;
     public event System.Action<float> OnChangeHealth;
 
     public int Attack => _stats.Stats.Strenght;
@@ -75,7 +76,7 @@ public class EntityBody : MonoBehaviour
     }
 
     #endregion
-    #region Save
+    #region Save / Load
     public string Save()
     {
         var save = new SaveEntityBody();
@@ -101,6 +102,7 @@ public class EntityBody : MonoBehaviour
                 _parts[i].Load(save.Parts[i]);
             }
             Health = GetHealth();
+            OnArmorUpdate?.Invoke();
         }
     }
     #endregion
@@ -112,6 +114,7 @@ public class EntityBody : MonoBehaviour
             if (part.Part == armor.Part)
             {
                 part.SetArmor(armor);
+                OnArmorUpdate?.Invoke();
                 return;
             }
         }
@@ -121,6 +124,7 @@ public class EntityBody : MonoBehaviour
     {
         var part = GetPart(type);
         part.SetArmor(null);
+        OnArmorUpdate?.Invoke();
     }
 
     public void RemoveArmor(Armor armor)

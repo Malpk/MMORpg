@@ -22,6 +22,7 @@ public abstract class Entity : MonoBehaviour, IPvp
     public Vector2Int RangeAttack => hands.Attack + Vector2Int.one * body.Attack;
     public EntityBody Body => body;
     public HandHolder Hands => hands;
+    public EntityStats Stats => entityStats;
     public GlorySet Glory => glorySet;
 
     #region Save / Load
@@ -45,6 +46,13 @@ public abstract class Entity : MonoBehaviour, IPvp
         body?.Load(save.Body);
         entityStats.Load(save.Stats);
         hands.Load(save.Hands);
+        if(hands.Weapon)
+            hands.Weapon.Use(this);
+        foreach (var part in body.Parts)
+        {
+            if (part.Armor)
+                part.Armor.Use(this);
+        }
         OnLoad?.Invoke();
     }
 

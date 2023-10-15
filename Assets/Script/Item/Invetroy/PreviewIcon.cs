@@ -6,7 +6,7 @@ public class PreviewIcon : MonoBehaviour
     [SerializeField] private Image _icon;
     [SerializeField] private Image _preview;
 
-    public void Bind(Item item)
+    public void SetItem(Item item)
     {
         if(item)
             _icon.sprite = item.Icon;

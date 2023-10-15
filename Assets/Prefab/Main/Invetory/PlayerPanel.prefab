@@ -51,7 +51,7 @@ GameObject:
   - component: {fileID: 9101084772635122939}
   - component: {fileID: 9101084772635122938}
   m_Layer: 0
-  m_Name: Hand
+  m_Name: Hands
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

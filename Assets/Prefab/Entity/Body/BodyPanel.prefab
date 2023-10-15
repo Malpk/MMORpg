@@ -267,6 +267,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 818050333059477460}
+  - component: {fileID: 5738019535679084144}
   - component: {fileID: 818050333059477462}
   - component: {fileID: 818050333059477463}
   m_Layer: 0
@@ -296,6 +297,22 @@ RectTransform:
   m_AnchoredPosition: {x: -187.00002, y: -112.53}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5738019535679084144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818050333059477461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65e8321fa3cd43246bcf14037eb7fa31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _content: ' 10-15'
+  _prefix: "\u0443\u0440\u043E\u043D: "
+  _postfix: 
+  _textMesh: {fileID: 818050333059477463}
 --- !u!222 &818050333059477462
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -324,7 +341,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0443\u0440\u043E\u043D : 10-15"
+  m_text: "\u0443\u0440\u043E\u043D:  10-15"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

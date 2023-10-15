@@ -8,6 +8,9 @@ public class HandHolder : MonoBehaviour
     [SerializeField] private Weapon _weapon;
     [SerializeField] private List<SaveWeaponSkill> _skills = new List<SaveWeaponSkill>();
 
+    public event System.Action<Item> OnUpdateWeapon;
+    public event System.Action<Item> OnUpdateShield;
+
     public int Protect => _shield ? _shield.Protect : 0;
     public Vector2Int Attack => _weapon ? _weapon.Attack : Vector2Int.zero;
     public Weapon Weapon => _weapon;
@@ -40,6 +43,7 @@ public class HandHolder : MonoBehaviour
         _weapon = ItemHub.GetItem<Weapon>(save.UseWeaponId);
         if (_weapon)
             SetSkill(_weapon);
+        OnUpdateWeapon?.Invoke(_weapon);
     }
     #endregion
 
@@ -51,6 +55,7 @@ public class HandHolder : MonoBehaviour
             SaveSkill();
             _weapon = weapon;
             SetSkill(_weapon);
+            OnUpdateWeapon?.Invoke(_weapon);
         }
     }
 

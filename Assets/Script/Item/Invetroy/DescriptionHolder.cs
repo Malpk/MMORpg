@@ -29,7 +29,7 @@ public class DescriptionHolder : MonoBehaviour
 
     public void Hide()
     {
-        _description.SetActive(false);
+        _description?.SetActive(false);
     }
 
     private void ShowDescription(GameObject description)

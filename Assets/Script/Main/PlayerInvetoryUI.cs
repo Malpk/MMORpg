@@ -53,7 +53,7 @@ public class PlayerInvetoryUI : Inventory
             _select.OnSelect -= Select;
             _select.OnDeselect -= Deselect;
             _select.gameObject.SetActive(false);
-            _body.RemoveArmor(_select.Content);
+            _select.Content.Drop();
             Deselect(_select);
         }
     }
