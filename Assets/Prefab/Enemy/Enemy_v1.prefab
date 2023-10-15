@@ -61,6 +61,7 @@ MonoBehaviour:
   glorySet: {fileID: 6766203441065321973}
   level: {fileID: 5769530822529160698}
   body: {fileID: 8253368461901001514}
+  hands: {fileID: 6189675120171192121}
   entityStats: {fileID: 4391776297331508444}
   _id: 1
   _attackDistance: 1
@@ -828,6 +829,17 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2993350911332001951, guid: bb67ec3348551544abc067aa4965505c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bb67ec3348551544abc067aa4965505c, type: 3}
+--- !u!114 &6189675120171192121 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7413212787444246303, guid: bb67ec3348551544abc067aa4965505c, type: 3}
+  m_PrefabInstance: {fileID: 3676944432585762854}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 853d224e357d36545a152e5ee7b169d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8253368461901001514 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4723989696510335756, guid: bb67ec3348551544abc067aa4965505c, type: 3}

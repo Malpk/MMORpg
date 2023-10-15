@@ -24,7 +24,10 @@ public class MainBodyPanel : MonoBehaviour
 
     private void AttackUpdate()
     {
-        _attack.SetText($"{_entity.RangeAttack.x} - {_entity.RangeAttack.y}");
+        if (_entity.RangeAttack.x != _entity.RangeAttack.y)
+            _attack.SetText($"{_entity.RangeAttack.x} - {_entity.RangeAttack.y}");
+        else
+            _attack.SetText($"{_entity.RangeAttack.x}");
     }
 
     private void ArmorUpdate()

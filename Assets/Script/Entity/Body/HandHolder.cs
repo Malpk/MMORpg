@@ -12,7 +12,9 @@ public class HandHolder : MonoBehaviour
     public event System.Action<Item> OnUpdateShield;
 
     public int Protect => _shield ? _shield.Protect : 0;
-    public Vector2Int Attack => _weapon ? _weapon.Attack : Vector2Int.zero;
+    public int Attack => _weapon ? _weapon.GetAttack() : 0;
+    public Vector2Int AttackRange => _weapon ? _weapon.Attack : Vector2Int.zero;
+
     public Weapon Weapon => _weapon;
 
     private void Awake()
@@ -20,6 +22,7 @@ public class HandHolder : MonoBehaviour
         if (_weapon)
             SetSkill(_weapon);
     }
+
 
     #region Save
     public SaveHandHolder Save()

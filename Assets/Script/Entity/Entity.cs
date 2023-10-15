@@ -19,7 +19,7 @@ public abstract class Entity : MonoBehaviour, IPvp
     public int Level => level.Level;
     public EntityRang Rang => _rang;
     public EntityData Data => _data;
-    public Vector2Int RangeAttack => hands.Attack + Vector2Int.one * body.Attack;
+    public Vector2Int RangeAttack =>  hands.AttackRange + Vector2Int.one * body.Attack;
     public EntityBody Body => body;
     public HandHolder Hands => hands;
     public EntityStats Stats => entityStats;
@@ -76,8 +76,9 @@ public abstract class Entity : MonoBehaviour, IPvp
     #region Attack
     public AttackType Attack(Entity target, PartType part = PartType.None)
     {
-        var attack = body.Attack + hands.Weapon.GetAttack();
+        var attack = body.Attack + hands.Attack;
         var result = SetAttack(target, part, attack);
+        Debug.Log(result);
         if (result == AttackType.Full || result == AttackType.Part)
             hands.Weapon.AddScore(attack);
         level.AddScore(attack);
