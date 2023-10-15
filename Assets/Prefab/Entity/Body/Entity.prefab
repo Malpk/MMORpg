@@ -48,9 +48,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88f3ff9ad2cbd9c458a8ce97b6690033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mana: 0
-  _health: 100
-  _evasionProbility: 0
+  _manaUnit: 5
+  _healthUnit: 4
+  _evasionProbility: 0.126
+  _stats: {fileID: 0}
   _parts:
   - {fileID: 2130463523560198211}
   - {fileID: 5811257666782508104}

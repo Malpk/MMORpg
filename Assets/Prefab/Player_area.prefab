@@ -694,6 +694,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4723989696510335756, guid: bb67ec3348551544abc067aa4965505c, type: 3}
+      propertyPath: _stats
+      value: 
+      objectReference: {fileID: 3051281248896620812}
+    - target: {fileID: 4723989696510335756, guid: bb67ec3348551544abc067aa4965505c, type: 3}
       propertyPath: _evasionProbility
       value: 0.3
       objectReference: {fileID: 0}

@@ -4,12 +4,12 @@ using UnityEngine;
 public class EntityStats : MonoBehaviour
 {
     [Min(0)]
-    [SerializeField] private int _skillScore = 3;
+    [SerializeField] private int _skillScore = 2;
     [SerializeField] private Stats _stats;
     [Header("Reference")]
     [SerializeField] private LevelSet _level;
 
-    public event System.Action OnLoad;
+    public event System.Action OnStatUpdate;
     public event System.Action OnScoreUpdate;
 
     public int Score { get; private set; } = 0;
@@ -45,7 +45,7 @@ public class EntityStats : MonoBehaviour
             var data = JsonUtility.FromJson<EntityStatSave>(json);
             Score = data.SkillScore;
             _stats = data.Stats;
-            OnLoad?.Invoke();
+            OnStatUpdate?.Invoke();
         }
     }
 
@@ -59,6 +59,7 @@ public class EntityStats : MonoBehaviour
     {
         _stats = stats;
         Score = _skillScore;
+        OnStatUpdate?.Invoke();
     }
 
     public bool UpdateStats(Stats stats)
@@ -66,6 +67,7 @@ public class EntityStats : MonoBehaviour
         if (Score > 0)
         {
             _stats = stats;
+            OnStatUpdate?.Invoke();
             Score--;
             return true;
         }
@@ -74,6 +76,7 @@ public class EntityStats : MonoBehaviour
 
     private void UpLevel()
     {
-        AddSkillScore(_skillScore);
+        var score = _level.Level >= 5 ? _skillScore + 1 : _skillScore;
+        AddSkillScore(score);
     }
 }

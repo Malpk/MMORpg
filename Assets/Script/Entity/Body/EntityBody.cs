@@ -4,14 +4,17 @@ using System.Collections.Generic;
 public class EntityBody : MonoBehaviour
 {
     [Min(0)]
-    [SerializeField] private int _mana;
+    [SerializeField] private int _manaUnit;
     [Min(0)]
-    [SerializeField] private int _health;
+    [SerializeField] private int _healthUnit;
     [Range(0, 1f)]
     [SerializeField] private float _evasionProbility;
     [Header("Reference")]
+    [SerializeField] private EntityStats _stats;
     [SerializeField] private PartBody[] _parts;
 
+    private int _fullMana;
+    private int _fullHealth;
     private int _curretHealth;
 
     public event System.Action OnDead;
@@ -32,7 +35,7 @@ public class EntityBody : MonoBehaviour
     }
     public bool IsDead { get; private set; }
 
-    public float HealthNormalize => Health / (float)_health;
+    public float HealthNormalize => Health / (float)_fullHealth;
 
     public PartBody[] Parts => _parts;
 
@@ -43,27 +46,39 @@ public class EntityBody : MonoBehaviour
 
     private void Awake()
     {
-        foreach (var part in _parts)
-        {
-            part?.SetHealth(_health / _parts.Length);
-        }
-        Health = GetHealth();
+        UpdateStats();
     }
 
-    private void OnValidate()
+    #region Events
+    private void OnEnable()
     {
+        _stats.OnStatUpdate += UpdateStats;
+        _stats.OnScoreUpdate += UpdateStats;
+    }
+
+    private void OnDisable()
+    {
+        _stats.OnStatUpdate -= UpdateStats;
+        _stats.OnScoreUpdate -= UpdateStats;
+    }
+
+    private void UpdateStats()
+    {
+        _fullMana = _stats.Stats.Intelligence * _manaUnit;
+        _fullHealth = _stats.Stats.Body * _healthUnit;
         foreach (var part in _parts)
         {
-            part?.SetHealth(_health / _parts.Length);
+            part?.SetHealth(_fullHealth / _parts.Length);
         }
         Health = GetHealth();
     }
 
+    #endregion
     #region Save
     public string Save()
     {
         var save = new SaveEntityBody();
-        save.Mana = _mana;
+        save.Mana = _fullMana;
         save.Evasion = _evasionProbility;
         save.Parts = new SavePartBody[_parts.Length];
         for (int i = 0; i < _parts.Length; i++)
@@ -78,7 +93,7 @@ public class EntityBody : MonoBehaviour
         if (json != "")
         {
             var save = JsonUtility.FromJson<SaveEntityBody>(json);
-            _mana = save.Mana;
+            _fullMana = save.Mana;
             _evasionProbility = save.Evasion;
             for (int i = 0; i < save.Parts.Length; i++)
             {

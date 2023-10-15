@@ -30,13 +30,13 @@ public class SkillPanel : MonoBehaviour
     private void OnEnable()
     {
         LoadStats();
-        _entityStats.OnLoad += LoadStats;
+        _entityStats.OnStatUpdate += LoadStats;
         _entityStats.OnScoreUpdate += UpdateScore;
     }
 
     private void OnDisable()
     {
-        _entityStats.OnLoad -= LoadStats;
+        _entityStats.OnStatUpdate -= LoadStats;
         _entityStats.OnScoreUpdate -= UpdateScore;
     }
 
