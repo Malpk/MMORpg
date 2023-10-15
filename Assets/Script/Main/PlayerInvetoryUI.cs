@@ -63,7 +63,7 @@ public class PlayerInvetoryUI : Inventory
         if (_select)
             _select.Deselect();
         _select = panel as ContentPanel;
-        _body.SetArmor(_select.Content);
+        _body.SetBodyItem(_select.Content);
         _description.Show(_select.Content);
         _sellButton.interactable = _select;
     }
@@ -74,7 +74,7 @@ public class PlayerInvetoryUI : Inventory
         _select.Deselect();
         _description.Hide();
         _select = null;
-        _body.SetArmor(null);
+        _body.SetBodyItem(null);
         _sellButton.interactable = _select;
     }
 

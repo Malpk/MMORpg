@@ -63,7 +63,7 @@ public class Enemy : Entity, IPvp
         }
         else
         {
-            _player.TakeDamage(Attack);
+            Attack(_player);
             OnComplite?.Invoke();
             _steap = null;
         }

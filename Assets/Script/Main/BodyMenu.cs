@@ -7,20 +7,27 @@ public class BodyMenu : MonoBehaviour
     [SerializeField] private Button _useArmor;
     [SerializeField] private Button _unuseArmor;
 
-    private Armor _selectArmor;
+    private Item _select;
 
-    public void SetArmor(Item item)
+    public void SetBodyItem(Item item)
     {
         if (item is Armor armor)
         {
-            _selectArmor = armor;
+            _select = armor;
             var contain = _palyer.Body.CheakContaintArmor(armor.Part);
+            _useArmor.gameObject.SetActive(!contain);
+            _unuseArmor.gameObject.SetActive(contain);
+        }
+        else if(item is Weapon weapon)
+        {
+            _select = weapon;
+            var contain = _palyer.Hands.Weapon == weapon;
             _useArmor.gameObject.SetActive(!contain);
             _unuseArmor.gameObject.SetActive(contain);
         }
         else
         {
-            _selectArmor = null;
+            _select = null;
             _useArmor.gameObject.SetActive(false);
             _unuseArmor.gameObject.SetActive(false);
         }
@@ -34,19 +41,18 @@ public class BodyMenu : MonoBehaviour
         }
     }
 
-    public void AddArmor()
+    public void AddItem()
     {
         _useArmor.gameObject.SetActive(false);
         _unuseArmor.gameObject.SetActive(true);
-        _palyer.Body.AddArmor(_selectArmor);
+        _select.Use(_palyer);
     }
 
-    public void AddRemove()
+    public void RemoveItem()
     {
         _useArmor.gameObject.SetActive(true);
         _unuseArmor.gameObject.SetActive(false);
-        _palyer.Body.RemoveArmor(_selectArmor.Part);
+        _select.Drop();
     }
-
 
 }

@@ -4,7 +4,7 @@ public enum ItemType
     Paper,
     Armor,
     Shield,
-    Sword,
+    Weapon,
     Jewelry,
     None
 }

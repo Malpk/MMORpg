@@ -14,8 +14,9 @@ public abstract class Item : MonoBehaviour
 
     public abstract void Pick();
 
-    public abstract void Use(Player player);
-
+    public abstract void Use(Entity player);
+    public abstract void Drop();
+    
     #region Bind
 
     public virtual void BindPanel(ContentPanel panel)

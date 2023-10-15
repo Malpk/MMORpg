@@ -7,9 +7,13 @@ public class Potion : SkillItem
         gameObject.SetActive(false);
     }
 
-    public override void Use(Player player)
+    public override void Use(Entity player)
     {
-        Debug.Log("Use");
+        Debug.Log("use");
+    }
+    public override void Drop()
+    {
+        Debug.Log("drop");
     }
 
     public void BindDescription(PotionDescription panel)

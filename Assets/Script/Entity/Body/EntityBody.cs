@@ -20,6 +20,7 @@ public class EntityBody : MonoBehaviour
     public event System.Action OnDead;
     public event System.Action<float> OnChangeHealth;
 
+    public int Attack => _stats.Stats.Strenght;
     public int Health
     {
         get
@@ -134,16 +135,6 @@ public class EntityBody : MonoBehaviour
         var part = GetPart(type);
         return part.Armor;
     }
-
-    private int GetAmountArmor()
-    {
-        var amount = 0;
-        foreach (var part in _parts)
-        {
-            amount += part.Protect;
-        }
-        return amount;
-    }
     #endregion
     #region PartBody
 
@@ -245,6 +236,7 @@ public class EntityBody : MonoBehaviour
     }
 
     #endregion
+
 
     private int GetHealth()
     {

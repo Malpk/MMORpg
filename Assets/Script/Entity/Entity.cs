@@ -6,8 +6,9 @@ public abstract class Entity : MonoBehaviour, IPvp
     [SerializeField] private EntityData _data;
     [Header("Reference")]
     [SerializeField] protected GlorySet glorySet;
-    [SerializeField] protected LevelSet level;
+    [SerializeField] private LevelSet level;
     [SerializeField] protected EntityBody body;
+    [SerializeField] protected HandHolder hands;
     [SerializeField] protected EntityStats entityStats;
 
     public event System.Action OnLoad;
@@ -16,13 +17,38 @@ public abstract class Entity : MonoBehaviour, IPvp
     public abstract event System.Action OnComplite;
 
     public int Level => level.Level;
-    public int Attack => entityStats.Stats.Strenght;
     public EntityRang Rang => _rang;
     public EntityData Data => _data;
+    public Vector2Int RangeAttack => hands.Attack + Vector2Int.one * body.Attack;
     public EntityBody Body => body;
-    public LevelSet EntityLevel => level;
+    public HandHolder Hands => hands;
     public GlorySet Glory => glorySet;
 
+    #region Save / Load
+    public SaveEntity Save()
+    {
+        var save = new SaveEntity();
+        save.Glory = glorySet.Glory;
+        save.Hands = hands.Save();
+        save.Data = Data;
+        save.Body = body?.Save();
+        save.Stats = entityStats.Save();
+        save.Level = level.Save();
+        return save;
+    }
+
+    public void Load(SaveEntity save)
+    {
+        SetData(save.Data);
+        glorySet.SetGlroy(save.Glory);
+        level.Load(save.Level);
+        body?.Load(save.Body);
+        entityStats.Load(save.Stats);
+        hands.Load(save.Hands);
+        OnLoad?.Invoke();
+    }
+
+    #endregion
 
     public abstract void Play();
 
@@ -39,26 +65,24 @@ public abstract class Entity : MonoBehaviour, IPvp
         entityStats.SetStats(stats);
     }
 
-    public SaveEntity Save()
+    #region Attack
+    public AttackType Attack(Entity target, PartType part = PartType.None)
     {
-        var save = new SaveEntity();
-        save.Glory = glorySet.Glory;
-        save.Data = Data;
-        save.Body = body?.Save();
-        save.Stats = entityStats.Save();
-        save.Level = level.Save();
-        return save;
+        var attack = body.Attack + hands.Weapon.GetAttack();
+        var result = SetAttack(target, part, attack);
+        if (result == AttackType.Full || result == AttackType.Part)
+            hands.Weapon.AddScore(attack);
+        level.AddScore(attack);
+        return result;
     }
 
-    public void Load(SaveEntity save)
+    public AttackType SetAttack(Entity target, PartType part, int attack)
     {
-        SetData(save.Data);
-        glorySet.SetGlroy(save.Glory);
-        level.Load(save.Level);
-        body?.Load(save.Body);
-        entityStats.Load(save.Stats);
-        OnLoad?.Invoke();
+        if (part != PartType.None)
+            return target.Body.TakeDamage(attack);
+        else
+            return target.body.TakeDamage(attack, part);
     }
-
+    #endregion
 
 }

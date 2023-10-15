@@ -13,9 +13,13 @@ public class Paper : SkillItem
         gameObject.SetActive(false);
     }
 
-    public override void Use(Player player)
+    public override void Use(Entity player)
     {
         Debug.Log("use");
+    }
+    public override void Drop()
+    {
+        Debug.Log("drop");
     }
 
     public override void BindPanel(ItemPanel panel)
@@ -34,4 +38,6 @@ public class Paper : SkillItem
         panel.SetData(data.Name, data.Icon, data.Cost);
         panel.SetAddition(_mana);
     }
+
+
 }

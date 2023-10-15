@@ -9,6 +9,7 @@ public class InvetorySet : MonoBehaviour
 
     private void Awake()
     {
+        _contents.Clear();
         foreach (var item in _contents)
         {
             AddItem(item);

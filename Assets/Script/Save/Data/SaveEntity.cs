@@ -6,4 +6,5 @@ public class SaveEntity
     public string Stats = "";
     public EntityData Data = default;
     public SaveLevel Level;
+    public SaveHandHolder Hands;
 }

@@ -50,12 +50,11 @@ public class AttackSet : MonoBehaviour
     {
         foreach (var part in parts)
         {
-            var result = _enemy.Body.TakeDamage(_player.Attack, part);
+            var result = _player.Attack(_enemy, part);
             switch (result)
             {
                 case AttackType.Full:
                     _skills.AddScore(PvpScoreType.Attack);
-                    _player.EntityLevel.AddScore(_player.Attack);
                     break;
             }
         }

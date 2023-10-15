@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4723989696510335757}
   - component: {fileID: 4723989696510335756}
+  - component: {fileID: 7413212787444246303}
   m_Layer: 0
   m_Name: Entity
   m_TagString: Untagged
@@ -51,12 +52,29 @@ MonoBehaviour:
   _manaUnit: 5
   _healthUnit: 4
   _evasionProbility: 0.126
+  _hands: {fileID: 7413212787444246303}
   _stats: {fileID: 0}
   _parts:
   - {fileID: 2130463523560198211}
   - {fileID: 5811257666782508104}
   - {fileID: 5811257665511507894}
   - {fileID: 5811257664843986030}
+--- !u!114 &7413212787444246303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4723989696510335759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 853d224e357d36545a152e5ee7b169d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defoutSkill: 0.05
+  _shield: {fileID: 0}
+  _weapon: {fileID: 0}
+  _skills: []
 --- !u!1001 &917514820037947336
 PrefabInstance:
   m_ObjectHideFlags: 0
