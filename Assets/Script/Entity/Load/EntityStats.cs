@@ -7,7 +7,7 @@ public class EntityStats : MonoBehaviour
     [SerializeField] private int _skillScore = 3;
     [SerializeField] private Stats _stats;
     [Header("Reference")]
-    [SerializeField] private EntityLevelSet _level;
+    [SerializeField] private LevelSet _level;
 
     public event System.Action OnLoad;
     public event System.Action OnScoreUpdate;

@@ -3,7 +3,11 @@ using System.Collections.Generic;
 
 public class GameSwitcher : MonoBehaviour
 {
-    [SerializeField] private Vector2Int _reward;
+    [Min(0)]
+    [SerializeField] private int _gloryWin;
+    [Min(0)]
+    [SerializeField] private int _gloryLose;
+    [SerializeField] private Vector2Int _rewardRange;
     [Header("Reference")]
     [SerializeField] private List<Enemy> _enemys;
     [SerializeField] private Player _player;
@@ -18,7 +22,7 @@ public class GameSwitcher : MonoBehaviour
         {
             enemy.Body.OnDead += DeadEnemy;
         }
-        _player.Body.OnDead += () => CompliteGame();
+        _player.Body.OnDead += DeadPlayer;
     }
 
     private void OnDisable()
@@ -27,7 +31,7 @@ public class GameSwitcher : MonoBehaviour
         {
             enemy.Body.OnDead -= DeadEnemy;
         }
-        _player.Body.OnDead -= () => CompliteGame();
+        _player.Body.OnDead -= DeadPlayer;
     }
 
     public void AddEnemy(Enemy enemy)
@@ -40,11 +44,11 @@ public class GameSwitcher : MonoBehaviour
         }
     }
 
-    private void CompliteGame(int reward = 0)
+
+    private void DeadPlayer()
     {
-        _controller.enabled = false;
-        _endMenu.ShowMenu(reward);
-        _saver.Save();
+        _player.Glory.RemoveGlory(_gloryLose);
+        CompliteGame(-_gloryLose);
     }
 
     private void DeadEnemy()
@@ -55,11 +59,18 @@ public class GameSwitcher : MonoBehaviour
             foreach (var enemy in _enemys)
             {
                 _lootSpawner.AddLoot(enemy.Loot);
-                reward += enemy.Level * Random.Range(_reward.x, _reward.y);
+                reward += enemy.Level * Random.Range(_rewardRange.x, _rewardRange.y);
             }
+            _player.Glory.AddGlory(_gloryWin);
             _player.Wallet.TakeMoney(reward);
-            CompliteGame(reward);
+            CompliteGame(_gloryWin, reward);
         }
+    }
+    private void CompliteGame(int glory, int reward = 0)
+    {
+        _controller.enabled = false;
+        _endMenu.ShowMenu(glory, reward);
+        _saver.Save();
     }
 
     private Enemy GetActiveEnemy()

@@ -22,7 +22,10 @@ public class Player : Entity
         if(_movement)
             _movement.OnCompliteMove -= Complite;
     }
-
+    private void Start()
+    {
+        Body.Dead();
+    }
     public override void Play()
     {
         foreach (var part in body.Parts)

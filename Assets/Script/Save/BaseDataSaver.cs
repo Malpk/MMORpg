@@ -2,11 +2,18 @@ using UnityEngine;
 
 public class BaseDataSaver : MonoBehaviour
 {
+    [SerializeField] private bool _deleteMode;
     [SerializeField] private string _key = "key";
     [Header("Reference")]
     [SerializeField] private Entity _player;
     [SerializeField] private WalletSet _wallet;
     [SerializeField] private InvetorySet _invetory;
+
+    private void Awake()
+    {
+        if(_deleteMode)
+            PlayerPrefs.DeleteKey(_key);
+    }
 
     private void Start()
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EntityLevelSet : MonoBehaviour
+public class LevelSet : MonoBehaviour
 {
     [Min(1)]
     [SerializeField] private int _level = 1;

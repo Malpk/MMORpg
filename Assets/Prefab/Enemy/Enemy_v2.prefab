@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 3676944431507444635}
   - component: {fileID: 5769530822529160698}
   - component: {fileID: 519520933712824719}
+  - component: {fileID: 4961201900673453594}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Enemy_v2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,15 +53,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rang: 0
   _data:
-    Name: "\u042F\u0449\u0435\u0440"
-    Icon: {fileID: 21300000, guid: ffd10401c40143847a4ada4f3a163d88, type: 3}
+    Name: "\u0412\u043E\u0440\u043E\u043D"
+    Icon: {fileID: 21300000, guid: 296fb922ee2538e4c81173d2b6a07cd5, type: 3}
     Race: 0
     Class: 0
     Gender: 1
+  glorySet: {fileID: 4961201900673453594}
+  level: {fileID: 5769530822529160698}
   body: {fileID: 8253368461901001514}
   entityStats: {fileID: 4391776297331508444}
-  level: {fileID: 5769530822529160698}
-  _id: 0
+  _id: 2
   _attackDistance: 1
   _delay: 1
   _player: {fileID: 0}
@@ -155,8 +157,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _body: {fileID: 8253368461901001514}
   _loot:
-  - {fileID: 8558397049815668971, guid: caec51d9a3b47b2458e48a90cca5b42c, type: 3}
+  - {fileID: 9149310250359012406, guid: 639cc2fcb1ff8394ca5fccfa583e5941, type: 3}
   - {fileID: 6557031246817909295, guid: ea4747e004828c845a620ee59de18f69, type: 3}
+  - {fileID: 9020524289899669373, guid: 36a1ac6732b8b904ea74fb173f4e3087, type: 3}
+  - {fileID: 8558397049815668971, guid: caec51d9a3b47b2458e48a90cca5b42c, type: 3}
+--- !u!114 &4961201900673453594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3676944431507444639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 107acc14d1d23774d9e1cf0a4b359a50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _glory: 0
+  _text: []
 --- !u!1 &3676944432341687698
 GameObject:
   m_ObjectHideFlags: 0

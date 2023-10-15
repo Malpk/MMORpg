@@ -5,7 +5,7 @@ public class LootHolder : MonoBehaviour
 {
     [SerializeField] private Vector2 _probilityRange;
     [Header("Reference")]
-    [SerializeField] private InvetorySet _set;
+    [SerializeField] private InvetorySet _playerInvetory;
 
     public void AddLoot(LootSet loot)
     {
@@ -13,7 +13,7 @@ public class LootHolder : MonoBehaviour
         list.AddRange(GetItem(loot.Items));
         foreach (var item in list)
         {
-            _set.AddItem(item);
+            _playerInvetory.AddItem(item);
         }
     }
 

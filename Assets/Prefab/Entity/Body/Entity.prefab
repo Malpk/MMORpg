@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4723989696510335757}
-  - component: {fileID: 2993350911332001951}
   - component: {fileID: 4723989696510335756}
   m_Layer: 0
   m_Name: Entity
@@ -37,29 +36,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2993350911332001951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4723989696510335759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f872122727656be4681091d3ae74ed5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveDistance: 0
-  attackDistance: 0
-  _level: 1
-  _stats:
-    Strenght: 10
-    Dexterity: 0
-    Luck: 0
-    Intelligence: 0
-    Survival: 0
-    Body: 0
-  _body: {fileID: 4723989696510335756}
 --- !u!114 &4723989696510335756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,8 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88f3ff9ad2cbd9c458a8ce97b6690033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mana: 0
   _health: 100
-  _field: {fileID: 0}
+  _evasionProbility: 0
   _parts:
   - {fileID: 2130463523560198211}
   - {fileID: 5811257666782508104}
