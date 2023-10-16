@@ -58,8 +58,9 @@ MonoBehaviour:
     Race: 0
     Class: 0
     Gender: 1
-  glorySet: {fileID: 6840900986882218721}
+  _conterAttackProbility: 0.5
   level: {fileID: 5769530822529160698}
+  glorySet: {fileID: 6840900986882218721}
   body: {fileID: 8253368461901001514}
   hands: {fileID: 6189675120171192121}
   entityStats: {fileID: 4391776297331508444}
@@ -321,7 +322,7 @@ PrefabInstance:
     - target: {fileID: 2130463523560198211, guid: bb67ec3348551544abc067aa4965505c, type: 3}
       propertyPath: _armor
       value: 
-      objectReference: {fileID: 7742280525022290017, guid: d9b120e32b966b94688be63c9e0eb0b7, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 2130463523560198211, guid: bb67ec3348551544abc067aa4965505c, type: 3}
       propertyPath: _health
       value: 3

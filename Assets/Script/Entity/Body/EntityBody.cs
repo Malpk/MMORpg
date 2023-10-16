@@ -246,7 +246,7 @@ public class EntityBody : MonoBehaviour
     private bool TryEvasion(Attack attack)
     {
         var probility = Random.Range(0, 1f);
-        var evasion = _evasionProbility * (_stats.Stats.Dexterity / attack.Dexterity) / 10f;
+        var evasion = _evasionProbility * (_stats.Stats.Dexterity / attack.Power) / 10f;
         return probility <= evasion;
     }
     #endregion

@@ -145,8 +145,9 @@ MonoBehaviour:
     Race: 0
     Class: 0
     Gender: 0
-  glorySet: {fileID: 7969511640398440661}
+  _conterAttackProbility: 0.5
   level: {fileID: 3051281248759610609}
+  glorySet: {fileID: 7969511640398440661}
   body: {fileID: 7770591414660207390}
   hands: {fileID: 5528540047963352845}
   entityStats: {fileID: 3051281248896620812}
