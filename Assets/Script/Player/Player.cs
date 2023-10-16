@@ -24,6 +24,7 @@ public class Player : Entity
     }
     public override void Play()
     {
+        base.Play();
         foreach (var part in body.Parts)
         {
             part.SetProtect(false);
@@ -33,6 +34,7 @@ public class Player : Entity
 
     public override void Stop()
     {
+        base.Stop();
         _movement.enabled = false;
         Complite();
     }

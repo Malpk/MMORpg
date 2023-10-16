@@ -29,13 +29,10 @@ public class Enemy : Entity, IPvp
         _movement.OnCompliteMove -= Complite;
     }
 
-    //private void Start()
-    //{
-    //    Body.Dead();
-    //}
 
     public override void Play()
     {
+        base.Play();
         if (_steap == null)
         {
             enabled = true;
@@ -45,6 +42,8 @@ public class Enemy : Entity, IPvp
 
     public override void Stop()
     {
+        base.Stop();
+        enabled = false;
         Complite();
     }
 
@@ -75,6 +74,5 @@ public class Enemy : Entity, IPvp
         if (_steap != null)
             StopCoroutine(_steap);
         _steap = null;
-        enabled = false;
     }
 }

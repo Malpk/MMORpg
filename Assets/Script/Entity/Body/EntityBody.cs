@@ -19,6 +19,7 @@ public class EntityBody : MonoBehaviour
 
     public event System.Action OnDead;
     public event System.Action OnArmorUpdate;
+    public event System.Action<AttackResult> OnTakeDamage;
     public event System.Action<float> OnChangeHealth;
 
     public int Attack => _stats.Stats.Strenght;
@@ -197,7 +198,8 @@ public class EntityBody : MonoBehaviour
         var part = GetPart(target);
         if (part)
         {
-            var result = SetDamage(part, attack.Damage);
+            var result = SetDamage(part, attack);
+            OnTakeDamage?.Invoke(result);
             return result;
         }
         return new AttackResult();
@@ -209,7 +211,8 @@ public class EntityBody : MonoBehaviour
         if (parts.Count > 0)
         {
             var part = parts[Random.Range(0, parts.Count)];
-            var result = SetDamage(part, attack.Damage);
+            var result = SetDamage(part, attack);
+            OnTakeDamage?.Invoke(result);
             return result;
         }
         return new AttackResult();
@@ -221,24 +224,30 @@ public class EntityBody : MonoBehaviour
         OnDead?.Invoke();
     }
 
-    private AttackResult SetDamage(PartBody part, int damage)
+    private AttackResult SetDamage(PartBody part, Attack attack)
     {
-        var evasion = Random.Range(0, 1f);
-        if (evasion > _evasionProbility * _stats.Stats.Luck / 10f)
+        if (!TryEvasion(attack))
         {
-            if (part.TakeDamage(damage))
+            if (part.TakeDamage(attack.Damage))
             {
                 Health = GetHealth();
-                if (GetActivePart().Count == 0)
+                if (Health == 0)
                     Dead();
-                return new AttackResult(AttackType.Full, damage);
+                return new AttackResult(attack.Attaker, AttackType.Full, attack.Damage);
             }
             else
             {
-                return new AttackResult(AttackType.Protect);
+                return new AttackResult(attack.Attaker, AttackType.Protect);
             }
         }
-        return new AttackResult(AttackType.Evasul);
+        return new AttackResult(attack.Attaker, AttackType.Evasul);
+    }
+
+    private bool TryEvasion(Attack attack)
+    {
+        var probility = Random.Range(0, 1f);
+        var evasion = _evasionProbility * (_stats.Stats.Dexterity / attack.Dexterity) / 10f;
+        return probility <= evasion;
     }
     #endregion
 
