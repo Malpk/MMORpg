@@ -39,7 +39,6 @@ public class Weapon : Item
 
     public void AddScore(int score)
     {
-        Debug.Log(score);
         if (_levelSkill < _maxLevelSkill)
         {
             _curretScore += score;

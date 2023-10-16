@@ -50,6 +50,21 @@ public class EntityBody : MonoBehaviour
     {
         UpdateStats();
     }
+    public void ReloadPart()
+    {
+        foreach (var part in _parts)
+        {
+            part.SetProtect(false);
+        }
+    }
+
+    public void SetProtect(PartType target, bool protect)
+    {
+        var part = GetPart(target);
+        if (part)
+            part.SetProtect(protect);
+
+    }
 
     #region Events
     private void OnEnable()
@@ -140,35 +155,20 @@ public class EntityBody : MonoBehaviour
         return part.Armor;
     }
     #endregion
-    #region PartBody
+    #region Health
+  
 
-    public void ReloadPart()
+    public void TekeHeal(int heal = 4)
     {
+        if (heal < _parts.Length)
+            heal = _parts.Length;
         foreach (var part in _parts)
         {
-            part.SetProtect(false);
+            part.TakeHeal(heal / _parts.Length);
         }
+        Health = GetHealth();
     }
 
-    public void SetProtect(PartType target, bool protect)
-    {
-        var part = GetPart(target);
-        if (part)
-            part.SetProtect(protect);
-
-    }
-    public AttackType TakeDamage(int damage, PartType target)
-    {
-        var part = GetPart(target);
-        if (part)
-        {
-            var result = SetDamage(part, damage);
-            if (GetActivePart().Count == 0)
-                Dead();
-            return result;
-        }
-        return AttackType.None;
-    }
     public bool TekeHeal(int heal, PartType target)
     {
         var part = GetPart(target);
@@ -179,6 +179,78 @@ public class EntityBody : MonoBehaviour
             return true;
         }
         return false;
+    }
+    private int GetHealth()
+    {
+        var health = 0;
+        foreach (var part in _parts)
+        {
+            health += part.Health;
+        }
+        return health;
+    }
+
+    #endregion
+    #region Damage
+    public AttackResult TakeDamage(Attack attack, PartType target)
+    {
+        var part = GetPart(target);
+        if (part)
+        {
+            var result = SetDamage(part, attack.Damage);
+            return result;
+        }
+        return new AttackResult();
+    }
+
+    public AttackResult TakeDamage(Attack attack)
+    {
+        var parts = GetActivePart();
+        if (parts.Count > 0)
+        {
+            var part = parts[Random.Range(0, parts.Count)];
+            var result = SetDamage(part, attack.Damage);
+            return result;
+        }
+        return new AttackResult();
+    }
+
+    public void Dead()
+    {
+        IsDead = true;
+        OnDead?.Invoke();
+    }
+
+    private AttackResult SetDamage(PartBody part, int damage)
+    {
+        var evasion = Random.Range(0, 1f);
+        if (evasion > _evasionProbility * _stats.Stats.Luck / 10f)
+        {
+            if (part.TakeDamage(damage))
+            {
+                Health = GetHealth();
+                if (GetActivePart().Count == 0)
+                    Dead();
+                return new AttackResult(AttackType.Full, damage);
+            }
+            else
+            {
+                return new AttackResult(AttackType.Protect);
+            }
+        }
+        return new AttackResult(AttackType.Evasul);
+    }
+    #endregion
+
+    private List<PartBody> GetActivePart()
+    {
+        var list = new List<PartBody>();
+        foreach (var part in _parts)
+        {
+            if (part.Health > 0)
+                list.Add(part);
+        }
+        return list;
     }
 
     private PartBody GetPart(PartType target, bool isActive = false)
@@ -194,80 +266,5 @@ public class EntityBody : MonoBehaviour
             }
         }
         return null;
-    }
-    #endregion
-    #region Body
-    public AttackType TakeDamage(int damage)
-    {
-        var parts = GetActivePart();
-        if (parts.Count > 0)
-        {
-            var part = parts[Random.Range(0, parts.Count)];
-            var result = SetDamage(part, damage);
-            if (GetActivePart().Count == 0)
-                Dead();
-            return result;
-        }
-        return AttackType.None;
-    }
-
-    public void Dead()
-    {
-        IsDead = true;
-        OnDead?.Invoke();
-    }
-
-    public void TekeHeal(int heal = 4)
-    {
-        if (heal < _parts.Length)
-            heal = _parts.Length;
-        foreach (var part in _parts)
-        {
-            part.TakeHeal(heal / _parts.Length);
-        }
-        Health = GetHealth();
-    }
-
-    private List<PartBody> GetActivePart()
-    {
-        var list = new List<PartBody>();
-        foreach (var part in _parts)
-        {
-            if (part.Health > 0)
-                list.Add(part);
-        }
-        return list;
-    }
-
-    #endregion
-
-
-    private int GetHealth()
-    {
-        var health = 0;
-        foreach (var part in _parts)
-        {
-            health += part.Health;
-        }
-        return health;
-    }
-
-    private AttackType SetDamage(PartBody part, int damage)
-    {
-        var evasion = Random.Range(0, 1f);
-
-        if (evasion > _evasionProbility)
-        {
-            if (part.TakeDamage(damage))
-            {
-                Health = GetHealth();
-                return AttackType.Full;
-            }
-            else
-            {
-                return AttackType.Protect;
-            }
-        }
-        return AttackType.Evasul;
     }
 }

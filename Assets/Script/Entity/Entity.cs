@@ -74,23 +74,28 @@ public abstract class Entity : MonoBehaviour, IPvp
     }
 
     #region Attack
-    public AttackType Attack(Entity target, PartType part = PartType.None)
+    public AttackResult Attack(Entity target, PartType part = PartType.None)
     {
-        var attack = body.Attack + hands.Attack;
-        var result = SetAttack(target, part, attack);
-        Debug.Log(result);
-        if (result == AttackType.Full || result == AttackType.Part)
-            hands.Weapon.AddScore(attack);
-        level.AddScore(attack);
+        var result = SetAttack(target, part);
+        if (result.Result == AttackType.Full || result.Result == AttackType.Part)
+            hands.AddScore(result.Damage);
+        level.AddScore(result.Damage);
         return result;
     }
 
-    public AttackType SetAttack(Entity target, PartType part, int attack)
+    public AttackResult SetAttack(Entity target, PartType part)
     {
+        var attack = GetAttack();
         if (part != PartType.None)
-            return target.Body.TakeDamage(attack);
-        else
             return target.body.TakeDamage(attack, part);
+        else
+            return target.Body.TakeDamage(attack);
+
+    }
+
+    private Attack GetAttack()
+    {
+       return new Attack(this, body.Attack + hands.Attack);
     }
     #endregion
 

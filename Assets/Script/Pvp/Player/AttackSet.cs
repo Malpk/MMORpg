@@ -51,7 +51,7 @@ public class AttackSet : MonoBehaviour
         foreach (var part in parts)
         {
             var result = _player.Attack(_enemy, part);
-            switch (result)
+            switch (result.Result)
             {
                 case AttackType.Full:
                     _skills.AddScore(PvpScoreType.Attack);

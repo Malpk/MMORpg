@@ -50,6 +50,11 @@ public class HandHolder : MonoBehaviour
     }
     #endregion
 
+    public void AddScore(int score)
+    {
+        _weapon?.AddScore(score);
+    }
+
     #region WeaponSetup
     public void TakeWeapon(Weapon weapon)
     {
@@ -92,6 +97,8 @@ public class HandHolder : MonoBehaviour
         }
     }
     #endregion
+
+
 
     private SaveWeaponSkill GetSkill(int id)
     {

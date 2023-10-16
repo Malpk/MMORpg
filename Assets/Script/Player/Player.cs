@@ -22,10 +22,6 @@ public class Player : Entity
         if(_movement)
             _movement.OnCompliteMove -= Complite;
     }
-    //private void Start()
-    //{
-    //    Body.Dead();
-    //}
     public override void Play()
     {
         foreach (var part in body.Parts)
@@ -41,10 +37,10 @@ public class Player : Entity
         Complite();
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(Attack damage)
     {
         var attack = body.TakeDamage(damage);
-        switch (attack)
+        switch (attack.Result)
         {
             case AttackType.Evasul:
                 _skills.AddScore(PvpScoreType.Evasion);
