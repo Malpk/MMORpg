@@ -4,5 +4,6 @@ public enum PartType
     Body,
     Leg,
     Hands,
-    None
+    None,
+    Any
 }

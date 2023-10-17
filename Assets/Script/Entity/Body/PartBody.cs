@@ -14,7 +14,7 @@ public class PartBody : MonoBehaviour
     private int _curretHealth;
 
     public event System.Action OnLoad;
-    public event System.Action<int, BodyPartState> OnUpdateHealth;
+    public event System.Action<int> OnUpdateHealth;
     public event System.Action<Armor> OnSetArmor;
 
     public int Health
@@ -26,7 +26,7 @@ public class PartBody : MonoBehaviour
         private set
         {
             _curretHealth = value;
-            OnUpdateHealth?.Invoke(_curretHealth, _partState.Data);
+            OnUpdateHealth?.Invoke(_curretHealth);
         }
     }
 
@@ -106,7 +106,6 @@ public class PartBody : MonoBehaviour
         save.FullHealth = _health;
         save.Health = Health;
         save.Part = _type;
-        save.State = _partState.Data.State;
         save.ArmorId = _armor ? _armor.ID : -1;
         return save;
     }
@@ -119,7 +118,6 @@ public class PartBody : MonoBehaviour
         var armor = ItemHub.GetItem<Armor>(save.ArmorId);
         if (armor)
             SetArmor(armor);
-        _partState.SetState(save.State);
         OnLoad?.Invoke();
     }
     #endregion

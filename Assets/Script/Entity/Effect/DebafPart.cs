@@ -3,33 +3,18 @@ using UnityEngine;
 public abstract class DebafPart : MonoBehaviour
 {
     [SerializeField] private DebafDataHolder _debafHolder;
-    [SerializeField] private BodyPartState[] _states;
-
+    
+    private string _stateName;
     private DebafPartData _debafActive;
-    private BodyPartState _curretState;
+
+    public event System.Action<int> OnSetState;
 
     public abstract PartType Part { get; }
 
-    public BodyPartState Data => _curretState;
-
-    private void Awake()
-    {
-        SetState(PartState.Idle);
-    }
+    public string StateName => _stateName;
 
     protected abstract Stats AddDebaf(Stats stats, DebafPartData data);
 
-    public void SetState(PartState target)
-    {
-        foreach (var data in _states)
-        {
-            if (data.State == target)
-            {
-                _curretState = data;
-                return;
-            }
-        }
-    }
     public Stats AddDebaf(Stats stats, Attack attack)
     {
         var debaf = _debafHolder.GetDebaf();
@@ -43,20 +28,8 @@ public abstract class DebafPart : MonoBehaviour
         if (debaf.Level > debafLevel)
         {
             _debafActive = debaf;
-            SetStates(debaf.Level, attacl.DamageType);
+            var state = _debafHolder.GetState(_debafActive.Level, Part);
+            _stateName = state.GetName(attacl.DamageType);
         }
-    }
-
-    private bool SetStates(int level, DamageType damage)
-    {
-        foreach (var data in _states)
-        {
-            if(data.Level == level && data.Damage == damage)
-            {
-                _curretState = data;
-                return true;
-            }
-        }
-        return false;
     }
 }

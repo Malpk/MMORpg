@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26ea13ad1d5abea44b8d0b1cfda18767, type: 3}
-  m_Name: IdleState
+  m_Script: {fileID: 11500000, guid: fb677ce8e6fb6c54091d474f534057cc, type: 3}
+  m_Name: low_debaf
   m_EditorClassIdentifier: 
-  _name: 
-  _seriousness: 0
-  _state: 0
+  _level: 1
+  _debafRange: {x: 0.05, y: 0.2}

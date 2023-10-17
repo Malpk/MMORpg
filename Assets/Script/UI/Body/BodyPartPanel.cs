@@ -15,15 +15,15 @@ public class BodyPartPanel : MonoBehaviour
     {
         if (_bind)
         {
-            SetHealth(_bind.Health, _bind.State.Data);
+            SetHealth(_bind.Health);
             SetArmor(_bind.Armor);
             _bind.OnSetArmor += SetArmor;
             _bind.OnUpdateHealth += SetHealth;
-            _bind.OnLoad += () => SetHealth(_bind.Health, _bind.State.Data);
+            _bind.OnLoad += () => SetHealth(_bind.Health);
         }
         else
         {
-            SetHealth(0, null);
+            SetHealth(0);
             SetArmor(null);
         }
     }
@@ -34,7 +34,7 @@ public class BodyPartPanel : MonoBehaviour
         {
             _bind.OnSetArmor -= SetArmor;
             _bind.OnUpdateHealth -= SetHealth;
-            _bind.OnLoad -= () => SetHealth(_bind.Health, _bind.State.Data);
+            _bind.OnLoad -= () => SetHealth(_bind.Health);
         }
     }
 
@@ -46,7 +46,7 @@ public class BodyPartPanel : MonoBehaviour
         if (_bind)
         {
             SetArmor(_bind.Armor);
-            SetHealth(_bind.Health, _bind.State.Data);
+            SetHealth(_bind.Health);
         }
         else
         {
@@ -66,10 +66,9 @@ public class BodyPartPanel : MonoBehaviour
         _armor.SetArmor(armor);
     }
 
-    public void SetHealth(int health, BodyPartState state = null)
+    public void SetHealth(int health)
     {
         _health.SetText(health.ToString());
-        _animator.SetState(state);
     }
 
     private void SwitchPart(PartBody part)

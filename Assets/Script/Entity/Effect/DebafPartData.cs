@@ -4,12 +4,9 @@ using UnityEngine;
 public class DebafPartData : ScriptableObject
 {
     [SerializeField] private int _level;
-    [SerializeField] private string _name;
     [SerializeField] private Vector2 _debafRange;
-    [SerializeField] private DamageType _damage;
 
     public int Level => _level;
-    public string Name => _name;
 
     private void OnValidate()
     {
