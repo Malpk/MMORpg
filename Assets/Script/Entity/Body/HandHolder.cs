@@ -13,6 +13,7 @@ public class HandHolder : MonoBehaviour
 
     public int Protect => _shield ? _shield.Protect : 0;
     public int Attack => _weapon ? _weapon.GetAttack() : 0;
+    public DamageType DamageType => _weapon ? _weapon.DamageType : DamageType.None; 
     public Vector2Int AttackRange => _weapon ? _weapon.Attack : Vector2Int.zero;
 
     public Weapon Weapon => _weapon;

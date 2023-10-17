@@ -17,6 +17,7 @@ public class Weapon : Item
     private int _levelSkill = 1;
     private int _curretScore = 0;
 
+    public DamageType DamageType => _damageType;
     public Vector2Int Attack => _attackRamge;
 
     public void SetSkill(WeaponSkill skill)

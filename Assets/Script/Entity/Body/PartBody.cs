@@ -6,14 +6,12 @@ public class PartBody : MonoBehaviour
     [SerializeField] private int _health;
     [SerializeField] private bool _isProtect;
     [SerializeField] private PartType _type;
-    [SerializeField] private BodyPartState _idleState;
-    [SerializeField] private BodyPartState[] _states;
     [Header("Reference")]
     [SerializeField] private Armor _armor;
+    [SerializeField] private DebafPart _partState;
     [SerializeField] private UnityEvent<Item> _onSetArmor;
 
     private int _curretHealth;
-    private BodyPartState _curretState;
 
     public event System.Action OnLoad;
     public event System.Action<int, BodyPartState> OnUpdateHealth;
@@ -28,7 +26,7 @@ public class PartBody : MonoBehaviour
         private set
         {
             _curretHealth = value;
-            OnUpdateHealth?.Invoke(_curretHealth, _curretState);
+            OnUpdateHealth?.Invoke(_curretHealth, _partState.Data);
         }
     }
 
@@ -36,8 +34,8 @@ public class PartBody : MonoBehaviour
     public PartType Part => _type;
 
     public Armor Armor => _armor;
-    public BodyPartState State => _curretState;
 
+    public DebafPart State => _partState;
 
     private void OnValidate()
     {
@@ -46,7 +44,6 @@ public class PartBody : MonoBehaviour
             if (_armor.Part != Part)
                 _armor = null;
         }
-        _curretState = _idleState;
     }
 
     private void Awake()
@@ -56,7 +53,6 @@ public class PartBody : MonoBehaviour
             if (_armor.Part != Part)
                 _armor = null;
         }
-        _curretState = _idleState;
     }
 
     private void Start()
@@ -83,21 +79,12 @@ public class PartBody : MonoBehaviour
         {
             if (_armor)
                 damage = Mathf.Clamp(damage - _armor.Protect, 0, damage);
-            var stateData = _states[Random.Range(0, _states.Length)];
-            if (_curretState == null)
-            {
-                _curretState = stateData;
-            }
-            else if (stateData.Seriousness > _curretState.Seriousness)
-            {
-                _curretState = stateData;
-            }
             Health = Health - damage > 0 ? Health - damage : 0;
-
             return true;
         }
         return false;
     }
+
 
     public void TakeHeal(int heal)
     {
@@ -105,6 +92,12 @@ public class PartBody : MonoBehaviour
         Health = health > _health ? _health :health;
     }
     #endregion
+    public void SetArmor(Armor armor)
+    {
+        _armor = armor;
+        OnSetArmor?.Invoke(armor);
+        _onSetArmor.Invoke(armor);
+    }
 
     #region Save
     public SavePartBody Save()
@@ -113,7 +106,7 @@ public class PartBody : MonoBehaviour
         save.FullHealth = _health;
         save.Health = Health;
         save.Part = _type;
-        save.State = _curretState.State;
+        save.State = _partState.Data.State;
         save.ArmorId = _armor ? _armor.ID : -1;
         return save;
     }
@@ -123,32 +116,13 @@ public class PartBody : MonoBehaviour
         Health = save.Health;
         _health = save.FullHealth;
         _type = save.Part;
-        var state = GetState(save.State);
         var armor = ItemHub.GetItem<Armor>(save.ArmorId);
         if (armor)
             SetArmor(armor);
-        if (state)
-            _curretState = state;
+        _partState.SetState(save.State);
         OnLoad?.Invoke();
-    }
-
-    private BodyPartState GetState(PartState target)
-    {
-        foreach (var state in _states)
-        {
-            if (state.State == target)
-            {
-                return state;
-            }
-        }
-        return null;
     }
     #endregion
 
-    public void SetArmor(Armor armor)
-    {
-        _armor = armor;
-        OnSetArmor?.Invoke(armor);
-        _onSetArmor.Invoke(armor);
-    }
+
 }

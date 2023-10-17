@@ -28,7 +28,7 @@ public class EntityStats : MonoBehaviour
     {
         _level.OnUpLevel -= UpLevel;
     }
-
+    #region Save / Load
     public string Save()
     {
         var data = new EntityStatSave();
@@ -47,7 +47,7 @@ public class EntityStats : MonoBehaviour
             OnStatUpdate?.Invoke();
         }
     }
-
+    #endregion
     public void AddSkillScore(int score)
     {
         Score += score;
