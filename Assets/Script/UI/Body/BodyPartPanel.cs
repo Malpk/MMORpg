@@ -69,6 +69,8 @@ public class BodyPartPanel : MonoBehaviour
     public void SetHealth(int health)
     {
         _health.SetText(health.ToString());
+        if(_bind)
+            _animator.SetState(_bind.State);
     }
 
     private void SwitchPart(PartBody part)

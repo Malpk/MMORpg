@@ -11,6 +11,16 @@ public class DebafDataHolder : MonoBehaviour
         return debaf;
     }
 
+    public DebafPartData GetDebaf(int level)
+    {
+        foreach (var debaf in _debafs)
+        {
+            if (debaf.Level == level)
+                return debaf;
+        }
+        return null;
+    }
+
     public PartState GetState(int level, PartType part)
     {
         var states = GetStates(level, part);

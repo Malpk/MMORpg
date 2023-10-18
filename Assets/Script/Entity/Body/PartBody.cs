@@ -60,18 +60,39 @@ public class PartBody : MonoBehaviour
         SetArmor(_armor);
     }
 
-    public void SetProtect(bool protect)
+
+    #region Save
+    public SavePartBody Save()
     {
-        _isProtect = protect;
+        var save = new SavePartBody();
+        save.FullHealth = _health;
+        save.Health = Health;
+        save.Part = _type;
+        save.ArmorId = _armor ? _armor.ID : -1;
+        save.State = _partState.Save();
+        return save;
     }
 
+    public void Load(SavePartBody save)
+    {
+        Health = save.Health;
+        _health = save.FullHealth;
+        _type = save.Part;
+        var armor = ItemHub.GetItem<Armor>(save.ArmorId);
+        if (armor)
+            SetArmor(armor);
+        _partState.Load(save.State);
+        OnLoad?.Invoke();
+    }
+    #endregion
     #region Health
+
+
     public void SetHealth(int health)
     {
         _health = health;
         Health = health;
     }
-
 
     public bool TakeDamage(int damage)
     {
@@ -92,6 +113,11 @@ public class PartBody : MonoBehaviour
         Health = health > _health ? _health :health;
     }
     #endregion
+    public void SetProtect(bool protect)
+    {
+        _isProtect = protect;
+    }
+
     public void SetArmor(Armor armor)
     {
         _armor = armor;
@@ -99,28 +125,6 @@ public class PartBody : MonoBehaviour
         _onSetArmor.Invoke(armor);
     }
 
-    #region Save
-    public SavePartBody Save()
-    {
-        var save = new SavePartBody();
-        save.FullHealth = _health;
-        save.Health = Health;
-        save.Part = _type;
-        save.ArmorId = _armor ? _armor.ID : -1;
-        return save;
-    }
-
-    public void Load(SavePartBody save)
-    {
-        Health = save.Health;
-        _health = save.FullHealth;
-        _type = save.Part;
-        var armor = ItemHub.GetItem<Armor>(save.ArmorId);
-        if (armor)
-            SetArmor(armor);
-        OnLoad?.Invoke();
-    }
-    #endregion
 
 
 }

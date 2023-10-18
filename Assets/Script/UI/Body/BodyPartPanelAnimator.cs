@@ -17,31 +17,30 @@ public class BodyPartPanelAnimator : MonoBehaviour
         SetState(null);
     }
 
-    public void SetState(PartState part)
+    public void SetState(DebafPart part)
     {
-        //if (part != null)
-        //{
-        //    _backGround.color = GetColor(part.State);
-        //    _stateText?.SetText(part.StateName);
-        //}
-        //else
-        //{
-        //    _backGround.color = GetColor(PartState.None);
-        //    _stateText?.SetText(_noneText);
-        //}
+        if (part != null)
+        {
+            _backGround.color = GetColor(part.Level);
+            _stateText?.SetText(part.StateName);
+        }
+        else
+        {
+            _backGround.color = _none;
+            _stateText?.SetText(_noneText);
+        }
     }
 
-    private Color GetColor(PartState state)
+    private Color GetColor(int level)
     {
-        //switch (state)
-        //{
-        //    case PartState.Idle:
-        //        return _idle;
-        //    case PartState.MidleDamage:
-        //        return _wound;
-        //    case PartState.HardDamage:
-        //        return _break;
-        //}
-        return _none;
+        switch (level)
+        {
+            case 0:
+                return _idle;
+            case 1:
+                return _wound;
+            default:
+                return _break;
+        }
     }
 }

@@ -56,6 +56,7 @@ public abstract class Entity : MonoBehaviour, IPvp
         entityStats.OnStatUpdate += UpdateStats;
         entityStats.OnScoreUpdate += UpdateStats;
         body.OnTakeDamage += TakeDamage;
+        UpdateStats();
     }
 
     private void OnDestroy()
@@ -64,37 +65,12 @@ public abstract class Entity : MonoBehaviour, IPvp
         entityStats.OnScoreUpdate -= UpdateStats;
         body.OnTakeDamage -= TakeDamage;
     }
-
-    private void Start()
-    {
-        UpdateStats();
-    }
-
-    private void UpdateStats()
-    {
-        _fullMana = entityStats.Stats.Intelligence * _manaUnit;
-        _fullHealth = entityStats.Stats.Body * _healthUnit;
-        foreach (var part in body.Parts)
-        {
-            part?.SetHealth(_fullHealth / body.Parts.Length);
-        }
-        Health = GetHealth();
-    }
-    private int GetHealth()
-    {
-        var health = 0;
-        foreach (var part in body.Parts)
-        {
-            health += part.Health;
-        }
-        return health;
-    }
-
+ 
     private void TakeDamage(AttackResult attack)
     {
         if (attack.Damage > 0)
         {
-            Health = GetHealth();
+            Health = body.GetHealth();
             if (Health == 0)
                 OnDead?.Invoke();
         }
@@ -115,11 +91,11 @@ public abstract class Entity : MonoBehaviour, IPvp
     public void Load(SaveEntity save)
     {
         SetData(save.Data);
+        entityStats.Load(save.Stats);
+        body?.Load(save.Body);
+        hands.Load(save.Hands);
         glorySet.SetGlroy(save.Glory);
         level.Load(save.Level);
-        body?.Load(save.Body);
-        entityStats.Load(save.Stats);
-        hands.Load(save.Hands);
         if (hands.Weapon)
             hands.Weapon.Use(this);
         foreach (var part in body.Parts)
@@ -128,7 +104,10 @@ public abstract class Entity : MonoBehaviour, IPvp
                 part.Armor.Use(this);
         }
         OnLoad?.Invoke();
+        Health = body.GetHealth();
+        Debug.Log(Health);
     }
+
 
     #endregion
 
@@ -151,6 +130,15 @@ public abstract class Entity : MonoBehaviour, IPvp
     public void SetStats(Stats stats)
     {
         entityStats.SetStats(stats);
+        UpdateStats();
+    }
+
+    private void UpdateStats()
+    {
+        _fullMana = entityStats.Stats.Intelligence * _manaUnit;
+        _fullHealth = entityStats.Stats.Body * _healthUnit;
+        body.SetHealth(_fullHealth);
+        Health = body.GetHealth();
     }
 
     #region Attack

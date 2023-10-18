@@ -51,7 +51,6 @@ public class PartSelectMenu : MonoBehaviour
 
     public bool RemoveSelect()
     {
-        Debug.Log("Remove");
         if (_selects.Count > 0)
         {
             Remove(_selects[_selects.Count - 1]);

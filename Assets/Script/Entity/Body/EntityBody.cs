@@ -97,6 +97,25 @@ public class EntityBody : MonoBehaviour
     }
     #endregion
     #region Health
+
+    public void SetHealth(int health)
+    {
+        foreach (var part in _parts)
+        {
+            part?.SetHealth(health / _parts.Length);
+        }
+    }
+
+    public int GetHealth()
+    {
+        var health = 0;
+        foreach (var part in _parts)
+        {
+            health += part.Health;
+        }
+        return health;
+    }
+
     public void TekeHeal(int heal = 4)
     {
         if (heal < _parts.Length)

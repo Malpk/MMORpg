@@ -13,11 +13,13 @@ public class PlayerPanel : MonoBehaviour
     {
         LoadPlayer();
         _player.OnLoad += LoadPlayer;
+        _player.OnChangeHealth += (float value) => LoadPlayer();
     }
 
     private void OnDisable()
     {
         _player.OnLoad -= LoadPlayer;
+        _player.OnChangeHealth -= (float value) => LoadPlayer();
     }
 
     public void LoadPlayer()
