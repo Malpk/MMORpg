@@ -5,5 +5,4 @@ public enum PartType
     Leg,
     Hands,
     None,
-    Any
 }

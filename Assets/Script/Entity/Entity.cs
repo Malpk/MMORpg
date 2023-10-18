@@ -2,6 +2,10 @@ using UnityEngine;
 
 public abstract class Entity : MonoBehaviour, IPvp
 {
+    [Min(0)]
+    [SerializeField] private int _manaUnit;
+    [Min(0)]
+    [SerializeField] private int _healthUnit;
     [SerializeField] private EntityRang _rang;
     [SerializeField] private EntityData _data;
     [Range(0, 1f)]
@@ -14,20 +18,87 @@ public abstract class Entity : MonoBehaviour, IPvp
     [SerializeField] protected HandHolder hands;
     [SerializeField] protected EntityStats entityStats;
 
-    public event System.Action OnLoad;
-    public event System.Action<EntityData> OnSetData;
+    private int _fullMana;
+    private int _fullHealth;
+    private int _curretHealth;
 
+    public event System.Action OnLoad;
+    public event System.Action OnDead;
+    public event System.Action<EntityData> OnSetData;
     public abstract event System.Action OnComplite;
+    public event System.Action<float> OnChangeHealth;
 
     public int Level => level.Level;
+    public int Health
+    {
+        get
+        {
+            return _curretHealth;
+        }
+
+        private set
+        {
+            _curretHealth = value;
+            OnChangeHealth?.Invoke(HealthNormalize);
+        }
+    }
+    public float HealthNormalize => Health / (float)_fullHealth;
     public EntityRang Rang => _rang;
     public EntityData Data => _data;
-    public Vector2Int RangeAttack => hands.AttackRange + Vector2Int.one * body.Attack;
+    public Vector2Int RangeAttack => hands.AttackRange + Vector2Int.one * entityStats.Stats.Strenght;
     public EntityBody Body => body;
     public HandHolder Hands => hands;
     public EntityStats Stats => entityStats;
     public GlorySet Glory => glorySet;
 
+    private void Awake()
+    {
+        entityStats.OnStatUpdate += UpdateStats;
+        entityStats.OnScoreUpdate += UpdateStats;
+        body.OnTakeDamage += TakeDamage;
+    }
+
+    private void OnDestroy()
+    {
+        entityStats.OnStatUpdate -= UpdateStats;
+        entityStats.OnScoreUpdate -= UpdateStats;
+        body.OnTakeDamage -= TakeDamage;
+    }
+
+    private void Start()
+    {
+        UpdateStats();
+    }
+
+    private void UpdateStats()
+    {
+        _fullMana = entityStats.Stats.Intelligence * _manaUnit;
+        _fullHealth = entityStats.Stats.Body * _healthUnit;
+        foreach (var part in body.Parts)
+        {
+            part?.SetHealth(_fullHealth / body.Parts.Length);
+        }
+        Health = GetHealth();
+    }
+    private int GetHealth()
+    {
+        var health = 0;
+        foreach (var part in body.Parts)
+        {
+            health += part.Health;
+        }
+        return health;
+    }
+
+    private void TakeDamage(AttackResult attack)
+    {
+        if (attack.Damage > 0)
+        {
+            Health = GetHealth();
+            if (Health == 0)
+                OnDead?.Invoke();
+        }
+    }
     #region Save / Load
     public SaveEntity Save()
     {
@@ -85,7 +156,7 @@ public abstract class Entity : MonoBehaviour, IPvp
     #region Attack
     public AttackResult Attack(Entity target, PartType part = PartType.None)
     {
-        var result = SetAttack(target, part, body.Attack + hands.Attack);
+        var result = SetAttack(target, part, entityStats.Stats.Strenght + hands.Attack);
         UpLevel(result);
         return result;
     }
@@ -112,7 +183,6 @@ public abstract class Entity : MonoBehaviour, IPvp
 
     private void UpLevel(AttackResult attack)
     {
-        Debug.Log(attack.Result);
         if (attack.Result == AttackType.Full || attack.Result == AttackType.Part)
             hands.AddScore(attack.Damage);
         level.AddScore(attack.Damage);

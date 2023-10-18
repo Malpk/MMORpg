@@ -28,7 +28,7 @@ public class PvpControlelr : MonoBehaviour
     {
         foreach (var part in _partsPvp)
         {
-            part.Body.OnDead += () => DeadPart(part);
+            part.OnDead += () => DeadPart(part);
         }
     }
 
@@ -36,7 +36,7 @@ public class PvpControlelr : MonoBehaviour
     {
         foreach (var part in _partsPvp)
         {
-            part.Body.OnDead -= () => DeadPart(part);
+            part.OnDead -= () => DeadPart(part);
         }
     }
 

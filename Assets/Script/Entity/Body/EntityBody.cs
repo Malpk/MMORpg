@@ -3,42 +3,14 @@ using System.Collections.Generic;
 
 public class EntityBody : MonoBehaviour
 {
-    [Min(0)]
-    [SerializeField] private int _manaUnit;
-    [Min(0)]
-    [SerializeField] private int _healthUnit;
     [Range(0, 1f)]
     [SerializeField] private float _evasionProbility;
     [Header("Reference")]
     [SerializeField] private EntityStats _stats;
     [SerializeField] private PartBody[] _parts;
 
-    private int _fullMana;
-    private int _fullHealth;
-    private int _curretHealth;
-
-    public event System.Action OnDead;
     public event System.Action OnArmorUpdate;
     public event System.Action<AttackResult> OnTakeDamage;
-    public event System.Action<float> OnChangeHealth;
-
-    public int Attack => _stats.Stats.Strenght;
-    public int Health
-    {
-        get
-        {
-            return _curretHealth;
-        }
-
-        private set
-        {
-            _curretHealth = value;
-            OnChangeHealth?.Invoke(HealthNormalize);
-        }
-    }
-    public bool IsDead { get; private set; }
-
-    public float HealthNormalize => Health / (float)_fullHealth;
 
     public PartBody[] Parts => _parts;
 
@@ -47,10 +19,6 @@ public class EntityBody : MonoBehaviour
         _parts = GetComponentsInChildren<PartBody>();
     }
 
-    private void Awake()
-    {
-        UpdateStats();
-    }
     public void ReloadPart()
     {
         foreach (var part in _parts)
@@ -67,36 +35,10 @@ public class EntityBody : MonoBehaviour
 
     }
 
-    #region Events
-    private void OnEnable()
-    {
-        _stats.OnStatUpdate += UpdateStats;
-        _stats.OnScoreUpdate += UpdateStats;
-    }
-
-    private void OnDisable()
-    {
-        _stats.OnStatUpdate -= UpdateStats;
-        _stats.OnScoreUpdate -= UpdateStats;
-    }
-
-    private void UpdateStats()
-    {
-        _fullMana = _stats.Stats.Intelligence * _manaUnit;
-        _fullHealth = _stats.Stats.Body * _healthUnit;
-        foreach (var part in _parts)
-        {
-            part?.SetHealth(_fullHealth / _parts.Length);
-        }
-        Health = GetHealth();
-    }
-
-    #endregion
     #region Save / Load
     public string Save()
     {
         var save = new SaveEntityBody();
-        save.Mana = _fullMana;
         save.Evasion = _evasionProbility;
         save.Parts = new SavePartBody[_parts.Length];
         for (int i = 0; i < _parts.Length; i++)
@@ -111,13 +53,11 @@ public class EntityBody : MonoBehaviour
         if (json != "")
         {
             var save = JsonUtility.FromJson<SaveEntityBody>(json);
-            _fullMana = save.Mana;
             _evasionProbility = save.Evasion;
             for (int i = 0; i < save.Parts.Length; i++)
             {
                 _parts[i].Load(save.Parts[i]);
             }
-            Health = GetHealth();
             OnArmorUpdate?.Invoke();
         }
     }
@@ -157,8 +97,6 @@ public class EntityBody : MonoBehaviour
     }
     #endregion
     #region Health
-  
-
     public void TekeHeal(int heal = 4)
     {
         if (heal < _parts.Length)
@@ -167,7 +105,6 @@ public class EntityBody : MonoBehaviour
         {
             part.TakeHeal(heal / _parts.Length);
         }
-        Health = GetHealth();
     }
 
     public bool TekeHeal(int heal, PartType target)
@@ -176,19 +113,9 @@ public class EntityBody : MonoBehaviour
         if (part)
         {
             part.TakeHeal(heal);
-            Health = GetHealth();
             return true;
         }
         return false;
-    }
-    private int GetHealth()
-    {
-        var health = 0;
-        foreach (var part in _parts)
-        {
-            health += part.Health;
-        }
-        return health;
     }
 
     #endregion
@@ -218,21 +145,13 @@ public class EntityBody : MonoBehaviour
         return new AttackResult();
     }
 
-    public void Dead()
-    {
-        IsDead = true;
-        OnDead?.Invoke();
-    }
-
     private AttackResult SetDamage(PartBody part, Attack attack)
     {
         if (!TryEvasion(attack))
         {
             if (part.TakeDamage(attack.Damage))
             {
-                Health = GetHealth();
-                if (Health == 0)
-                    Dead();
+                part.State.TakeDamage(attack);
                 return new AttackResult(attack.Attaker, AttackType.Full, attack.Damage);
             }
             else

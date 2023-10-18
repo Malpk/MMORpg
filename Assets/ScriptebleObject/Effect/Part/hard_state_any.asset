@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: hard_state_any
   m_EditorClassIdentifier: 
   _level: 3
-  _part: 5
+  _part: 4
   _partStats:
   - _name: "\u041F\u0435\u0440\u0435\u043B\u043E\u043C"
     _damage: 1

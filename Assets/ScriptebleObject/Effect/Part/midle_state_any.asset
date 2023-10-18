@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: midle_state_any
   m_EditorClassIdentifier: 
   _level: 2
-  _part: 5
+  _part: 4
   _partStats:
   - _name: "\u0420\u0430\u0437\u0434\u0440\u043E\u0431\u043B\u0435\u043D\u0438\u0435"
     _damage: 1

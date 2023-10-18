@@ -26,15 +26,15 @@ public class EntityDataPanel : MonoBehaviour
     {
         if (_bind)
         {
-            _bind.Body.OnChangeHealth += _healthField.SetValue;
-            _healthField.SetValue(_bind.Body.HealthNormalize);
+            _bind.OnChangeHealth += _healthField.SetValue;
+            _healthField.SetValue(_bind.HealthNormalize);
         }
     }
 
     private void OnDisable()
     {
         if (_bind)
-            _bind.Body.OnChangeHealth -= _healthField.SetValue;
+            _bind.OnChangeHealth -= _healthField.SetValue;
     }
 
     public void BindPanel(Entity entity)
@@ -57,6 +57,6 @@ public class EntityDataPanel : MonoBehaviour
     private void UpdateData()
     {
         _preview.BindEntity(_bind);
-        _healthField?.SetValue(_bind ? _bind.Body.HealthNormalize : 1);
+        _healthField?.SetValue(_bind ? _bind.HealthNormalize : 1);
     }
 }

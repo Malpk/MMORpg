@@ -1,14 +1,15 @@
-using UnityEngine;
-
 public class DebafBody : DebafPart
 {
     public override PartType Part => PartType.Body;
 
-    protected override Stats AddDebaf(Stats stats, DebafPartData data)
+    public override Stats AddDebaf(Stats stats)
     {
-        var debaf = data.GetDebaf();
-        stats.Strenght -= (int)(stats.Strenght * debaf);
-        stats.Body -= (int)(stats.Body * debaf);
+        if (debafActive)
+        {
+            var debaf = debafActive.GetDebaf();
+            stats.Strenght -= (int)(stats.Strenght * debaf);
+            stats.Body -= (int)(stats.Body * debaf);
+        }
         return stats;
     }
 }

@@ -2,10 +2,13 @@ public class DebafHead : DebafPart
 {
     public override PartType Part => PartType.Head;
 
-    protected override Stats AddDebaf(Stats stats, DebafPartData data)
+    public override Stats AddDebaf(Stats stats)
     {
-        var debaf = stats.Intelligence * data.GetDebaf();
-        stats.Intelligence -= (int)debaf;
+        if (debafActive)
+        {
+            var debaf = stats.Intelligence * debafActive.GetDebaf();
+            stats.Intelligence -= (int)debaf;
+        }
         return stats;
     }
 }

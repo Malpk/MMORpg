@@ -21,7 +21,7 @@ public class EntityPanel : MonoBehaviour
         _entity = entity;
         if (entity)
         {
-            _health?.SetText(entity.Body.Health.ToString());
+            _health?.SetText(entity.Health.ToString());
             _damage?.SetText($"{entity.RangeAttack.x}-{entity.RangeAttack.y}");
             _level?.SetText(entity.Level.ToString());
         }

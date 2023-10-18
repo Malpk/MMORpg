@@ -4515,7 +4515,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 3676944432530464372}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1292766699}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: caa1090c6dbada3428e08eed9d82ff3f, type: 3}
   m_Name: 
@@ -8382,7 +8382,23 @@ PrefabInstance:
     - target: {fileID: 555623826424419322, guid: 9aac009762dff8f44ae3a86d83905c0f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 1397365620}
+    - target: {fileID: 555623826424419322, guid: 9aac009762dff8f44ae3a86d83905c0f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
       objectReference: {fileID: 299944097}
+    - target: {fileID: 555623826424419322, guid: 9aac009762dff8f44ae3a86d83905c0f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Close
+      objectReference: {fileID: 0}
+    - target: {fileID: 555623826424419322, guid: 9aac009762dff8f44ae3a86d83905c0f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: ShowHud
+      objectReference: {fileID: 0}
+    - target: {fileID: 555623826424419322, guid: 9aac009762dff8f44ae3a86d83905c0f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: PvpMenuHolder, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 555623826929791683, guid: 9aac009762dff8f44ae3a86d83905c0f, type: 3}
       propertyPath: m_Camera
       value: 
@@ -9013,6 +9029,10 @@ PrefabInstance:
       propertyPath: _player
       value: 
       objectReference: {fileID: 1235513939}
+    - target: {fileID: 3676944431507444634, guid: e7aba3d761e8d644b8fbfe3fa670f344, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3676944431507444635, guid: e7aba3d761e8d644b8fbfe3fa670f344, type: 3}
       propertyPath: _map
       value: 

@@ -23,6 +23,6 @@ public class PlayerPanel : MonoBehaviour
     public void LoadPlayer()
     {
         _playerName.SetText(_player.Data.Name);
-        _health.SetValue(_player.Body.HealthNormalize);
+        _health.SetValue(_player.HealthNormalize);
     }
 }

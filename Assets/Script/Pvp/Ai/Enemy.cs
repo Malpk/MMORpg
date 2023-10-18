@@ -35,7 +35,6 @@ public class Enemy : Entity, IPvp
         base.Play();
         if (_steap == null)
         {
-            enabled = true;
             _steap = StartCoroutine(MakeSteap());
         }
     }
@@ -43,7 +42,6 @@ public class Enemy : Entity, IPvp
     public override void Stop()
     {
         base.Stop();
-        enabled = false;
         Complite();
     }
 

@@ -20,18 +20,18 @@ public class GameSwitcher : MonoBehaviour
     {
         foreach (var enemy in _enemys)
         {
-            enemy.Body.OnDead += DeadEnemy;
+            enemy.OnDead += DeadEnemy;
         }
-        _player.Body.OnDead += DeadPlayer;
+        _player.OnDead += DeadPlayer;
     }
 
     private void OnDisable()
     {
         foreach (var enemy in _enemys)
         {
-            enemy.Body.OnDead -= DeadEnemy;
+            enemy.OnDead -= DeadEnemy;
         }
-        _player.Body.OnDead -= DeadPlayer;
+        _player.OnDead -= DeadPlayer;
     }
 
     public void AddEnemy(Enemy enemy)
@@ -39,7 +39,7 @@ public class GameSwitcher : MonoBehaviour
         if (!_enemys.Contains(enemy))
         {
             if (enabled)
-                enemy.Body.OnDead += DeadEnemy;
+                enemy.OnDead += DeadEnemy;
             _enemys.Add(enemy);
         }
     }
@@ -77,7 +77,7 @@ public class GameSwitcher : MonoBehaviour
     {
         foreach (var enemy in _enemys)
         {
-            if (!enemy.Body.IsDead)
+            if (enemy.Health > 0)
                 return enemy;
         }
         return null;

@@ -2,11 +2,14 @@ public class DebafHand : DebafPart
 {
     public override PartType Part => PartType.Hands;
 
-    protected override Stats AddDebaf(Stats stats, DebafPartData data)
+    public override Stats AddDebaf(Stats stats)
     {
-        var debaf = data.GetDebaf();
-        stats.Dexterity -= (int)(stats.Dexterity * debaf);
-        stats.Survival -= (int)(stats.Survival * debaf);
+        if (debafActive)
+        {
+            var debaf = debafActive.GetDebaf();
+            stats.Dexterity -= (int)(stats.Dexterity * debaf);
+            stats.Survival -= (int)(stats.Survival * debaf);
+        }
         return stats;
     }
 }

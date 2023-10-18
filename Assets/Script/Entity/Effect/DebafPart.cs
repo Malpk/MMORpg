@@ -2,33 +2,33 @@ using UnityEngine;
 
 public abstract class DebafPart : MonoBehaviour
 {
+    [SerializeField] private string _stateName;
     [SerializeField] private DebafDataHolder _debafHolder;
     
-    private string _stateName;
-    private DebafPartData _debafActive;
+    protected DebafPartData debafActive;
 
-    public event System.Action<int> OnSetState;
+    public event System.Action OnUpdateState;
 
     public abstract PartType Part { get; }
 
     public string StateName => _stateName;
 
-    protected abstract Stats AddDebaf(Stats stats, DebafPartData data);
+    public abstract Stats AddDebaf(Stats stats);
 
-    public Stats AddDebaf(Stats stats, Attack attack)
+    public void TakeDamage(Attack attack)
     {
         var debaf = _debafHolder.GetDebaf();
         SetDebaf(debaf, attack);
-        return AddDebaf(stats, debaf);
+        OnUpdateState?.Invoke();
     }
 
     private void SetDebaf(DebafPartData debaf, Attack attacl)
     {
-        var debafLevel = _debafActive ? _debafActive.Level : 0;
+        var debafLevel = debafActive ? debafActive.Level : 0;
         if (debaf.Level > debafLevel)
         {
-            _debafActive = debaf;
-            var state = _debafHolder.GetState(_debafActive.Level, Part);
+            debafActive = debaf;
+            var state = _debafHolder.GetState(debafActive.Level, Part);
             _stateName = state.GetName(attacl.DamageType);
         }
     }
