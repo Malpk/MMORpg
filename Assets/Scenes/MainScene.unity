@@ -8343,7 +8343,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6665277435895285629, guid: f37b52213a8e84545a14b409e9c8b080, type: 3}
       propertyPath: _healthUnit
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6665277435895285629, guid: f37b52213a8e84545a14b409e9c8b080, type: 3}
       propertyPath: _conterAttackProbility

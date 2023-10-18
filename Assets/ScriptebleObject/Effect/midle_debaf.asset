@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb677ce8e6fb6c54091d474f534057cc, type: 3}
   m_Name: midle_debaf
   m_EditorClassIdentifier: 
-  _level: 1
+  _level: 2
   _debafRange: {x: 0.2, y: 0.4}

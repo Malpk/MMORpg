@@ -91,8 +91,8 @@ public abstract class Entity : MonoBehaviour, IPvp
     public void Load(SaveEntity save)
     {
         SetData(save.Data);
-        entityStats.Load(save.Stats);
         body?.Load(save.Body);
+        entityStats.Load(save.Stats);
         hands.Load(save.Hands);
         glorySet.SetGlroy(save.Glory);
         level.Load(save.Level);
@@ -105,7 +105,6 @@ public abstract class Entity : MonoBehaviour, IPvp
         }
         OnLoad?.Invoke();
         Health = body.GetHealth();
-        Debug.Log(Health);
     }
 
 
@@ -140,6 +139,8 @@ public abstract class Entity : MonoBehaviour, IPvp
         body.SetHealth(_fullHealth);
         Health = body.GetHealth();
     }
+
+
 
     #region Attack
     public AttackResult Attack(Entity target, PartType part = PartType.None)

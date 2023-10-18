@@ -11,7 +11,8 @@ public class PartBody : MonoBehaviour
     [SerializeField] private DebafPart _partState;
     [SerializeField] private UnityEvent<Item> _onSetArmor;
 
-    private int _curretHealth;
+    [SerializeField] private int _curretDamage;
+    [SerializeField] private int _curretHealth;
 
     public event System.Action OnLoad;
     public event System.Action<int> OnUpdateHealth;
@@ -67,6 +68,7 @@ public class PartBody : MonoBehaviour
         var save = new SavePartBody();
         save.FullHealth = _health;
         save.Health = Health;
+        save.Damage = _curretDamage;
         save.Part = _type;
         save.ArmorId = _armor ? _armor.ID : -1;
         save.State = _partState.Save();
@@ -75,9 +77,10 @@ public class PartBody : MonoBehaviour
 
     public void Load(SavePartBody save)
     {
-        Health = save.Health;
-        _health = save.FullHealth;
         _type = save.Part;
+        _health = save.FullHealth;
+        _curretDamage = save.Damage;
+        Health = save.Health;
         var armor = ItemHub.GetItem<Armor>(save.ArmorId);
         if (armor)
             SetArmor(armor);
@@ -91,7 +94,7 @@ public class PartBody : MonoBehaviour
     public void SetHealth(int health)
     {
         _health = health;
-        Health = health;
+        Health = _health - _curretDamage;
     }
 
     public bool TakeDamage(int damage)
@@ -100,6 +103,7 @@ public class PartBody : MonoBehaviour
         {
             if (_armor)
                 damage = Mathf.Clamp(damage - _armor.Protect, 0, damage);
+            _curretDamage = Mathf.Clamp(_curretDamage + damage, 0 , _health);
             Health = Health - damage > 0 ? Health - damage : 0;
             return true;
         }
