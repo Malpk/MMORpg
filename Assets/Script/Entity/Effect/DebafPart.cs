@@ -19,7 +19,6 @@ public abstract class DebafPart : MonoBehaviour
     private Coroutine _heal;
 
     public event System.Action OnUpdateState;
-    public event System.Action OnHeal;
 
     public abstract PartType Part { get; }
 
@@ -54,10 +53,6 @@ public abstract class DebafPart : MonoBehaviour
             _staticState = save.Static;
             _timeHeal = save.HealTime;
             _progress = save.HealProgress;
-            if (!_staticState)
-            {
-                StartHeal();
-            }
         }
     }
     #endregion
@@ -70,6 +65,8 @@ public abstract class DebafPart : MonoBehaviour
             _stateName = "";
             _damage = DamageType.None;
             debaf = 0;
+            if(_heal != null)
+                StopCoroutine(_heal);
             OnUpdateState?.Invoke();
         }
     }
@@ -92,7 +89,6 @@ public abstract class DebafPart : MonoBehaviour
             _staticState = false;
             _progress = 0f;
             _timeHeal = debafActive.GetTime();
-            StartHeal();
         }
     }
 
@@ -107,7 +103,13 @@ public abstract class DebafPart : MonoBehaviour
     {
         if (_heal != null)
             StopCoroutine(_heal);
-        _heal = StartCoroutine(Healing());
+        if (!_staticState)
+        {
+            if (debafActive)
+            {
+                _heal = StartCoroutine(Healing());
+            }
+        }
     }
 
     private IEnumerator Healing()
@@ -122,8 +124,8 @@ public abstract class DebafPart : MonoBehaviour
                 TryMakeStatic();
             yield return null;
         }
-        OnHeal?.Invoke();
         _heal = null;
+        TakeHeal(debafActive.Level);
     }
 
     private void TryMakeStatic()

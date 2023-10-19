@@ -11,7 +11,13 @@ public class HealPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        _healButton.interactable = _player.Wallet.Money >= _healPrice;
+        UpdateButton();
+        _heal.OnReady += UpdateButton;
+    }
+
+    private void OnDisable()
+    {
+        _heal.OnReady -= UpdateButton;
     }
 
     public void Heal()
@@ -19,7 +25,13 @@ public class HealPanel : MonoBehaviour
         if (_player.Wallet.GiveMoney(_healPrice))
         {
             _heal.Heal();
-            _healButton.interactable = _player.Wallet.Money >= _healPrice;
+            UpdateButton();
         }
+    }
+
+    private void UpdateButton()
+    {
+        _healButton.interactable = _player.Wallet.Money >= _healPrice;
+        _healButton.interactable = _healButton.interactable && _heal.IsReady;
     }
 }

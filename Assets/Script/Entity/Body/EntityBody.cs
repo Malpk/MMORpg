@@ -12,6 +12,7 @@ public class EntityBody : MonoBehaviour
     public event System.Action<AttackResult> OnTakeDamage;
     public event System.Action OnArmorUpdate;
     public event System.Action OnChangeHealth;
+    public event System.Action OnLoad;
 
     public PartBody[] Parts => _parts;
 
@@ -76,6 +77,7 @@ public class EntityBody : MonoBehaviour
                 _parts[i].Load(save.Parts[i]);
             }
             OnArmorUpdate?.Invoke();
+            OnLoad?.Invoke();
         }
     }
     #endregion

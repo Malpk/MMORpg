@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
 
 public class PartBody : MonoBehaviour
 {
+    [SerializeField] private float _timeHeal;
+    [Header("Stats")]
     [SerializeField] private int _health;
     [SerializeField] private int _curretDamage;
     [SerializeField] private bool _isProtect;
@@ -13,6 +16,8 @@ public class PartBody : MonoBehaviour
     [SerializeField] private UnityEvent<Item> _onSetArmor;
 
     private int _curretHealth;
+    private float _healProgress = 0f;
+    private Coroutine _heal;
 
     public event System.Action OnLoad;
     public event System.Action<int> OnUpdateHealth;
@@ -54,7 +59,6 @@ public class PartBody : MonoBehaviour
             if (_armor.Part != Part)
                 _armor = null;
         }
-        _partState.OnHeal += Heal;
     }
 
     private void Start()
@@ -62,13 +66,7 @@ public class PartBody : MonoBehaviour
         SetArmor(_armor);
     }
 
-    private void OnDestroy()
-    {
-        _partState.OnHeal -= Heal;
-    }
-
-
-    #region Save
+    #region Save / Load
     public SavePartBody Save()
     {
         var save = new SavePartBody();
@@ -78,6 +76,7 @@ public class PartBody : MonoBehaviour
         save.Part = _type;
         save.ArmorId = _armor ? _armor.ID : -1;
         save.State = _partState.Save();
+        save.HealProgress = _healProgress;
         return save;
     }
 
@@ -87,6 +86,7 @@ public class PartBody : MonoBehaviour
         _health = save.FullHealth;
         _curretDamage = save.Damage;
         Health = save.Health;
+        _healProgress = save.HealProgress;
         var armor = ItemHub.GetItem<Armor>(save.ArmorId);
         if (armor)
             SetArmor(armor);
@@ -94,9 +94,8 @@ public class PartBody : MonoBehaviour
         OnLoad?.Invoke();
     }
     #endregion
+
     #region Health
-
-
     public void SetHealth(int health)
     {
         _health = health;
@@ -111,6 +110,7 @@ public class PartBody : MonoBehaviour
                 damage = Mathf.Clamp(damage - _armor.Protect, 0, damage);
             _curretDamage = Mathf.Clamp(_curretDamage + damage, 0 , _health);
             Health = Health - damage > 0 ? Health - damage : 0;
+            _healProgress = 0f;
             return true;
         }
         return false;
@@ -121,6 +121,8 @@ public class PartBody : MonoBehaviour
         _curretDamage = 0;
         Health = _health;
         _partState.TakeHeal(_partState.Level);
+        if (_heal != null)
+            StopCoroutine(_heal);
     }
 
     public void TakeHeal(int heal, int level = 0)
@@ -128,7 +130,31 @@ public class PartBody : MonoBehaviour
         _curretDamage = Mathf.Clamp(_curretDamage - heal, 0, _curretDamage);
         Health = _health - _curretDamage;
         _partState.TakeHeal(level);
+        if (_curretDamage == 0 && _heal != null)
+            StopCoroutine(_heal);
     }
+
+    public void StartHeal()
+    {
+        if (_heal != null)
+            StopCoroutine(_heal);
+        _partState.StartHeal();
+        if(_curretDamage > 0)
+            _heal = StartCoroutine(Healing());
+    }
+
+    private IEnumerator Healing()
+    {
+        while (_healProgress < 1f)
+        {
+            _healProgress += Time.deltaTime / _timeHeal;
+            yield return null;
+        }
+        _curretDamage = 0;
+        Health = _health;
+        _heal = null;
+    }
+
     #endregion
     public void SetProtect(bool protect)
     {
@@ -141,7 +167,4 @@ public class PartBody : MonoBehaviour
         OnSetArmor?.Invoke(armor);
         _onSetArmor.Invoke(armor);
     }
-
-
-
 }
