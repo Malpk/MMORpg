@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: midle_debaf
   m_EditorClassIdentifier: 
   _level: 2
+  _timeHeal: {x: 2, y: 4}
   _debafRange: {x: 0.2, y: 0.4}

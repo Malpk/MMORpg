@@ -1,18 +1,25 @@
 using UnityEngine;
+using System.Collections;
 
 public abstract class DebafPart : MonoBehaviour
 {
+    [SerializeField] private bool _staticState;
+    [SerializeField] private float _delay;
+    [Header("State")]
     [SerializeField] private string _stateName;
+    [SerializeField] private float _timeHeal;
     [SerializeField] private DamageType _damage;
 
+    [SerializeField] protected float debaf;
     [SerializeField] protected DebafPartData debafActive;
     [Header("Reference")]
     [SerializeField] private DebafDataHolder _debafHolder;
 
-    [SerializeField] protected float debaf;
-
+    private float _progress;
+    private Coroutine _heal;
 
     public event System.Action OnUpdateState;
+    public event System.Action OnHeal;
 
     public abstract PartType Part { get; }
 
@@ -30,6 +37,9 @@ public abstract class DebafPart : MonoBehaviour
             save.Level = debafActive.Level;
             save.Debaf = debaf;
             save.Damage = _damage;
+            save.Static = _staticState;
+            save.HealProgress = _progress;
+            save.HealTime = _timeHeal;
         }
         return save;
     }
@@ -39,8 +49,15 @@ public abstract class DebafPart : MonoBehaviour
         if (save.Level > 0)
         {
             debafActive = _debafHolder.GetDebaf(save.Level);
-            debaf = save.Debaf;
             SetState(save.Damage);
+            debaf = save.Debaf;
+            _staticState = save.Static;
+            _timeHeal = save.HealTime;
+            _progress = save.HealProgress;
+            if (!_staticState)
+            {
+                StartHeal();
+            }
         }
     }
     #endregion
@@ -72,6 +89,10 @@ public abstract class DebafPart : MonoBehaviour
             debafActive = data;
             debaf = debafActive.GetDebaf();
             SetState(attacl.DamageType);
+            _staticState = false;
+            _progress = 0f;
+            _timeHeal = debafActive.GetTime();
+            StartHeal();
         }
     }
 
@@ -80,5 +101,42 @@ public abstract class DebafPart : MonoBehaviour
         var state = _debafHolder.GetState(debafActive.Level, Part);
         _damage = damage;
         _stateName = state.GetName(damage);
+    }
+
+    public void StartHeal()
+    {
+        if (_heal != null)
+            StopCoroutine(_heal);
+        _heal = StartCoroutine(Healing());
+    }
+
+    private IEnumerator Healing()
+    {
+        var timeHeal = _timeHeal * 3600f;
+        var progress = 0f;
+        while (_progress < 1f)
+        {
+            _progress += Time.deltaTime / timeHeal;
+            progress += Time.deltaTime / _delay;
+            if (progress >= 1)
+                TryMakeStatic();
+            yield return null;
+        }
+        OnHeal?.Invoke();
+        _heal = null;
+    }
+
+    private void TryMakeStatic()
+    {
+        var probility = Random.Range(0, 1f);
+        if (probility > 0)
+        {
+            if (probility <= debafActive.ChanceMakeStatic)
+            {
+                _staticState = true;
+                StopCoroutine(_heal);
+                _heal = null;
+            }
+        }
     }
 }

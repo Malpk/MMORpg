@@ -54,11 +54,17 @@ public class PartBody : MonoBehaviour
             if (_armor.Part != Part)
                 _armor = null;
         }
+        _partState.OnHeal += Heal;
     }
 
     private void Start()
     {
         SetArmor(_armor);
+    }
+
+    private void OnDestroy()
+    {
+        _partState.OnHeal -= Heal;
     }
 
 
