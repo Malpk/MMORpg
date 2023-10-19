@@ -4,6 +4,7 @@ using UnityEngine;
 public class DebafPartData : ScriptableObject
 {
     [SerializeField] private int _level;
+    [SerializeField] private float _timeHeal;
     [SerializeField] private Vector2 _debafRange;
 
     public int Level => _level;

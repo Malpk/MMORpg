@@ -56,6 +56,7 @@ public abstract class Entity : MonoBehaviour, IPvp
         entityStats.OnStatUpdate += UpdateStats;
         entityStats.OnScoreUpdate += UpdateStats;
         body.OnTakeDamage += TakeDamage;
+        body.OnChangeHealth += () => Health = body.GetHealth();
         UpdateStats();
     }
 
@@ -64,6 +65,7 @@ public abstract class Entity : MonoBehaviour, IPvp
         entityStats.OnStatUpdate -= UpdateStats;
         entityStats.OnScoreUpdate -= UpdateStats;
         body.OnTakeDamage -= TakeDamage;
+        body.OnChangeHealth -= () => Health = body.GetHealth();
     }
  
     private void TakeDamage(AttackResult attack)
@@ -106,6 +108,17 @@ public abstract class Entity : MonoBehaviour, IPvp
         ItemHub.GetItem<Weapon>(save.Hands.UseWeaponId)?.Use(this);
     }
 
+    public void SetData(EntityData data)
+    {
+        _data = data;
+        OnSetData?.Invoke(data);
+    }
+
+    public void SetStats(Stats stats)
+    {
+        entityStats.SetStats(stats);
+        UpdateStats();
+    }
 
     #endregion
 
@@ -117,18 +130,6 @@ public abstract class Entity : MonoBehaviour, IPvp
     public virtual void Stop()
     {
         body.OnTakeDamage += TryConterAttack;
-    }
-
-    public void SetData(EntityData data)
-    {
-        _data = data;
-        OnSetData?.Invoke(data);
-    }
-
-    public void SetStats(Stats stats)
-    {
-        entityStats.SetStats(stats);
-        UpdateStats();
     }
 
     private void UpdateStats()
@@ -145,8 +146,6 @@ public abstract class Entity : MonoBehaviour, IPvp
         body.SetHealth(_fullHealth);
         Health = body.GetHealth();
     }
-
-
 
     #region Attack
     public AttackResult Attack(Entity target, PartType part = PartType.None)

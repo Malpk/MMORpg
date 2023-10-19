@@ -9,6 +9,8 @@ public abstract class DebafPart : MonoBehaviour
     [Header("Reference")]
     [SerializeField] private DebafDataHolder _debafHolder;
 
+    [SerializeField] protected float debaf;
+
 
     public event System.Action OnUpdateState;
 
@@ -17,7 +19,7 @@ public abstract class DebafPart : MonoBehaviour
     public int Level => debafActive ? debafActive.Level : 0;
     public string StateName => _stateName;
 
-    public abstract Stats AddDebaf(Stats stats);
+    public abstract Stats AddDebaf(Stats stats, Stats baseStats);
 
     #region Save / Load
     public SavePartState Save()
@@ -26,6 +28,7 @@ public abstract class DebafPart : MonoBehaviour
         if (debafActive)
         {
             save.Level = debafActive.Level;
+            save.Debaf = debaf;
             save.Damage = _damage;
         }
         return save;
@@ -36,10 +39,23 @@ public abstract class DebafPart : MonoBehaviour
         if (save.Level > 0)
         {
             debafActive = _debafHolder.GetDebaf(save.Level);
+            debaf = save.Debaf;
             SetState(save.Damage);
         }
     }
     #endregion
+
+    public void TakeHeal(int level)
+    {
+        if (level >= Level)
+        {
+            debafActive = null;
+            _stateName = "";
+            _damage = DamageType.None;
+            debaf = 0;
+            OnUpdateState?.Invoke();
+        }
+    }
 
     public void TakeDamage(Attack attack)
     {
@@ -48,12 +64,13 @@ public abstract class DebafPart : MonoBehaviour
         OnUpdateState?.Invoke();
     }
 
-    private void SetDebaf(DebafPartData debaf, Attack attacl)
+    private void SetDebaf(DebafPartData data, Attack attacl)
     {
         var debafLevel = debafActive ? debafActive.Level : 0;
-        if (debaf.Level > debafLevel)
+        if (data.Level > debafLevel)
         {
-            debafActive = debaf;
+            debafActive = data;
+            debaf = debafActive.GetDebaf();
             SetState(attacl.DamageType);
         }
     }

@@ -3,7 +3,6 @@ using UnityEngine;
 public class Player : Entity
 {
     [SerializeField] private WalletSet _playerWallet;
-    [SerializeField] private PvpSkills _skills;
     [SerializeField] private EntityMovement _movement;
 
     public event System.Action<AttackType> OnDamage;
@@ -37,20 +36,6 @@ public class Player : Entity
         base.Stop();
         _movement.enabled = false;
         Complite();
-    }
-
-    public void TakeDamage(Attack damage)
-    {
-        var attack = body.TakeDamage(damage);
-        switch (attack.Result)
-        {
-            case AttackType.Evasul:
-                _skills.AddScore(PvpScoreType.Evasion);
-                break;
-            case AttackType.Protect:
-                _skills.AddScore(PvpScoreType.Protect);
-                break;
-        }
     }
 
     private void Complite()

@@ -118,7 +118,6 @@ public class SkillPanel : MonoBehaviour
 
     private void SetStats(Stats stats)
     {
-
         _stats = stats;
         _power.SetValue(_stats.Strenght);
         _dexterity.SetValue(_stats.Dexterity);

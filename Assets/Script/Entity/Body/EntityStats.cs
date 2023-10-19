@@ -14,12 +14,14 @@ public class EntityStats : MonoBehaviour
 
     private Stats _curretStats;
 
-    public int Score { get; private set; } = 0;
+    private int _score;
+
+    public int Score => _score;
     public Stats Stats => _curretStats;
 
     private void OnValidate()
     {
-        Score = _skillScore;
+        _score = _skillScore;
     }
 
     private void Awake()
@@ -28,7 +30,7 @@ public class EntityStats : MonoBehaviour
         _level.OnUpLevel += UpLevel;
         foreach (var part in _parts)
         {
-            part.OnUpdateState += UpdateStats;
+            part.OnUpdateState += SetCurretStats;
         }
     }
 
@@ -37,7 +39,7 @@ public class EntityStats : MonoBehaviour
         _level.OnUpLevel -= UpLevel;
         foreach (var part in _parts)
         {
-            part.OnUpdateState -= UpdateStats;
+            part.OnUpdateState -= SetCurretStats;
         }
     }
     #region Save / Load
@@ -45,7 +47,7 @@ public class EntityStats : MonoBehaviour
     {
         var data = new EntityStatSave();
         data.Stats = _stats;
-        data.SkillScore = Score;
+        data.SkillScore = _score;
         return JsonUtility.ToJson(data);
     }
 
@@ -54,27 +56,28 @@ public class EntityStats : MonoBehaviour
         if (json != "")
         {
             var data = JsonUtility.FromJson<EntityStatSave>(json);
-            Score = data.SkillScore;
+            _score = data.SkillScore;
             _stats = data.Stats;
-            _curretStats = data.Stats;
-            UpdateStats();
-            OnStatUpdate?.Invoke();
+            SetCurretStats();
         }
     }
     #endregion
     #region Level
-    public void AddSkillScore(int score)
-    {
-        Score += score;
-        OnScoreUpdate?.Invoke();
-    }
 
     private void UpLevel()
     {
         var score = _level.Level >= 5 ? _skillScore + 1 : _skillScore;
         AddSkillScore(score);
     }
+
+    private void AddSkillScore(int score)
+    {
+        _score += score;
+        OnScoreUpdate?.Invoke();
+    }
+
     #endregion
+
     public int CheakDebaf(PartType target)
     {
         foreach (var part in _parts)
@@ -88,29 +91,29 @@ public class EntityStats : MonoBehaviour
     public void SetStats(Stats stats)
     {
         _stats = stats;
-        _curretStats = stats;
-        Score = _skillScore;
-        OnStatUpdate?.Invoke();
+        _score = _skillScore;
+        SetCurretStats();
     }
 
     public bool UpdateStats(Stats stats)
     {
-        if (Score > 0)
+        if (_score > 0)
         {
             _stats = stats;
-            OnStatUpdate?.Invoke();
-            Score--;
+            SetCurretStats();
+            _score--;
             return true;
         }
         return false;
     }
 
-    private void UpdateStats()
+    private void SetCurretStats()
     {
         _curretStats = _stats;
         foreach (var part in _parts)
         {
-            _curretStats = part.AddDebaf(_curretStats);
+            _curretStats = part.AddDebaf(_curretStats, _stats);
         }
+        OnStatUpdate?.Invoke();
     }
 }

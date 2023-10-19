@@ -88,6 +88,6 @@ public class MapPoint : MonoBehaviour
     public void Deactivate()
     {
         _activate = false;
-        _animator.SetBool("active", _activate);
+        _animator?.SetBool("active", _activate);
     }
 }

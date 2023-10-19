@@ -110,11 +110,18 @@ public class PartBody : MonoBehaviour
         return false;
     }
 
-
-    public void TakeHeal(int heal)
+    public void Heal()
     {
-        var health = Health + heal;
-        Health = health > _health ? _health :health;
+        _curretDamage = 0;
+        Health = _health;
+        _partState.TakeHeal(_partState.Level);
+    }
+
+    public void TakeHeal(int heal, int level = 0)
+    {
+        _curretDamage = Mathf.Clamp(_curretDamage - heal, 0, _curretDamage);
+        Health = _health - _curretDamage;
+        _partState.TakeHeal(level);
     }
     #endregion
     public void SetProtect(bool protect)

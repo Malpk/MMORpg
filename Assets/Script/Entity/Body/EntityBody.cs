@@ -9,14 +9,31 @@ public class EntityBody : MonoBehaviour
     [SerializeField] private EntityStats _stats;
     [SerializeField] private PartBody[] _parts;
 
-    public event System.Action OnArmorUpdate;
     public event System.Action<AttackResult> OnTakeDamage;
+    public event System.Action OnArmorUpdate;
+    public event System.Action OnChangeHealth;
 
     public PartBody[] Parts => _parts;
 
     private void Reset()
     {
         _parts = GetComponentsInChildren<PartBody>();
+    }
+
+    private void OnEnable()
+    {
+        foreach (var part in _parts)
+        {
+            part.OnUpdateHealth += (int health) => OnChangeHealth?.Invoke();
+        }
+    }
+
+    private void OnDisable()
+    {
+        foreach (var part in _parts)
+        {
+            part.OnUpdateHealth -= (int health) => OnChangeHealth?.Invoke();
+        }
     }
 
     public void ReloadPart()
