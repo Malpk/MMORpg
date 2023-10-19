@@ -535,7 +535,7 @@ GameObject:
   - component: {fileID: 6019465683298466302}
   - component: {fileID: 6019465683298466303}
   m_Layer: 0
-  m_Name: BattelPanel
+  m_Name: BattelPanel[Forest]
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -579,6 +579,7 @@ MonoBehaviour:
   _locationName: "\u0417\u0430\u0431\u0440\u043E\u0448\u0435\u043D\u044B\u0439 \u043B\u0435\u0441"
   _battel: {fileID: 11400000, guid: 9ece1fabc2f393245ba70dd95e9fd90d, type: 2}
   _panelPrefab: {fileID: 609514105673007668, guid: 72e4e972e479d2846be725a5b5139fb5, type: 3}
+  _startButton: {fileID: 6019465683028330555}
   _panelHolder: {fileID: 6019465682622073526}
   _lable: {fileID: 6019465681992340018}
 --- !u!1 &8029552447293598902

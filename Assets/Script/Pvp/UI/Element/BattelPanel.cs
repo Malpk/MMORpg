@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class BattelPanel : MonoBehaviour
@@ -8,6 +9,7 @@ public class BattelPanel : MonoBehaviour
     [SerializeField] private BattelData _battel;
     [SerializeField] private EntityPanel _panelPrefab;
     [Header("Reference")]
+    [SerializeField] private Button _startButton;
     [SerializeField] private Transform _panelHolder;
     [SerializeField] private TextMeshProUGUI _lable;
 
@@ -36,6 +38,11 @@ public class BattelPanel : MonoBehaviour
     {
         if (_battel)
             SetBattel(_battel);
+    }
+
+    public void SetMode(bool mode)
+    {
+        _startButton.interactable = mode;
     }
 
     public void StartBattel()

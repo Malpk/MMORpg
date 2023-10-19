@@ -8123,6 +8123,14 @@ PrefabInstance:
       propertyPath: _saver
       value: 
       objectReference: {fileID: 199525562}
+    - target: {fileID: 3193243367516685279, guid: e118fc220d2d3054d992be078083ba3e, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 82975063}
+    - target: {fileID: 3193243367516685279, guid: e118fc220d2d3054d992be078083ba3e, type: 3}
+      propertyPath: _minPlayerHealth
+      value: 0.76
+      objectReference: {fileID: 0}
     - target: {fileID: 4319441628529720795, guid: e118fc220d2d3054d992be078083ba3e, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
