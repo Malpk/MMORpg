@@ -417,6 +417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxAction: 2
+  _menu: {fileID: 0}
   _applyButtonl: {fileID: 555623826424419322}
   _protect: {fileID: 5953959737516433140}
   _attack: {fileID: 5953959735657995889}

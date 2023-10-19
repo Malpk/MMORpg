@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class AttackSet : MonoBehaviour
 {
+    [SerializeField] private int _countAction;
     [Min(1)]
     [SerializeField] private int _attackDistance;
     [Header("Reference")]
@@ -37,6 +38,16 @@ public class AttackSet : MonoBehaviour
         _attackMenu.OnProtect -= Protect;
     }
 
+    public void Open()
+    {
+
+        if (_player.Stats.CheakDebaf(PartType.Body) > 2)
+            _attackMenu.SetCountAction(1);
+        else
+            _attackMenu.SetCountAction(_countAction);
+        _attackMenu.Canvas.Show();
+    }
+
     private void Protect(PartType[] parts)
     {
         foreach (var part in parts)
@@ -46,7 +57,7 @@ public class AttackSet : MonoBehaviour
         _player.Stop();
     }
 
-    public void Attack(PartType[] parts)
+    private void Attack(PartType[] parts)
     {
         foreach (var part in parts)
         {

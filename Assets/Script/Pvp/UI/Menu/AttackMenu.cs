@@ -7,6 +7,7 @@ public class AttackMenu : MonoBehaviour
     [Min(1)]
     [SerializeField] private int _maxAction = 1;
     [Header("Reference")]
+    [SerializeField] private UIMenu _menu;
     [SerializeField] private Button _applyButtonl;
     [SerializeField] private PartSelectMenu _protect;
     [SerializeField] private PartSelectMenu _attack;
@@ -18,7 +19,7 @@ public class AttackMenu : MonoBehaviour
     public event System.Action<PartType[]> OnProtect;
 
     private int CountAction => _attack.SelectCount + _protect.SelectCount;
-
+    public UIMenu Canvas => _menu;
 
     private void OnEnable()
     {
@@ -54,11 +55,13 @@ public class AttackMenu : MonoBehaviour
             OnAttack?.Invoke(GetParts(_attack.Selects));
         OnProtect?.Invoke(GetParts(_protect.Selects));
         Reload();
+        _menu.Hide();
     }
 
     public void Skip()
     {
         OnProtect?.Invoke(GetParts(_protect.GetPats()));
+        _menu.Hide();
         Reload();
     }
 
@@ -66,6 +69,12 @@ public class AttackMenu : MonoBehaviour
     {
         BindMenu(null);
         _protect.Reload();
+        _attack.Reload();
+    }
+
+    public void SetCountAction(int count)
+    {
+        _maxAction = count;
     }
 
     private PartType[] GetParts(List<PartButton> select)
@@ -83,14 +92,20 @@ public class AttackMenu : MonoBehaviour
     private void SelectAttack(PartButton part)
     {
         if (CountAction > _maxAction)
-            _protect.RemoveSelect();
+        {
+            if (!_protect.RemoveSelect())
+                _attack.RemoveSelect();
+        }
         _applyButtonl.interactable = CountAction == _maxAction;
     }
 
     private void SelectProtect(PartButton part)
     {
         if (CountAction > _maxAction)
-            _attack.RemoveSelect();
+        {
+            if (!_attack.RemoveSelect())
+                _protect.RemoveSelect();
+        }
         _applyButtonl.interactable = CountAction == _maxAction;
     }
 

@@ -96,6 +96,8 @@ public class EntityBody : MonoBehaviour
         return part.Armor;
     }
     #endregion
+
+
     #region Health
 
     public void SetHealth(int health)

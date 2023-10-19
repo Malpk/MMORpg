@@ -6,6 +6,7 @@ public class HandHolder : MonoBehaviour
     [Header("Reference")]
     [SerializeField] private Armor _shield;
     [SerializeField] private Weapon _weapon;
+    [SerializeField] private EntityStats _entityStats;
     [SerializeField] private List<SaveWeaponSkill> _skills = new List<SaveWeaponSkill>();
 
     public event System.Action<Item> OnUpdateWeapon;
@@ -22,10 +23,15 @@ public class HandHolder : MonoBehaviour
     {
         if (_weapon)
             SetSkill(_weapon);
+        _entityStats.OnStatUpdate += CheakDebaf;
     }
 
+    private void OnDestroy()
+    {
+        _entityStats.OnStatUpdate -= CheakDebaf;
+    }
 
-    #region Save
+    #region Save / Load
     public SaveHandHolder Save()
     {
         var save = new SaveHandHolder();
@@ -44,10 +50,6 @@ public class HandHolder : MonoBehaviour
         if (save.Skills != null)
             _skills.AddRange(save.Skills);
         _shield = ItemHub.GetItem<Armor>(save.UseShieldId);
-        _weapon = ItemHub.GetItem<Weapon>(save.UseWeaponId);
-        if (_weapon)
-            SetSkill(_weapon);
-        OnUpdateWeapon?.Invoke(_weapon);
     }
     #endregion
 
@@ -55,11 +57,20 @@ public class HandHolder : MonoBehaviour
     {
         _weapon?.AddScore(score);
     }
+    private void CheakDebaf()
+    {
+        if (_entityStats.CheakDebaf(PartType.Hands) > 2)
+            TakeWeapon(null);
+    }
 
     #region WeaponSetup
     public void TakeWeapon(Weapon weapon)
     {
-        if (_weapon != weapon)
+        if (_entityStats.CheakDebaf(PartType.Hands) > 2)
+        {
+            _weapon = null;
+        }
+        else if (_weapon != weapon)
         {
             SaveSkill();
             _weapon = weapon;
@@ -98,8 +109,6 @@ public class HandHolder : MonoBehaviour
         }
     }
     #endregion
-
-
 
     private SaveWeaponSkill GetSkill(int id)
     {

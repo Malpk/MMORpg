@@ -53,7 +53,7 @@ public class PartSelectMenu : MonoBehaviour
     {
         if (_selects.Count > 0)
         {
-            Remove(_selects[_selects.Count - 1]);
+            Remove(_selects[0]);
             return true;
         }
         return false;

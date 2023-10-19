@@ -39,6 +39,8 @@ public class BodyPartPanelAnimator : MonoBehaviour
                 return _idle;
             case 1:
                 return _wound;
+            case 2:
+                return _wound;
             default:
                 return _break;
         }

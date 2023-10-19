@@ -92,12 +92,10 @@ public abstract class Entity : MonoBehaviour, IPvp
     {
         SetData(save.Data);
         body?.Load(save.Body);
-        entityStats.Load(save.Stats);
         hands.Load(save.Hands);
+        entityStats.Load(save.Stats);
         glorySet.SetGlroy(save.Glory);
         level.Load(save.Level);
-        if (hands.Weapon)
-            hands.Weapon.Use(this);
         foreach (var part in body.Parts)
         {
             if (part.Armor)
@@ -105,6 +103,7 @@ public abstract class Entity : MonoBehaviour, IPvp
         }
         OnLoad?.Invoke();
         Health = body.GetHealth();
+        ItemHub.GetItem<Weapon>(save.Hands.UseWeaponId)?.Use(this);
     }
 
 
@@ -134,7 +133,14 @@ public abstract class Entity : MonoBehaviour, IPvp
 
     private void UpdateStats()
     {
-        _fullMana = entityStats.Stats.Intelligence * _manaUnit;
+        if (entityStats.CheakDebaf(PartType.Head) > 2)
+        {
+            _fullMana = entityStats.Stats.Intelligence * _manaUnit;
+        }
+        else
+        {
+            _fullMana = 0;
+        }
         _fullHealth = entityStats.Stats.Body * _healthUnit;
         body.SetHealth(_fullHealth);
         Health = body.GetHealth();

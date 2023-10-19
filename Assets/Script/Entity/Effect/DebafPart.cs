@@ -4,9 +4,11 @@ public abstract class DebafPart : MonoBehaviour
 {
     [SerializeField] private string _stateName;
     [SerializeField] private DamageType _damage;
+
+    [SerializeField] protected DebafPartData debafActive;
+    [Header("Reference")]
     [SerializeField] private DebafDataHolder _debafHolder;
 
-    protected DebafPartData debafActive;
 
     public event System.Action OnUpdateState;
 

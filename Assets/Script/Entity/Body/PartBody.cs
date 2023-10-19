@@ -4,6 +4,7 @@ using UnityEngine.Events;
 public class PartBody : MonoBehaviour
 {
     [SerializeField] private int _health;
+    [SerializeField] private int _curretDamage;
     [SerializeField] private bool _isProtect;
     [SerializeField] private PartType _type;
     [Header("Reference")]
@@ -11,8 +12,7 @@ public class PartBody : MonoBehaviour
     [SerializeField] private DebafPart _partState;
     [SerializeField] private UnityEvent<Item> _onSetArmor;
 
-    [SerializeField] private int _curretDamage;
-    [SerializeField] private int _curretHealth;
+    private int _curretHealth;
 
     public event System.Action OnLoad;
     public event System.Action<int> OnUpdateHealth;

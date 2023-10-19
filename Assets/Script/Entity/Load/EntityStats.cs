@@ -57,6 +57,7 @@ public class EntityStats : MonoBehaviour
             Score = data.SkillScore;
             _stats = data.Stats;
             _curretStats = data.Stats;
+            UpdateStats();
             OnStatUpdate?.Invoke();
         }
     }
@@ -74,6 +75,15 @@ public class EntityStats : MonoBehaviour
         AddSkillScore(score);
     }
     #endregion
+    public int CheakDebaf(PartType target)
+    {
+        foreach (var part in _parts)
+        {
+            if (part.Part == target)
+                return part.Level;
+        }
+        return -1;
+    }
 
     public void SetStats(Stats stats)
     {

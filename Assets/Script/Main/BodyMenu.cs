@@ -11,6 +11,7 @@ public class BodyMenu : MonoBehaviour
 
     public void SetBodyItem(Item item)
     {
+        _useArmor.interactable = true;
         if (item is Armor armor)
         {
             _select = armor;
@@ -23,6 +24,7 @@ public class BodyMenu : MonoBehaviour
             _select = weapon;
             var contain = _palyer.Hands.Weapon == weapon;
             _useArmor.gameObject.SetActive(!contain);
+            _useArmor.interactable = _palyer.Stats.CheakDebaf(PartType.Hands) < 3;
             _unuseArmor.gameObject.SetActive(contain);
         }
         else

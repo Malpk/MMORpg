@@ -71,6 +71,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shield: {fileID: 0}
   _weapon: {fileID: 0}
+  _entityStats: {fileID: 0}
   _skills: []
 --- !u!114 &988111508
 MonoBehaviour:
@@ -218,6 +219,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f535c354d0e4fa040b90db42716a8116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stateName: 
+  _damage: 0
+  debafActive: {fileID: 0}
   _debafHolder: {fileID: 988111508}
 --- !u!4 &5109405441793468304 stripped
 Transform:
@@ -358,6 +362,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d48c039f55a5454f91cf380f1fd3b59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stateName: 
+  _damage: 0
+  debafActive: {fileID: 0}
   _debafHolder: {fileID: 988111508}
 --- !u!1001 &4723989697316747325
 PrefabInstance:
@@ -493,6 +500,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64c7ae713c1a0f2478afe98fe20cc759, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stateName: 
+  _damage: 0
+  debafActive: {fileID: 0}
   _debafHolder: {fileID: 988111508}
 --- !u!1001 &4723989697724255205
 PrefabInstance:
@@ -624,4 +634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79121314976389f4dbee91009fa090e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stateName: 
+  _damage: 0
+  debafActive: {fileID: 0}
   _debafHolder: {fileID: 988111508}

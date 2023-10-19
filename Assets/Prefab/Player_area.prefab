@@ -184,6 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 520be9b824d6b8b46adc5b921530fbdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _countAction: 2
   _attackDistance: 1
   _player: {fileID: 3051281248759610613}
   _skills: {fileID: 3051281249480602377}
@@ -646,6 +647,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Entity
       objectReference: {fileID: 0}
+    - target: {fileID: 7413212787444246303, guid: bb67ec3348551544abc067aa4965505c, type: 3}
+      propertyPath: _entityStats
+      value: 
+      objectReference: {fileID: 3051281248896620812}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb67ec3348551544abc067aa4965505c, type: 3}
 --- !u!114 &3051281249664027060 stripped
